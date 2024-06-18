@@ -1,0 +1,18 @@
+[user]
+	name = Mathai Mathew Pulicken
+	email = 49433106+mathewp88@users.noreply.github.com
+	username = mathewp88
+[init]
+	defaultBranch = main
+[core]
+	editor = nvim
+	whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
+	pager = delta
+
+[credential "https://github.com"]
+	helper = 
+	helper = !/etc/profiles/per-user/mathai/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/etc/profiles/per-user/mathai/bin/gh auth git-credential
+
