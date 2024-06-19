@@ -19,13 +19,6 @@
   
   services.printing.enable = true;
 
-  hardware.pulseaudio.enable = false;
-  
-  services.pipewire = {
-    enable = true;
-    pulse.enable = true;
-  };
-
   services.libinput.enable = true;
 
   users.users.mathai = {

@@ -4,6 +4,6 @@
     ./stylix/stylix.nix
     ./hardware
     ./virualisation/docker.nix
-    ./services/deamon.nix
+    ./services
   ];
 }

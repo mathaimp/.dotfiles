@@ -5,7 +5,11 @@
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  imports = [ ./nvidia.nix ];
+  imports = [
+    ./nvidia.nix
+    ./pstate.nix
+    ./zenpower.nix
+  ];
 
   services.btrfs.autoScrub = {
     enable = true;

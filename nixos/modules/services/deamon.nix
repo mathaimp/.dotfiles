@@ -18,7 +18,7 @@
     };
 
     # Enable thermald, the temperature management daemon.
-    thermald.enable = true;
+    #thermald.enable = true; # Disabled on amd
 
     # Enable Upower, a DBus service that provides power management support to applications.
     upower = {
