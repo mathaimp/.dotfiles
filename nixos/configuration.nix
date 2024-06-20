@@ -14,15 +14,6 @@
 
   services.xserver.enable = true;
 
-  services.xserver.displayManager.gdm.enable = true;
-  programs.hyprland = {
-    enable = true;
-    xwayland.enable = true;
-  };
-  
-  #xdg.portal.enable = true;
-  #xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-
   services.xserver.desktopManager.gnome.enable = true;
   
   services.printing.enable = true;
@@ -50,7 +41,6 @@
     curl
     git
     cloudflare-warp
-    polkit_gnome # For auth in wm
   ];
 
   systemd.packages = [ pkgs.cloudflare-warp ];
