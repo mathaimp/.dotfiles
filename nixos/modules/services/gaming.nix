@@ -5,6 +5,7 @@
   environment.systemPackages = with pkgs; [
     mangohud
     lutris
+    transmission-gtk
     wineWowPackages.stable
   ];
 

@@ -6,6 +6,8 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
     # stylix for managing global color schemes
     stylix.url = "github:danth/stylix";
+    # spicetify
+    spicetify-nix.url = "github:the-argus/spicetify-nix";
     # home-manager, used for managing user configuration
     home-manager = {
       url = "github:nix-community/home-manager/release-24.05";
@@ -13,7 +15,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, stylix, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, stylix, spicetify-nix, ... }@inputs: {
     # Please replace mathai with your hostname
     nixosConfigurations.mathai = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
@@ -21,13 +23,17 @@
       modules = [
         ./nixos/configuration.nix
         stylix.nixosModules.stylix
+        #./nixos/modules/music/spicetify.nix
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-
+          home-manager.extraSpecialArgs = {
+                inherit inputs;
+                inherit spicetify-nix;
+          };
           home-manager.users.mathai = import ./home-manager/home.nix;
-          }
+        }
 
       ];
     };
