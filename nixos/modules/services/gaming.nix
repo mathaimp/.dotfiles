@@ -1,9 +1,9 @@
 { pkgs, ... }:
 {
   programs.gamemode.enable = true;
-  
+
   environment.systemPackages = with pkgs; [
-    mangohud
+    #mangohud get from home-manager
     lutris
     transmission-gtk
     wineWowPackages.stable

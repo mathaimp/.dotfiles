@@ -6,6 +6,8 @@
     neofetch
     ncdu
 
+    mangohud
+
     # archives
     zip
     xz

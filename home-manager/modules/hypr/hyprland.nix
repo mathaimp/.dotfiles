@@ -12,6 +12,8 @@
     swww
     swayosd
     playerctl
+    bc
+    jq
   ];
 
   services.playerctld.enable = true;
