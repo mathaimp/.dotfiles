@@ -34,11 +34,11 @@
       exec-once = [
         "swww-daemon"
         "swayosd-server"
+        "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
       ];
 
       exec = [
         "swww img ${config.stylix.image}"
-        "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
       ];
 
       misc.disable_hyprland_logo = true;
