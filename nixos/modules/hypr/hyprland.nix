@@ -8,6 +8,8 @@
 
   xdg.portal.enable = true;
   #xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+
+  security.pam.services.gdm.enableGnomeKeyring = true;
   
   environment.systemPackages = with pkgs; [
     polkit_gnome # For auth in wm
