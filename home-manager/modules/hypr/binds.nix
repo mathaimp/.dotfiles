@@ -5,12 +5,16 @@
       #Keybinds
       bind = [
         "$mainMod, return, exec, $terminal"
-        "$mainMod, W, exec, $browser"
-        "$mainMod, F, exec, $file_manager"
+        "$mainMod, F, exec, $browser"
+        "$mainMod, S, exec, $file_manager"
         "$mainMod, Q, killactive"
         #"$mainMod, P, pseudo"
+        "$mainMod SHIFT, R, exec, hyprctl reload"
 
-        "$mainMod, P, exec, loginctl lock-session"
+        "$mainMod, A, exec, loginctl lock-session"
+        "$mainMod SHIFT, Q, exec, ${builtins.toString ./.}/scripts/powermenu.sh"
+        "SUPER, SUPER_L, exec, rofi -show drun -theme ~/.config/rofi/launch.rasi"
+        "$mainMod, D, exec, rofi -show drun -theme ~/.config/rofi/launch.rasi"
 
         # Windows
         "$mainMod, J, movefocus, d"
@@ -21,7 +25,7 @@
         "$mainMod SHIFT,K,movewindow,u"
         "$mainMod SHIFT,H,movewindow,l"
         "$mainMod SHIFT,L,movewindow,r"
-        "$mainMod, S, togglespecialworkspace, magic"
+        "$mainMod, M, togglespecialworkspace, magic"
         "$mainMod SHIFT, S, movetoworkspace, special:magic"
         "$mainMod, mouse_down, workspace, e+1"
         "$mainMod, mouse_up, workspace, e-1"

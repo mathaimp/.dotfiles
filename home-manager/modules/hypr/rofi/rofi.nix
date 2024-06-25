@@ -7,6 +7,8 @@ with config.lib.stylix.colors;
   home.file.".config/rofi/config.rasi".source = ./config.rasi;
 
   home.file.".config/rofi/launch.rasi".source = ./launch.rasi;
+ 
+  home.file.".config/rofi/power.rasi".source = ./power.rasi;
   
   home.file.".config/rofi/color.rasi".text = ''
     * {
