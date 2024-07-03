@@ -6,6 +6,7 @@
     ./lock.nix
     ./idle.nix
     ./rofi/rofi.nix
+    ./waybar/bar.nix
   ];
 
   #programs.hyprlock.enable = true;
@@ -19,6 +20,8 @@
     brightnessctl
     rofi-wayland
     papirus-icon-theme
+    waybar
+    swaynotificationcenter
   ];
 
   services.playerctld.enable = true;
@@ -39,6 +42,7 @@
         "swww-daemon"
         "swayosd-server"
         "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
+        "waybar"
       ];
 
       exec = [
@@ -52,6 +56,8 @@
       misc.vfr = true;
       misc.disable_hyprland_logo = true;
       misc.disable_splash_rendering = true;
+      #misc.mouse_move_enables_dpms = true;
+      #misc.key_press_enables_dpms = true;
 
     };
   };

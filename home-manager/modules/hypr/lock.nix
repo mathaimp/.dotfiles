@@ -8,7 +8,8 @@ with config.lib.stylix.colors;
       background = [
         {
           monitor = "";
-          path = "${config.stylix.image}";
+          #path = "${builtins.toString ./.}/astro.jpg";
+          color = "rgb(${base01-rgb-r}, ${base01-rgb-g}, ${base01-rgb-b})";
           blur_passes = 2;
           contrast = 0.8916;
           brightness = 0.7172;
@@ -19,7 +20,7 @@ with config.lib.stylix.colors;
 
       general = [
         {
-          no_fade_in = false;
+          no_fade_in = true;
           grace = 0;
           disable_loading_bar = false;
           hide_cursor = false;
@@ -162,6 +163,7 @@ with config.lib.stylix.colors;
         {
           monitor = "";
           text = ''cmd[update:1000] echo "$(${builtins.toString ./.}/scripts/weather.sh)"'';
+          #text = ''cmd[update:60000] echo "$(curl -s 'wttr.in/Thiruvalla?format="%l:+%C,+%c%t"')"'';
           color = "rgb(${base05-rgb-r}, ${base05-rgb-g}, ${base05-rgb-b})";
           font_size = 10;
           font_family = "JetBrains Mono Nerd Font Mono ExtraBold";
