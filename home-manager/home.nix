@@ -1,7 +1,6 @@
-{ config, pkgs, lib, ... }:
+{ lib, ... }:
 
 {
-  # TODO please change the username & home directory to your own
   home.username = "mathai";
   home.homeDirectory = "/home/mathai";
 

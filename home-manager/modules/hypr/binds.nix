@@ -10,6 +10,7 @@
         "$mainMod, Q, killactive"
         #"$mainMod, P, pseudo"
         "$mainMod SHIFT, R, exec, hyprctl reload"
+        "$mainMod, E, fullscreen"
 
         "$mainMod, A, exec, loginctl lock-session"
         "$mainMod SHIFT, Q, exec, ${builtins.toString ./.}/scripts/powermenu.sh"

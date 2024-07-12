@@ -1,5 +1,11 @@
 { config, pkgs, ... }:
 {
+
+  imports = [
+    ./neovim.nix
+    ./tmux.nix
+  ];
+
   # Packages requiered for zsh
   home.packages = with pkgs; [
     #ZSH utils
@@ -9,6 +15,7 @@
     zsh-fzf-tab
     eza
     zoxide
+    tmux
   ];
   
   # basic configuration of git, please change to your own

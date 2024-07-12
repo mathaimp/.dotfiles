@@ -30,13 +30,16 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  # Allow unpackaged binaries to run
+  programs.nix-ld.enable = true;
+  programs.nix-ld.package = pkgs.nix-ld-rs;
+  
   environment.shells = with pkgs; [ zsh ];
   users.defaultUserShell = pkgs.zsh;
   programs.zsh.enable = true;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   environment.systemPackages = with pkgs; [
-    neovim
     wget
     curl
     git

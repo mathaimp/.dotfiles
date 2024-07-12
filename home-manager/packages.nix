@@ -9,6 +9,9 @@
 
     mangohud
 
+    # ESSENTIALS
+    gcc
+
     # archives
     zip
     xz

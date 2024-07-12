@@ -71,7 +71,7 @@
       general.gaps_out = 10;
       general.gaps_in = 3;
 
-      input.kb_options = "caps:swapescape";
+      input.kb_options = "ctrl:nocaps";
       #decoration.blur.enabled = false;
       decoration.drop_shadow = false;
       decoration.rounding = 10;
