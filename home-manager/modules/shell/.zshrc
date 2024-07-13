@@ -38,3 +38,9 @@ alias clean='nh clean all --keep=5'
 # Shell integrations
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
+
+# Getting nvim
+if [ ! -d ~/.config/nvim ]
+then
+    git clone https://github.com/mathewp88/nvim.git ~/.config/nvim
+fi

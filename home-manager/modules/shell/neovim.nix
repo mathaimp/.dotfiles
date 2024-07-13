@@ -1,17 +1,12 @@
-{ lib, pkgs, config, ... }:
+{ lib, pkgs, ... }:
 
 let
-  linker = lib.fileContents "${pkgs.binutils}/nix-support/dynamic-linker"; 
+  linker = lib.fileContents "${pkgs.binutils}/nix-support/dynamic-linker";
 in
 {
   stylix.targets.vim.enable = false;
 
-  home.activation = {
-    cloneNvim = lib.hm.dag.entryAfter ["writeBoundry"]
-    ''
-    $DRY_RUN_CMD [ ! -e ${config.xdg.configHome}/nvim ] && git clone git@github.com:mathewp88/nvim.git ${config.xdg.configHome}/nvim || true
-    '';
-  };
+  programs.lazygit.enable = true;
 
   programs.neovim = {
     package = pkgs.neovim-unwrapped;
@@ -45,4 +40,3 @@ in
     ];
   };
 }
-
