@@ -20,6 +20,7 @@ in
     viAlias = true;
     extraPackages = with pkgs; [
       python311
+      devpod
       rustc
       cargo
       xclip
