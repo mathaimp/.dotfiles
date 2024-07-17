@@ -19,7 +19,6 @@
     "backlight",
     "battery",
     "tray",
-    "network",
     "pulseaudio",
     "custom/notification"
   ],

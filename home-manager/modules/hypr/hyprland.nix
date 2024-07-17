@@ -10,7 +10,7 @@
     ./swaync/swaync.nix
   ];
 
-  #programs.hyprlock.enable = true;
+gtk.iconTheme.name = "Papirus-Dark";
 
   home.packages = with pkgs; [
     swww
@@ -48,6 +48,7 @@
         "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
         "waybar"
         "swaync"
+        "nm-applet"
       ];
 
       env = [
