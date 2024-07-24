@@ -32,7 +32,7 @@
     # Enable OpenGL drivers
     opengl = {
       enable = true;
-      driSupport = true;
+      # driSupport = true;
       driSupport32Bit = true;
     };
   };

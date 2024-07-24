@@ -5,6 +5,7 @@
     acpid.enable = true;
 
     # Enable the auto-cpufreq daemon.
+    power-profiles-daemon.enable = false;
     auto-cpufreq.enable = true;
 
     # Enable security levels for Thunderbolt 3 on GNU/Linux.

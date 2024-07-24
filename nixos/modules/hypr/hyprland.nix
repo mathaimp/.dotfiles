@@ -5,12 +5,12 @@
   services.xserver.desktopManager.gnome.enable = true;
   environment.gnome.excludePackages = (with pkgs; [
     gnome-tour
-  ]) ++ (with pkgs.gnome; [
     nautilus
-    gnome-music
     gnome-terminal
     epiphany
     geary
+  ]) ++ (with pkgs.gnome; [
+    gnome-music
     gnome-characters
   ]);
 
