@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   imports =
@@ -13,7 +13,7 @@
   time.timeZone = "Asia/Kolkata";
 
   services.xserver.enable = true;
-
+  services.fwupd.enable = true;
   services.printing.enable = true;
   networking.firewall.enable = true;
   services.libinput.enable = true;
@@ -61,7 +61,18 @@
 
   nix.optimise.automatic = true;
 
+  system.autoUpgrade = {
+    enable = true;
+    dates = "04:00";
+    flake = "${config.users.users.mathai.home}/.dotfiles";
+    flags = [
+      "--update-input"
+      "nixpkgs"
+      "--commit-lock-file"
+    ];
+    allowReboot = true;
+  };
+
   system.stateVersion = "24.05";
 
 }
-

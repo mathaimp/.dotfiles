@@ -26,7 +26,6 @@
       modules = [
         ./nixos/configuration.nix
         stylix.nixosModules.stylix
-        #./nixos/modules/music/spicetify.nix
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
