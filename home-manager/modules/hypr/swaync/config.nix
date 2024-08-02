@@ -1,4 +1,4 @@
-{ config, ... }:
+{ ... }:
 {
   home.file.".config/swaync/config.json".text = ''
 {
@@ -45,7 +45,7 @@
         },
         {
           "active": true,
-          "command": "overskride",
+          "command": "blueman-manager",
           "label": "",
           "type": "button"
         },

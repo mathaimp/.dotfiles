@@ -77,7 +77,7 @@ with config.lib.stylix.colors;
 
 .control-center .notification-row .notification-background .notification.critical .notification-content,
 .floating-notifications.background .notification-background .notification.critical .notification-content {
-  background-color: #${base09};
+  background-color: #${base01};
 }
 
 .control-center .notification-row .notification-background .notification.critical .notification-content image,

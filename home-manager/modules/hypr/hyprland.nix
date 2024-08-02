@@ -21,9 +21,10 @@
     brightnessctl
     rofi-wayland
     papirus-icon-theme
+    libnotify
     waybar
     swaynotificationcenter
-    overskride
+    blueman
     networkmanagerapplet
     sway-contrib.grimshot
   ];
@@ -45,6 +46,7 @@
         "brightnessctl s $(cat ~/.config/lock/bright)"
         "swww-daemon"
         "swayosd-server"
+        "${builtins.toString ./.}/scripts/notify.sh"
         "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
         "waybar"
         "swaync"
