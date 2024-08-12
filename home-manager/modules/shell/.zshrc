@@ -28,7 +28,8 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza -1 --color=always $realpath'
 
 # Aliases
-alias ls='eza -a'
+alias ls='eza'
+alias la='eza -a'
 alias c='clear'
 alias e='exit'
 alias update='nix flake update ~/.dotfiles'
