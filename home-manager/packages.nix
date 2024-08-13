@@ -31,6 +31,8 @@
     ffmpeg
     gh
 
+    # Notes
+    obsidian
 
     # system tools
     bottom
