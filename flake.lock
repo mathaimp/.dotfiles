@@ -327,7 +327,8 @@
         "nixpkgs": "nixpkgs",
         "spicetify-nix": "spicetify-nix",
         "stylix": "stylix",
-        "wezterm-flake": "wezterm-flake"
+        "wezterm-flake": "wezterm-flake",
+        "zen-browser": "zen-browser"
       }
     },
     "rust-overlay": {
@@ -441,6 +442,26 @@
         "owner": "wez",
         "ref": "main",
         "repo": "wezterm",
+        "type": "github"
+      }
+    },
+    "zen-browser": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1724231741,
+        "narHash": "sha256-JF+wqsM+9UghCgRqtiI0jSizQWkuWI7k9K3ET1KE1nA=",
+        "owner": "MarceColl",
+        "repo": "zen-browser-flake",
+        "rev": "d1192c280d1a423b75d207adb6297d0ee2b48296",
+        "type": "github"
+      },
+      "original": {
+        "owner": "MarceColl",
+        "repo": "zen-browser-flake",
         "type": "github"
       }
     },

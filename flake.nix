@@ -8,6 +8,11 @@
       url = "github:wez/wezterm/main?dir=nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    #Zen Browser
+    zen-browser = {
+      url = "github:MarceColl/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # stylix for managing global color schemes
     stylix.url = "github:danth/stylix";
     # spicetify

@@ -1,8 +1,11 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 {
   # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
     
+    # Browser
+    inputs.zen-browser.packages."${system}".default
+
     fastfetch
     ncdu
     duf
