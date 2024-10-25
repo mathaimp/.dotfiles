@@ -54,7 +54,7 @@ case "$1" in
 	if [ -z "$artist" ]; then
 		echo ""
 	else
-		echo "${artist:0:30}" # Limit the output to 50 characters
+		echo "${artist:0:20}" # Limit the output to 50 characters
 	fi
 	;;
 --length)
@@ -79,7 +79,7 @@ case "$1" in
 --album)
 	album=$(playerctl metadata --format "{{ xesam:album }}" 2>/dev/null)
 	if [[ -n $album ]]; then
-		echo "$album"
+		echo "${album:0:20}"
 	else
 		status=$(playerctl status 2>/dev/null)
 		if [[ -n $status ]]; then
