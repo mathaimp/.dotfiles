@@ -12,9 +12,9 @@ in
     package = pkgs.neovim-unwrapped;
     defaultEditor = true;
     enable = true;
-    #withRuby = true;
+    withRuby = true;
     withPython3 = true;
-    # withNodeJs = true;
+    withNodeJs = true;
     vimAlias = true;
     vimdiffAlias = true;
     viAlias = true;

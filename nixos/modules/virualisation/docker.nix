@@ -8,5 +8,5 @@
       setSocketVariable = true;
     };
   };
-  hardware.nvidia-container-toolkit.enable = true; #builtins.any (driver: driver == "nvidia") config.services.xserver.videoDrivers;
+  hardware.nvidia-container-toolkit.enable = builtins.any (driver: driver == "nvidia") config.services.xserver.videoDrivers;
 }
