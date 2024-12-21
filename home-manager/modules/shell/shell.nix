@@ -9,7 +9,6 @@
   # Packages requiered for zsh
   home.packages = with pkgs; [
     #ZSH utils
-    nerdfonts
     zsh-powerlevel10k
     fzf
     zsh-fzf-tab

@@ -45,6 +45,8 @@
 
     # robotics
     qgroundcontrol
+    vscode
+    gnome-text-editor
 
     # system tools
     bottom

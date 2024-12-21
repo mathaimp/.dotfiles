@@ -43,11 +43,12 @@
     wget
     curl
     git
-    cloudflare-warp
   ];
-
-  systemd.packages = [ pkgs.cloudflare-warp ];
-  systemd.targets.multi-user.wants = [ "warp-svc.service" ];
+  
+  fonts.packages = with pkgs; [
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.fira-code
+  ];
 
   environment.variables.EDITOR = "nvim";
 

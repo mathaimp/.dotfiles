@@ -32,11 +32,12 @@
 
   wayland.windowManager.hyprland = {
     enable = true;
+    systemd.variables = ["--all"];
     settings = {
 
       "$terminal" = "wezterm";
       "$browser" = "firefox";
-      "$file_manager" = "nemo";
+      "$file_manager" = "thunar";
       "$mainMod" = "ALT";
 
       input.numlock_by_default = true;
@@ -75,7 +76,6 @@
 
       input.kb_options = "ctrl:nocaps";
       decoration.blur.enabled = true;
-      decoration.drop_shadow = false;
       decoration.rounding = 10;
 
       misc.vfr = true;

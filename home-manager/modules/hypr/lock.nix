@@ -1,7 +1,10 @@
-{ config, ... }:
+{ config, lib, ... }:
 
 with config.lib.stylix.colors;
 {
+
+  stylix.targets.hyprlock.enable = false;
+
   programs.hyprlock = {
     enable = true;
     settings = {
