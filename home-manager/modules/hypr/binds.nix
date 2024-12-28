@@ -14,7 +14,7 @@
         ", PRINT, exec, grimshot savecopy anything"
 
         "$mainMod, A, exec, loginctl lock-session"
-        "$mainMod SHIFT, Q, exec, ${builtins.toString ./.}/scripts/powermenu.sh"
+        "$mainMod SHIFT, Q, exec, ~/.config/lock/scripts/powermenu.sh"
         "SUPER, SUPER_L, exec, rofi -show drun -theme ~/.config/rofi/launch.rasi"
         "$mainMod, D, exec, rofi -show drun -theme ~/.config/rofi/launch.rasi"
 

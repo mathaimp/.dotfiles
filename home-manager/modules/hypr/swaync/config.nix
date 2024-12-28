@@ -63,7 +63,7 @@
         },
         {
           "active": false,
-          "command": "${builtins.toString ./.}/../scripts/powermenu.sh",
+          "command": "~/.config/lock/scripts/powermenu.sh",
           "label": "",
           "type": "button"
         }

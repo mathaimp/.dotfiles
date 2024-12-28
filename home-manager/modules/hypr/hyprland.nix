@@ -29,6 +29,10 @@
   ];
 
   services.playerctld.enable = true;
+  
+  # Setup Scripts
+  home.file.".config/lock/scripts".source = config.lib.file.mkOutOfStoreSymlink ./scripts;
+
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -46,7 +50,7 @@
         "brightnessctl s $(cat ~/.config/lock/bright)"
         "swww-daemon"
         "swayosd-server"
-        "${builtins.toString ./.}/scripts/notify.sh"
+        "~/.config/lock/scripts/notify.sh"
         "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
         "waybar"
         "swaync"

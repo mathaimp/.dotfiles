@@ -105,7 +105,7 @@ with config.lib.stylix.colors;
         # PLAYER TITTLE
         {
           monitor = "";
-          text = ''cmd[update:100] echo "$(${builtins.toString ./.}/scripts/playerctlock.sh --title) $(${builtins.toString ./.}/scripts/playerctlock.sh --status)"'';
+          text = ''cmd[update:100] echo "$(~/.config/lock/scripts/playerctlock.sh --title) $(~/.config/lock/scripts/playerctlock.sh --status)"'';
           color = "rgb(${base05-rgb-r}, ${base05-rgb-g}, ${base05-rgb-b})";
           font_size = 16;
           font_family = "JetBrains Mono Nerd Font Mono ExtraBold";
@@ -117,7 +117,7 @@ with config.lib.stylix.colors;
         # PLAYER Length
         {
           monitor = "";
-          text = ''cmd[update:100] echo "$(${builtins.toString ./.}/scripts/playerctlock.sh --length) "'';
+          text = ''cmd[update:100] echo "$(~/.config/lock/scripts/playerctlock.sh --length) "'';
           color = "rgb(${base05-rgb-r}, ${base05-rgb-g}, ${base05-rgb-b})";
           font_size = 11;
           font_family = "JetBrains Mono Nerd Font Mono";
@@ -129,7 +129,7 @@ with config.lib.stylix.colors;
         # PLAYER SOURCE
         {
           monitor = "";
-          text = ''cmd[update:100] echo "$(${builtins.toString ./.}/scripts/playerctlock.sh --source)"'';
+          text = ''cmd[update:100] echo "$(~/.config/lock/scripts/playerctlock.sh --source)"'';
           color = "rgba(${base05-rgb-r}, ${base05-rgb-g}, ${base05-rgb-b}, 0.6)";
           font_size = 10;
           font_family = "JetBrains Mono Nerd Font Mono";
@@ -141,7 +141,7 @@ with config.lib.stylix.colors;
         # PLAYER ALBUM 
         {
           monitor = "";
-          text = ''cmd[update:100] echo "$(${builtins.toString ./.}/scripts/playerctlock.sh --album)"'';
+          text = ''cmd[update:100] echo "$(~/.config/lock/scripts/playerctlock.sh --album)"'';
           color = "rgb(${base05-rgb-r}, ${base05-rgb-g}, ${base05-rgb-b})";
           font_size = 10;
           font_family = "JetBrains Mono Nerd Font Mono";
@@ -153,7 +153,7 @@ with config.lib.stylix.colors;
         # PLAYER Artist
         {
           monitor = "";
-          text = ''cmd[update:100] echo "$(${builtins.toString ./.}/scripts/playerctlock.sh --artist)"'';
+          text = ''cmd[update:100] echo "$(~/.config/lock/scripts/playerctlock.sh --artist)"'';
           color = "rgba(${base05-rgb-r}, ${base05-rgb-g}, ${base05-rgb-b}, 0.8)";
           font_size = 10;
           font_family = "JetBrains Mono Nerd Font Mono ExtraBold";
@@ -165,7 +165,7 @@ with config.lib.stylix.colors;
         # Weather
         {
           monitor = "";
-          text = ''cmd[update:1000] echo "$(${builtins.toString ./.}/scripts/weather.sh)"'';
+          text = ''cmd[update:1000] echo "$(~/.config/lock/scripts/weather.sh)"'';
           #text = ''cmd[update:60000] echo "$(curl -s 'wttr.in/Thiruvalla?format="%l:+%C,+%c%t"')"'';
           color = "rgb(${base05-rgb-r}, ${base05-rgb-g}, ${base05-rgb-b})";
           font_size = 10;
@@ -178,7 +178,7 @@ with config.lib.stylix.colors;
         # Information
         {
           monitor = "";
-          text = ''cmd[update:10000] echo -e "$(${builtins.toString ./.}/scripts/infonlock.sh)"'';
+          text = ''cmd[update:10000] echo -e "$(~/.config/lock/scripts/infonlock.sh)"'';
           color = "rgb(${base05-rgb-r}, ${base05-rgb-g}, ${base05-rgb-b})";
           font_size = 12;
           font_family = "JetBrains Mono Nerd Font Mono ExtraBold";
