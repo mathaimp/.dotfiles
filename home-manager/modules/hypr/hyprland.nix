@@ -35,7 +35,7 @@
     systemd.variables = ["--all"];
     settings = {
 
-      "$terminal" = "wezterm";
+      "$terminal" = "ghostty";
       "$browser" = "firefox";
       "$file_manager" = "thunar";
       "$mainMod" = "ALT";
@@ -61,10 +61,6 @@
 
       exec = [
         "swww img ${config.stylix.image}"
-      ];
-
-      windowrule = [
-        "opacity 0.9 0.9,(wezterm)$"
       ];
 
       layerrule = [

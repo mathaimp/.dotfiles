@@ -11,7 +11,7 @@
     #ZSH utils
     zsh-powerlevel10k
     fzf
-    zsh-fzf-tab
+    # zsh-fzf-tab
     eza
     zoxide
     tmux
@@ -31,7 +31,6 @@
     initExtraFirst = ''
       source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
       source ~/.p10k.zsh
-      source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh
     '';
     initExtra = builtins.readFile ./.zshrc;
   };
@@ -45,6 +44,9 @@
   # p10k config
   home.file.".p10k.zsh".source = ./.p10k.zsh;
 
+  # Terminal Config
+  home.file.".config/ghostty/config".source = ./ghostty.config;
+
   # Backup Terminal
   # programs.kitty = {
   #   enable = true;
@@ -53,9 +55,4 @@
   #   shellIntegration.enableZshIntegration = true;
   # };
 
-  programs.wezterm = {
-    enable = true;
-    # package = inputs.wezterm-flake.packages.${pkgs.system}.default;
-    extraConfig = builtins.readFile ./wezterm.lua;
-  };
 }
