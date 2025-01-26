@@ -10,6 +10,7 @@
   imports = [
     ./nvidia.nix
     ./pstate.nix
+    ./secureboot.nix
     ./zenpower.nix
   ];
 

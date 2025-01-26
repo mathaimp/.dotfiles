@@ -9,6 +9,10 @@
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v0.4.2";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # home-manager, used for managing user configuration
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -16,13 +20,13 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, stylix, spicetify-nix, ... }@inputs: {
-    # Please replace mathai with your hostname
+  outputs = { self, nixpkgs, home-manager, stylix, lanzaboote, spicetify-nix, ... }@inputs: {
     nixosConfigurations.mathai = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = { inherit inputs; };
       modules = [
         ./nixos/configuration.nix
+        lanzaboote.nixosModules.lanzaboote
         stylix.nixosModules.stylix
         home-manager.nixosModules.home-manager
         {
