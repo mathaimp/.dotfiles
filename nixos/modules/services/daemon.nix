@@ -24,7 +24,7 @@
     # Enable Upower, a DBus service that provides power management support to applications.
     upower = {
       enable = true;
-      percentageLow = 30;
+      percentageLow = 20;
       percentageCritical = 10;
       percentageAction = 5;
       criticalPowerAction = "HybridSleep";

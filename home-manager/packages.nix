@@ -13,6 +13,7 @@
 
     # ESSENTIALS
     gcc
+    xfce.xfce4-power-manager
 
     # books
     helvetica-neue-lt-std
@@ -44,7 +45,6 @@
     zotero
 
     # robotics
-    qgroundcontrol
     gnome-text-editor
 
     # system tools

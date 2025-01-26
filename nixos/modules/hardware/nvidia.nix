@@ -21,7 +21,7 @@
     nvidiaSettings = false;
     nvidiaPersistenced = true;
 
-    package = config.boot.kernelPackages.nvidiaPackages.beta;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
     open = false;
   };
   # Enable Nvidia Drivers

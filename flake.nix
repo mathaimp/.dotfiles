@@ -5,9 +5,6 @@
     # NixOS official package source, using the nixos-23.11 branch here
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     stylix.url = "github:danth/stylix";
-    ghostty = {
-      url = "github:ghostty-org/ghostty";
-    };
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -19,7 +16,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, stylix, spicetify-nix, ghostty, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, stylix, spicetify-nix, ... }@inputs: {
     # Please replace mathai with your hostname
     nixosConfigurations.mathai = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";

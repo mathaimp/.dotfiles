@@ -11,7 +11,7 @@
     #ZSH utils
     zsh-powerlevel10k
     fzf
-    # zsh-fzf-tab
+    zsh-fzf-tab
     eza
     zoxide
     tmux
@@ -31,6 +31,7 @@
     initExtraFirst = ''
       source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
       source ~/.p10k.zsh
+      source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh
     '';
     initExtra = builtins.readFile ./.zshrc;
   };
@@ -44,15 +45,19 @@
   # p10k config
   home.file.".p10k.zsh".source = ./.p10k.zsh;
 
-  # Terminal Config
-  home.file.".config/ghostty/config".source = ./ghostty.config;
-
-  # Backup Terminal
-  # programs.kitty = {
-  #   enable = true;
-  #   font.size = lib.mkForce 14;
-  #   font.name = lib.mkForce "JetBrainsMono Nerd Font";
-  #   shellIntegration.enableZshIntegration = true;
-  # };
+  # Terminal
+  programs.kitty = {
+    enable = true;
+    font.size = lib.mkForce 14;
+    font.name = lib.mkForce "JetBrainsMono Nerd Font";
+    shellIntegration.enableZshIntegration = true;
+    settings = {
+      enable_audio_bell = false;
+      window_padding_width = 5;
+    };
+    keybindings = {
+      "ctrl+c" = "copy_or_interrupt";
+    };
+  };
 
 }

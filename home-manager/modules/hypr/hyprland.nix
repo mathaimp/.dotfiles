@@ -36,7 +36,7 @@
     systemd.variables = ["--all"];
     settings = {
 
-      "$terminal" = "ghostty";
+      "$terminal" = "kitty";
       "$browser" = "firefox";
       "$file_manager" = "thunar";
       "$mainMod" = "ALT";
@@ -47,7 +47,7 @@
         "brightnessctl s $(cat ~/.dotfiles/home-manager/modules/hypr/scripts/bright)"
         "swww-daemon"
         "swayosd-server"
-        "~/.dotfiles/home-manager/modules/hypr/scripts/notify.sh"
+        "xfce4-power-manager"
         "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
         "waybar"
         "swaync"

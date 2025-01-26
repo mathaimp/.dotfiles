@@ -113,7 +113,7 @@
       "critical": 15
     },
     "format": "{icon}{capacity}%",
-    "format-full": "<span foreground=\"#2A995C\">󰁹 </span>",
+    "format-full": "<span foreground=\"#2A995C\">󰁹 </span>{capacity}%",
     "format-charging": "<span foreground=\"#2A995C\">󰂄 </span>{capacity}%",
     "format-plugged": "󰂄 {capacity}%",
     "format-icons": [

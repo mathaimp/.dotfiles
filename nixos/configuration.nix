@@ -1,4 +1,4 @@
-{ inputs, config, pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   imports =
@@ -43,7 +43,6 @@
     wget
     curl
     git
-    inputs.ghostty.packages.x86_64-linux.default #terminal
   ];
   
   fonts.packages = with pkgs; [

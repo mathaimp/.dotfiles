@@ -23,7 +23,7 @@ in
       devpod
       rustc
       cargo
-      xclip
+      wl-clipboard
       ripgrep
       bottom
       curl
