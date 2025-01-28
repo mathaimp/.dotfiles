@@ -3,6 +3,6 @@
   imports = [
     ./daemon.nix
     ./pipewire.nix
-    ./gaming.nix
+    ./wine.nix
   ];
 }

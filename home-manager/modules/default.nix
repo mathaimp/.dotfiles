@@ -3,6 +3,6 @@
   imports = [
     ./shell/shell.nix
     ./hypr/hyprland.nix
-    ./music/spicetify.nix
+    ./apps/spicetify.nix
   ];
 }

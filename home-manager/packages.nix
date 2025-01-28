@@ -46,6 +46,7 @@
 
     # robotics
     gnome-text-editor
+    kicad
 
     # system tools
     bottom
