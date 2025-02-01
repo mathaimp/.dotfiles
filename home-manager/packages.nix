@@ -24,7 +24,7 @@
     zip
     xz
     unzip
-    p7zip
+    p7zip-rar
 
     # misc
     pavucontrol
