@@ -47,6 +47,7 @@
     wget
     curl
     git
+    gparted
   ];
   
   fonts.packages = with pkgs; [

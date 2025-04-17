@@ -19,6 +19,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-secrets = {
+      url = "git+ssh://git@github.com/mathewp88/nix-secrets?shallow=1&ref=main";
+      flake = false;
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, stylix, sops-nix, lanzaboote, spicetify-nix, ... }@inputs: {

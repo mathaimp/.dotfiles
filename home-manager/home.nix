@@ -11,6 +11,7 @@
 
   imports = [
     ./packages.nix
+    ./sops.nix
     ./modules
   ];
 

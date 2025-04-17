@@ -14,6 +14,7 @@
 
     # ESSENTIALS
     gcc
+    sops
     # bitwarden
     keepassxc
     xfce.xfce4-power-manager
