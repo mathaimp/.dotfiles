@@ -1,12 +1,14 @@
 { config, pkgs, ... }:
 {
   wayland.windowManager.hyprland = {
+    # Disable systemd here as it conflicts with uwsm
+    systemd.enable = false;
     settings = {
       #Keybinds
       bind = [
         "$mainMod, return, exec, $terminal"
         "$mainMod, F, exec, $browser"
-        "$mainMod, S, exec, $file_manager"
+        "$mainMod, D, exec, $file_manager"
         "$mainMod, Q, killactive"
         #"$mainMod, P, pseudo"
         "$mainMod SHIFT, R, exec, hyprctl reload"
@@ -16,7 +18,7 @@
         "$mainMod, A, exec, loginctl lock-session"
         "$mainMod SHIFT, Q, exec, ~/.dotfiles/home-manager/modules/hypr/scripts/powermenu.sh"
         "SUPER, SUPER_L, exec, rofi -show drun -theme ~/.config/rofi/launch.rasi"
-        "$mainMod, D, exec, rofi -show drun -theme ~/.config/rofi/launch.rasi"
+        # "$mainMod, D, exec, rofi -show drun -theme ~/.config/rofi/launch.rasi"
 
         # Windows
         "$mainMod, J, movefocus, d"
@@ -28,7 +30,7 @@
         "$mainMod SHIFT,H,movewindow,l"
         "$mainMod SHIFT,L,movewindow,r"
         "$mainMod, T, togglefloating"
-        "$mainMod, M, togglespecialworkspace, magic"
+        "$mainMod, S, togglespecialworkspace, magic"
         "$mainMod SHIFT, S, movetoworkspace, special:magic"
         "$mainMod, mouse_down, workspace, e+1"
         "$mainMod, mouse_up, workspace, e-1"
@@ -54,7 +56,7 @@
         ", XF86AudioPlay, exec, playerctl play-pause"
         ", XF86AudioPrev, exec, playerctl previous"
         ", XF86AudioNext, exec, playerctl next"
-        ", XF86AudioMute, exec, swayosd-client --output-volume mute-toggle"
+        ", XF86AudioMute, exec, swayosd-client --output-volume mute-toggle --max-volume 120"
         ", XF86AudioMicMute, exec, swayosd-client --input-volume mute-toggle"
       ];
 

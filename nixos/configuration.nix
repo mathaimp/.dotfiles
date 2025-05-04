@@ -9,6 +9,7 @@
 
   networking.hostName = "mathai";
   networking.networkmanager.enable = true;
+  systemd.services.NetworkManager-wait-online.enable = false;
 
   time.timeZone = "Asia/Kolkata";
 
@@ -76,7 +77,7 @@
   programs.nh = {
     enable = true;
     clean.enable = true;
-    clean.dates = "daily";
+    clean.dates = "weekly";
     clean.extraArgs = "--keep-since 7d --keep 10";
     flake = "/home/mathai/.dotfiles";
   };

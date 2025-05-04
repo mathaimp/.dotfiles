@@ -67,8 +67,11 @@
       layerrule = [
         "blur,waybar"
       ];
+      windowrule = [
+        "workspace special:magic silent, class:org.keepassxc.KeePassXC"
+      ];
 
-      general.gaps_out = 10;
+      general.gaps_out = 6;
       general.gaps_in = 3;
 
       input.kb_options = "ctrl:nocaps";
@@ -78,8 +81,8 @@
       misc.vfr = true;
       misc.disable_hyprland_logo = true;
       misc.disable_splash_rendering = true;
-      #misc.mouse_move_enables_dpms = true;
-      #misc.key_press_enables_dpms = true;
+      misc.mouse_move_enables_dpms = true;
+      misc.key_press_enables_dpms = true;
 
     };
   };

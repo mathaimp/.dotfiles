@@ -29,12 +29,12 @@
     enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
-    initExtraFirst = ''
+    initContent = lib.mkBefore ''
       source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
       source ~/.p10k.zsh
       source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh
-    '';
-    initExtra = builtins.readFile ./.zshrc;
+      ${builtins.readFile ./.zshrc}
+      '';
   };
 
   programs.direnv = {

@@ -20,7 +20,6 @@
 
       "syncthing/key".sopsFile = "${inputs.nix-secrets}/syncthing.yaml";
       "syncthing/cert".sopsFile = "${inputs.nix-secrets}/syncthing.yaml";
-      "syncthing/pass".sopsFile = "${inputs.nix-secrets}/syncthing.yaml";
     };
   };
 }

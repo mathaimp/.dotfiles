@@ -4,7 +4,6 @@
     enable = true;
     key = config.sops.secrets."syncthing/key".path;
     cert = config.sops.secrets."syncthing/cert".path;
-    passwordFile = config.sops.secrets."syncthing/pass".path;
     overrideDevices = true;
     overrideFolders = true;
     settings = {
