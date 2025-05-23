@@ -16,8 +16,8 @@ with config.lib.stylix.colors;
         background:     #${base00};
         background-alt: #${base01};
         foreground:     #${base05};
-        selected:       #${base0D};
-        active:         #${base0D};
+        selected:       #${base03};
+        active:         #${base02};
         urgent:         #${base09};
     }
   '';

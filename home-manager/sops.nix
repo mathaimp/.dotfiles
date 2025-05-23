@@ -18,6 +18,8 @@
         path = "/home/mathai/.ssh/id_ed25519.pub";
       };
 
+      "weather/api" = {};
+
       "syncthing/key".sopsFile = "${inputs.nix-secrets}/syncthing.yaml";
       "syncthing/cert".sopsFile = "${inputs.nix-secrets}/syncthing.yaml";
     };

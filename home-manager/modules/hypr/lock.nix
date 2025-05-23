@@ -165,8 +165,7 @@ with config.lib.stylix.colors;
         # Weather
         {
           monitor = "";
-          text = ''cmd[update:1000] echo "$(~/.dotfiles/home-manager/modules/hypr/scripts/weather.sh)"'';
-          #text = ''cmd[update:60000] echo "$(curl -s 'wttr.in/Thiruvalla?format="%l:+%C,+%c%t"')"'';
+          text = ''cmd[update:1000] echo "$(~/.dotfiles/home-manager/modules/hypr/scripts/weather.sh $(cat ${config.sops.secrets."weather/api".path}))"'';
           color = "rgb(${base05-rgb-r}, ${base05-rgb-g}, ${base05-rgb-b})";
           font_size = 10;
           font_family = "JetBrains Mono Nerd Font Mono ExtraBold";

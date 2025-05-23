@@ -1,4 +1,5 @@
-{ config, pkgs, ... }:
+{ lib, config, pkgs, ... }:
+with config.lib.stylix.colors;
 {
 
   imports = [
@@ -67,11 +68,19 @@
         "blur,waybar"
       ];
       windowrule = [
-        "workspace special:magic silent, class:org.keepassxc.KeePassXC"
+        "workspace special:magic silent, title:Passwords - KeePassXC"
+        "workspace special:magic silent, title:Passwords.kdbx [Locked] - KeePassXC"
+        "opacity 0.95 override 0.95 override 0.95 override, class:kitty"
+      ];
+
+      windowrulev2 = [
+        "center, floating:1"
       ];
 
       general.gaps_out = 6;
       general.gaps_in = 3;
+      general."col.active_border" = lib.mkForce "rgb(${base03})";
+      general."col.inactive_border" = lib.mkForce "rgb(${base02})";
 
       input.kb_options = "ctrl:nocaps";
       decoration.blur.enabled = true;
