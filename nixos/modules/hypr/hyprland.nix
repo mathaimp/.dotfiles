@@ -1,8 +1,8 @@
 { lib, pkgs, config, ... }:
 {
-  services.xserver.displayManager.gdm.enable = true;
+  services.displayManager.gdm.enable = true;
 
-  services.xserver.desktopManager.gnome.enable = false;
+  services.desktopManager.gnome.enable = false;
 
   programs.hyprland = {
     enable = true;

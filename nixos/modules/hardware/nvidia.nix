@@ -22,7 +22,7 @@
     nvidiaPersistenced = true;
 
     package = config.boot.kernelPackages.nvidiaPackages.stable;
-    open = false;
+    open = true;
   };
   # Enable Nvidia Drivers
   services.xserver.videoDrivers = ["nvidia"];

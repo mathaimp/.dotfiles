@@ -3,7 +3,9 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.plymouth.enable = true;
+
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelParams = [ "resume=/dev/mapper/nixos-root" "resume_offset=533760" ];
   boot.resumeDevice = "/dev/mapper/nixos-root";
 

@@ -12,10 +12,22 @@
 
     secrets = {
       "private_keys/victus" = {
-        path = "/home/mathai/.ssh/id_ed25519";
+        path = ".ssh/id_ed25519";
+        mode = "0600";
       };
       "public_keys/victus" = {
-        path = "/home/mathai/.ssh/id_ed25519.pub";
+        path = ".ssh/id_ed25519.pub";
+        mode = "0644";
+      };
+
+      "private_keys/github" = {
+        path = ".ssh/id_github";
+        mode = "0600";
+      };
+
+      "public_keys/github" = {
+        path = ".ssh/id_github.pub";
+        mode = "0644";
       };
 
       "weather/api" = {};

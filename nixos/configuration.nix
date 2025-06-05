@@ -11,7 +11,8 @@
   networking.networkmanager.enable = true;
   systemd.services.NetworkManager-wait-online.enable = false;
 
-  time.timeZone = "Asia/Kolkata";
+  # time.timeZone = "Asia/Kolkata";
+  services.automatic-timezoned.enable = true;
 
   services.xserver.enable = true;
   services.fwupd.enable = true;

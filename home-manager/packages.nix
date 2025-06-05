@@ -12,6 +12,7 @@
     interception-tools-plugins.caps2esc
 
     mangohud
+    ludusavi
 
     # ESSENTIALS
     gcc
@@ -20,7 +21,7 @@
     keepassxc
 
     # books
-    #helvetica-neue-lt-std
+    helvetica-neue-lt-std
     calibre
 
     # foliate

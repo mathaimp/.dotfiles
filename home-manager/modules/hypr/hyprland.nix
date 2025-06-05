@@ -73,10 +73,6 @@ with config.lib.stylix.colors;
         "opacity 0.95 override 0.95 override 0.95 override, class:kitty"
       ];
 
-      windowrulev2 = [
-        "center, floating:1"
-      ];
-
       general.gaps_out = 6;
       general.gaps_in = 3;
       general."col.active_border" = lib.mkForce "rgb(${base03})";

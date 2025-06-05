@@ -2,7 +2,7 @@
 unsetopt BEEP
 
 # Keybindings
-bindkey -e
+bindkey -v
 bindkey "${terminfo[kcuu1]}" history-search-backward
 bindkey "${terminfo[kcud1]}" history-search-forward
 #bindkey 'v' history-search-backward
@@ -26,6 +26,9 @@ zstyle ':completion:*' menu no
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza -1 --color=always $realpath'
+
+# Better SSH/Rsync/SCP Autocomplete
+zstyle ':completion:*:*:(ssh|scp|rsync):*:*' known-hosts-files ~/.ssh/known_hosts ~/.ssh/config
 
 # Aliases
 alias ls='eza'
