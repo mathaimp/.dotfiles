@@ -34,7 +34,7 @@
       source ~/.p10k.zsh
       source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh
       ${builtins.readFile ./.zshrc}
-      '';
+    '';
   };
 
   programs.direnv = {
@@ -50,18 +50,18 @@
   stylix.targets.kitty.enable = false;
   programs.kitty = {
     enable = true;
-    themeFile  = "rose-pine";
+    themeFile = "rose-pine";
     font.size = lib.mkForce 14;
     font.name = lib.mkForce "JetBrainsMono Nerd Font";
     shellIntegration.enableZshIntegration = true;
     settings = {
       enable_audio_bell = false;
       window_padding_width = 5;
-  		copy_on_select = true;
-  		clipboard_control = "write-clipboard read-clipboard write-primary read-primary";
+      copy_on_select = true;
+      clipboard_control = "write-clipboard read-clipboard write-primary read-primary";
     };
     keybindings = {
-      "ctrl+c" = "copy_or_interrupt";
+      # "ctrl+c" = "copy_or_interrupt";
     };
   };
 

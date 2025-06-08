@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ lib, config, pkgs, ... }:
 
 {
   imports =
@@ -11,7 +11,7 @@
   networking.networkmanager.enable = true;
   systemd.services.NetworkManager-wait-online.enable = false;
 
-  # time.timeZone = "Asia/Kolkata";
+  time.timeZone = lib.mkDefault "Asia/Kolkata";
   services.automatic-timezoned.enable = true;
 
   services.xserver.enable = true;
@@ -51,19 +51,19 @@
     git
     gparted
   ];
-  
+
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
     nerd-fonts.fira-code
   ];
 
   environment.variables.EDITOR = "nvim";
-  
+
   environment.sessionVariables = {
-  EDITOR = "nvim";
-  BROWSER = "firefox";
-  TERMINAL = "kitty";
-};
+    EDITOR = "nvim";
+    BROWSER = "firefox";
+    TERMINAL = "kitty";
+  };
 
   services.openssh = {
     enable = true;

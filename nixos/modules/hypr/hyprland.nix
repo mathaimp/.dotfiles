@@ -17,13 +17,14 @@
   security.pam.services.gdm.enableGnomeKeyring = true;
   security.pam.services.gdm-password.enableGnomeKeyring = true;
 
-  security.pam.services.hyprlock.text = lib.readFile "${pkgs.hyprlock}/etc/pam.d/hyprlock";
+  # security.pam.services.hyprlock.text = lib.readFile "${pkgs.hyprlock}/etc/pam.d/hyprlock";
+  security.pam.services.hyprlock = {};
 
   environment.systemPackages = with pkgs; [
     polkit_gnome # For auth in wm
     file-roller
   ];
-  
+
   # File Manager Setup
   programs.thunar.enable = true;
   programs.xfconf.enable = true; # To save preferances
