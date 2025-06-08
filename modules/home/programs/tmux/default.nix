@@ -40,6 +40,7 @@ in
             set -g @rose_pine_right_separator ' '
             set -g @rose_pine_field_separator ' ' 
             set -g @rose_pine_window_separator ' '
+            set -g @rose_pine_folder_icon ' '
           '';
         }
       ];

@@ -30,6 +30,7 @@ in
               "bold"
             ];
             inactiveBorderColor = [ muted ];
+            selectedLineBgColor = [ muted ];
           };
           showListFooter = false;
           showRandomTip = false;

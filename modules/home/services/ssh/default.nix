@@ -24,7 +24,7 @@ in
         "github.com" = {
           user = "git";
           hostname = "github.com";
-          identityFile = "/home/${config.home.homeDirectory}/.ssh/id_github";
+          identityFile = "${config.home.homeDirectory}/.ssh/id_github";
           identitiesOnly = true;
         };
       };

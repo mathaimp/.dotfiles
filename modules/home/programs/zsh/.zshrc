@@ -36,7 +36,7 @@ alias la='eza -a'
 alias c='clear'
 alias e='exit'
 alias update='nix flake update --flake ~/.dotfiles'
-alias rebuild='nh os switch'
+alias rebuild='nh os switch ~/.dotfiles/'
 alias clean='nh clean all --keep=5'
 alias rm='trash'
 

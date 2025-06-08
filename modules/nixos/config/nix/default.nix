@@ -21,7 +21,7 @@ in
       {
         package = pkgs.nixVersions.latest;
         gc = {
-          options = "--delete-older-than 30d";
+          options = "--keep 10";
           dates = "daily";
           automatic = true;
         };

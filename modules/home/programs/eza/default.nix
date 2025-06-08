@@ -21,6 +21,7 @@ in
       icons = "auto";
 
       extraOptions = [
+        "--group-directories-first"
         "--icons=always"
       ];
     };

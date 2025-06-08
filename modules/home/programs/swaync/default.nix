@@ -256,7 +256,7 @@ in
         border:none;
         background-color: unset;
         border-radius: 9999px;
-        min-width: 5.522rem;
+        min-width: 4.522rem;
         min-height: 2.927rem;
         padding: unset;
         margin: unset;
