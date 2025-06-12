@@ -22,7 +22,7 @@ in
       shellWrapperName = "y";
 
       settings = {
-        manager = {
+        mgr = {
           show_hidden = true;
           show_symlink = true;
           sort_by = "natural";

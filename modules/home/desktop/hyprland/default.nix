@@ -45,6 +45,7 @@ in
           "swaync"
           "nm-applet"
           "clipse -listen"
+          "[workspace special:magic silent] keepassxc"
         ];
 
         env = [
@@ -61,9 +62,9 @@ in
           "blur,waybar"
         ];
         windowrule = [
-          "workspace special:magic silent, title:Passwords - KeePassXC"
-          "workspace special:magic silent, title:Passwords.kdbx [Locked] - KeePassXC"
           "opacity 0.95 override 0.95 override 0.95 override, class:kitty"
+
+          "float, class:org.keepassxc.KeePassXC"
 
           "float, class:(clipse)"
           "size 622 652, class:(clipse)"

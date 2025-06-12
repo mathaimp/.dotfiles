@@ -17,8 +17,7 @@ in
   };
   config = mkIf cfg.enable {
 
-    home.file."${config.home.homeDirectory}/.config/nvim".source =
-      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/nvim";
+    xdg.configFile."nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/nvim";
 
     home.sessionVariables = {
       EDITOR = "nvim";
@@ -44,6 +43,10 @@ in
         fd
         wget
       ];
+      # Ensure no init.lua is made
+      extraConfig = "";
+      extraLuaConfig = "";
+      # make mason and stuff work
       extraWrapperArgs = [
         "--suffix"
         "NIX_LD_LIBRARY_PATH"

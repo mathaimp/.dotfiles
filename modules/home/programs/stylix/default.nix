@@ -38,6 +38,8 @@ in
         waybar.enable = false;
         hyprlock.enable = false;
         neovim.enable = false;
+	# Neovide diabled otherwise adds stuff to neovim conf
+	neovide.enable = false;
         tmux.enable = false;
       };
     };

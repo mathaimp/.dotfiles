@@ -17,6 +17,7 @@ with lib.${namespace};
       shell = enabled;
     };
     programs = {
+      keepassxc = enabled;
       spotify = enabled;
       yazi = enabled;
       zathura = enabled;
