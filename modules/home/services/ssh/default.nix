@@ -20,6 +20,14 @@ in
     programs.ssh = {
       enable = true;
 
+      ## FOR SAFETY, DO NOT OVERRIDE !! ##
+      forwardAgent = lib.mkForce false;
+      hashKnownHosts = lib.mkForce true;
+
+      addKeysToAgent = "yes";
+      serverAliveInterval = 60;
+      serverAliveCountMax = 10;
+
       matchBlocks = {
         "github.com" = {
           user = "git";
@@ -27,11 +35,14 @@ in
           identityFile = "${config.home.homeDirectory}/.ssh/id_github";
           identitiesOnly = true;
         };
-      };
 
-      extraConfig = ''
-        AddKeysToAgent yes
-      '';
+        "blazer" = {
+          user = "mathai.mathew";
+          hostname = "10.2.36.164";
+          identityFile = "${config.home.homeDirectory}/.ssh/id_ed25519";
+          identitiesOnly = true;
+        };
+      };
     };
     services.ssh-agent.enable = true;
   };
