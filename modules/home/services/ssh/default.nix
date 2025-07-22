@@ -49,6 +49,13 @@ in
           identityFile = "${config.home.homeDirectory}/.ssh/id_ed25519";
           identitiesOnly = true;
         };
+
+        "ada" = {
+          user = "mathai.mathew";
+          hostname = "10.4.24.24";
+          identityFile = "${config.home.homeDirectory}/.ssh/id_ed25519";
+          identitiesOnly = true;
+        };
       };
     };
     services.ssh-agent.enable = true;
