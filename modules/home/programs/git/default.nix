@@ -18,6 +18,7 @@ in
   config = mkIf cfg.enable {
     programs.git = {
       enable = true;
+      delta.enable = true;
       lfs.enable = true;
     };
     home.file.".gitconfig".source = ./.gitconfig;

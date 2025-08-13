@@ -48,6 +48,15 @@ in
         "-i"
         "--no-bold"
       ];
+      fileWidgetOptions = [
+        "--walker-skip .git,node_modules,target"
+        "--preview 'bat -n --color=always {}'"
+        "--bind 'ctrl-/:change-preview-window(down|hidden|)'"
+      ];
+      changeDirWidgetOptions = [
+        "--walker-skip .git,node_modules,target"
+        "--preview 'tree -C {}'"
+      ];
     };
 
     programs.zsh = {

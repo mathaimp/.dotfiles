@@ -29,7 +29,9 @@ in
       appimage-run
       which
       trash-cli
-      tldr
+      tealdeer
+      ripgrep
+      fd
 
       # archives
       zip
@@ -48,6 +50,7 @@ in
 
     olympus = {
       programs = {
+        bat = enabled;
         eza = enabled;
         fzf = enabled;
         git = enabled;

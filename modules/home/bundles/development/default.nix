@@ -20,6 +20,9 @@ in
       caligula
       nvitop
 
+      # python
+      uv
+
       # Notes
       obsidian
       zotero

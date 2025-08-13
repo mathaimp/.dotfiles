@@ -357,10 +357,10 @@
     "nix-secrets": {
       "flake": false,
       "locked": {
-        "lastModified": 1753982621,
-        "narHash": "sha256-etPU/w80QjkxlC5qnCleSZI+vM2x6FX0+Ker39zDQn0=",
+        "lastModified": 1753994775,
+        "narHash": "sha256-yOHF4bpmmnFYGfX3D4ra0VdDwqXN/a1PVfFqm3RMYTI=",
         "ref": "main",
-        "rev": "a2ea376b55642aa8f9ce1a2b3cbe6a1503a5ff4a",
+        "rev": "16f3668567c6a07985733d48c0f3c81bfdc6de17",
         "shallow": true,
         "type": "git",
         "url": "ssh://git@github.com/mathewp88/.nix-secrets"
