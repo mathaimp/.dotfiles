@@ -9,17 +9,16 @@
 with lib;
 with lib.${namespace};
 let
-  cfg = config.${namespace}.programs.direnv;
+  cfg = config.${namespace}.programs.bat;
 in
 {
-  options.${namespace}.programs.direnv = with types; {
-    enable = mkBoolOpt false "Enable direnv";
+  options.${namespace}.programs.bat = with types; {
+    enable = mkBoolOpt false "Enable bat";
   };
   config = mkIf cfg.enable {
-    programs.direnv = {
+    programs.bat = {
       enable = true;
-      enableZshIntegration = true; # see note on other shells below
-      nix-direnv.enable = true;
+      extraPackages = with pkgs.bat-extras; [ batman ];
     };
   };
 }
