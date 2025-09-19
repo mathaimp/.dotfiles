@@ -1,15 +1,7 @@
-{
-  options,
-  config,
-  lib,
-  pkgs,
-  namespace,
-  ...
-}:
+{ options, config, lib, pkgs, namespace, ... }:
 with lib;
 with lib.${namespace};
-let
-  cfg = config.${namespace}.hardware.nvidia;
+let cfg = config.${namespace}.hardware.nvidia;
 in
 {
   options.${namespace}.hardware.nvidia = with types; {
@@ -55,9 +47,8 @@ in
       # Switches power between gpu and cpu based on usage.
       dynamicBoost.enable = true;
 
-
       # Optionally, you may need to select the appropriate driver version for your specific GPU.
-      package = config.boot.kernelPackages.nvidiaPackages.legacy_535;
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
     };
   };
 }

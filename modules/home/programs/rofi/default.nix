@@ -19,7 +19,7 @@ in
   };
   config = mkIf cfg.enable {
 
-    home.packages = [ pkgs.rofi-wayland ];
+    home.packages = [ pkgs.rofi ];
 
     home.file.".config/rofi/config.rasi".source = ./config/config.rasi;
 

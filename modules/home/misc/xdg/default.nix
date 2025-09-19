@@ -16,6 +16,7 @@ in
   config = mkIf cfg.enable {
     xdg = {
       enable = true;
+      userDirs.enable = true;
       desktopEntries."nvim" = {
         name = "Neovim";
         comment = "Edit text files";
