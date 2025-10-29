@@ -1,12 +1,4 @@
-{ options
-, config
-, osConfig
-, lib
-, pkgs
-, inputs
-, namespace
-, ...
-}:
+{ options, config, osConfig, lib, pkgs, inputs, namespace, ... }:
 with lib;
 with lib.${namespace};
 let
@@ -19,10 +11,7 @@ in
   };
   config = mkIf cfg.enable {
 
-    home.packages = with pkgs; [
-      libnotify
-      swaynotificationcenter
-    ];
+    home.packages = with pkgs; [ libnotify swaynotificationcenter ];
 
     home.file.".config/swaync/configSchema.json".source = ./configSchema.json;
 
@@ -60,15 +49,11 @@ in
         border: unset;
         border-radius: 1.159rem;
         -gtk-outline-radius: 1.159rem;
-  
+
       }
 
       .floating-notifications.background .notification-background .notification .notification-content,
       .control-center .notification-background .notification .notification-content {
-      /*  border-top: 1px solid rgba(164, 162, 167, 0.15);
-        border-left: 1px solid rgba(164, 162, 167, 0.15);
-        border-right: 1px solid rgba(128, 127, 132, 0.15);
-        border-bottom: 1px solid rgba(128, 127, 132, 0.15);*/
         background-color: #${stylixColors.base01};
         padding: 0.818rem;
         padding-right: unset;
@@ -321,7 +306,8 @@ in
         color:unset;
         background-color: #${stylixColors.base09};
         border-radius: 100%;
-        min-height: 1.25rem;
+        min-height: 1.1rem;
+        min-width: 1.1rem;
       }
 
       /* Mpris widget */

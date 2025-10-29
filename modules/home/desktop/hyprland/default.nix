@@ -1,12 +1,4 @@
-{ options
-, osConfig
-, config
-, lib
-, pkgs
-, inputs
-, namespace
-, ...
-}:
+{ options, osConfig, config, lib, pkgs, inputs, namespace, ... }:
 with lib;
 with lib.${namespace};
 let
@@ -19,9 +11,7 @@ in
   };
   config = mkIf cfg.enable {
 
-    olympus.desktop.hyprland = {
-      keybinds = enabled;
-    };
+    olympus.desktop.hyprland = { keybinds = enabled; };
 
     services.playerctld.enable = true;
 
@@ -54,13 +44,9 @@ in
           "XDG_SESSION_DESKTOP,Hyprland"
         ];
 
-        exec = [
-          "swww img ${osConfig.stylix.image}"
-        ];
+        exec = [ "swww img ${osConfig.stylix.image}" ];
 
-        layerrule = [
-          "blur,waybar"
-        ];
+        layerrule = [ "blur,waybar" ];
         windowrule = [
           "opacity 0.95 override 0.95 override 0.95 override, class:kitty"
 
@@ -74,7 +60,8 @@ in
         general.gaps_out = 6;
         general.gaps_in = 3;
         general."col.active_border" = lib.mkForce "rgb(${stylixColors.base03})";
-        general."col.inactive_border" = lib.mkForce "rgb(${stylixColors.base02})";
+        general."col.inactive_border" =
+          lib.mkForce "rgb(${stylixColors.base02})";
 
         input.kb_options = "ctrl:nocaps";
         decoration.blur.enabled = true;

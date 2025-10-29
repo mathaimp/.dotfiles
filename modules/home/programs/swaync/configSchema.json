@@ -322,7 +322,6 @@
       ],
       "items": {
         "type": "string",
-        // Sadly can't use regex and enums at the same time. Fix in the future?
         "pattern": "^[a-zA-Z0-9_-]{1,}(#[a-zA-Z0-9_-]{1,}){0,1}?$"
       }
     },
@@ -331,9 +330,7 @@
       "description": "Configure specific widget properties.",
       "additionalProperties": false,
       "patternProperties": {
-        // New widgets go here
         "^title(#[a-zA-Z0-9_-]{1,}){0,1}?$": {
-          // References the widget structure from "widgets" below
           "$ref": "#/widgets/title"
         },
         "^dnd(#[a-zA-Z0-9_-]{1,}){0,1}?$": {
@@ -358,14 +355,12 @@
           "$ref": "#/widgets/backlight"
         },
         "^inhibitors(#[a-zA-Z0-9_-]{1,}){0,1}?$": {
-          // References the widget structure from "widgets" below
           "$ref": "#/widgets/inhibitors"
         }
       }
     }
   },
   "widgets": {
-    // New widgets go here
     "title": {
       "type": "object",
       "description": "Control Center Title Widget",
