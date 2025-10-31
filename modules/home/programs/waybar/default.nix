@@ -11,7 +11,8 @@ with lib;
 with lib.${namespace};
 let
   cfg = config.${namespace}.programs.waybar;
-  stylixColors = osConfig.lib.stylix.colors;
+  stylixEnabled = config.${namespace}.programs.stylix.enable or false;
+  stylixColors = if stylixEnabled then osConfig.lib.stylix.colors else null;
 in
 {
   options.${namespace}.programs.waybar = with types; {

@@ -1,4 +1,4 @@
-{ config, lib, pkgs, namespace, ... }:
+{ config, lib, pkgs, namespace, inputs, ... }:
 with lib;
 with lib.${namespace};
 let cfg = config.${namespace}.config.nix;

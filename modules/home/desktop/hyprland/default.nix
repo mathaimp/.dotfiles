@@ -3,7 +3,8 @@ with lib;
 with lib.${namespace};
 let
   cfg = config.${namespace}.desktop.hyprland;
-  stylixColors = osConfig.lib.stylix.colors;
+  stylixEnabled = config.${namespace}.programs.stylix.enable or false;
+  stylixColors = if stylixEnabled then osConfig.lib.stylix.colors else null;
 in
 {
   options.${namespace}.desktop.hyprland = with types; {
@@ -44,7 +45,7 @@ in
           "XDG_SESSION_DESKTOP,Hyprland"
         ];
 
-        exec = [ "swww img ${osConfig.stylix.image}" ];
+        exec = lib.mkIf stylixEnabled [ "swww img ${osConfig.stylix.image}" ];
 
         layerrule = [ "blur,waybar" ];
         windowrule = [

@@ -93,7 +93,6 @@
 
       systems.modules.nixos = with inputs; [
         lanzaboote.nixosModules.lanzaboote
-        stylix.nixosModules.stylix
         sops-nix.nixosModules.sops
       ];
 
@@ -105,16 +104,11 @@
       systems.hosts.ares.modules = with inputs; [
         # Same hardware as the victus
         nixos-hardware.nixosModules.omen-16-n0280nd
+        stylix.nixosModules.stylix
       ];
 
       systems.hosts.hermes.modules = with inputs; [
         nixos-hardware.nixosModules.raspberry-pi-4
-      ];
-
-      # Issue with snowfall, stylix (in home) fails eval as NixOS doesn't link it
-      # This will need to be added to any system not using stylix
-      homes.users."mathai@hermes".modules = with inputs; [
-        stylix.homeModules.stylix
       ];
 
       templates = import ./templates { };

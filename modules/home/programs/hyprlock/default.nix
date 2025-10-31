@@ -14,7 +14,8 @@ let
   weatherScript = (pkgs.writeShellScriptBin "weather" (builtins.readFile ./scripts/weather.sh));
   infolockScript = (pkgs.writeShellScriptBin "infolock" (builtins.readFile ./scripts/infolock.sh));
   playerctlockScript = (pkgs.writeShellScriptBin "playerctlock" (builtins.readFile ./scripts/playerctlock.sh));
-  stylixColors = osConfig.lib.stylix.colors;
+  stylixEnabled = config.${namespace}.programs.stylix.enable or false;
+  stylixColors = if stylixEnabled then osConfig.lib.stylix.colors else null;
 in
 {
   options.${namespace}.programs.hyprlock = with types; {
@@ -41,7 +42,7 @@ in
         background = [
           {
             monitor = "";
-            path = "${osConfig.stylix.image}";
+            path = lib.mkIf stylixEnabled "${osConfig.stylix.image}";
             color = "rgb(${stylixColors.base01-rgb-r}, ${stylixColors.base01-rgb-g}, ${stylixColors.base01-rgb-b})";
             blur_passes = 2;
             contrast = 0.8916;
