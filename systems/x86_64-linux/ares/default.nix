@@ -1,16 +1,27 @@
-{ pkgs, lib, namespace, ... }:
+{
+  lib,
+  namespace,
+  ...
+}:
 with lib;
-with lib.${namespace}; {
+with lib.${namespace};
+{
   imports = [ ./hardware.nix ];
 
   networking.hostName = "ares";
 
   olympus = {
-    bundles = { common = enabled; };
+    bundles = {
+      common = enabled;
+    };
     config = {
       user = {
         name = "mathai";
-        extraGroups = [ "networkmanager" "wheel" "dialout" ];
+        extraGroups = [
+          "networkmanager"
+          "wheel"
+          "dialout"
+        ];
       };
     };
     desktop.hyprland = enabled;

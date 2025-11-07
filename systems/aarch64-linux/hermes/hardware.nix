@@ -1,4 +1,8 @@
-{ inputs, lib, modulesPath, ... }:
+{
+  lib,
+  modulesPath,
+  ...
+}:
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
@@ -13,7 +17,12 @@
     "usbhid"
     "usb_storage"
   ];
-  boot.kernelParams = [ "8250.nr_uarts=1" "console=tyAMA0,115200" "console=tty1" "cma=128M" ];
+  boot.kernelParams = [
+    "8250.nr_uarts=1"
+    "console=tyAMA0,115200"
+    "console=tty1"
+    "cma=128M"
+  ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];

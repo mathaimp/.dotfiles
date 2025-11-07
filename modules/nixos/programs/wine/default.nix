@@ -1,7 +1,14 @@
-{ options, config, lib, pkgs, namespace, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  namespace,
+  ...
+}:
 with lib;
 with lib.${namespace};
-let cfg = config.${namespace}.programs.wine;
+let
+  cfg = config.${namespace}.programs.wine;
 in
 {
   options.${namespace}.programs.wine = with types; {

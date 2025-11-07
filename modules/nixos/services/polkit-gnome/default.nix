@@ -1,5 +1,4 @@
 {
-  options,
   config,
   lib,
   pkgs,
@@ -27,7 +26,7 @@ in
     security = {
       pam.services.gdm.enableGnomeKeyring = true;
       pam.services.gdm-password.enableGnomeKeyring = true;
-      pam.services.hyprlock = {};
+      pam.services.hyprlock = { };
       polkit.enable = true;
     };
 

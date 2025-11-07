@@ -1,11 +1,9 @@
-{ options
-, osConfig
-, config
-, lib
-, pkgs
-, inputs
-, namespace
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  namespace,
+  ...
 }:
 with lib;
 with lib.${namespace};
@@ -54,11 +52,12 @@ in
           "$mainMod SHIFT, S, movetoworkspace, special:magic"
           "$mainMod, mouse_down, workspace, e+1"
           "$mainMod, mouse_up, workspace, e-1"
-        ] ++ (
+        ]
+        ++ (
           # workspaces
           # binds $mod + [shift +] {1..10} to [move to] workspace {1..10}
-          builtins.concatLists (builtins.genList
-            (
+          builtins.concatLists (
+            builtins.genList (
               x:
               let
                 ws =
@@ -71,8 +70,8 @@ in
                 "$mainMod, ${ws}, workspace, ${toString (x + 1)}"
                 "$mainMod SHIFT, ${ws}, movetoworkspacesilent, ${toString (x + 1)}"
               ]
-            )
-            10)
+            ) 10
+          )
         );
 
         bindl = [

@@ -1,16 +1,24 @@
-{ config, lib, pkgs, namespace, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  namespace,
+  ...
+}:
 with lib;
 with lib.${namespace};
-let cfg = config.${namespace}.desktop.hyprland;
+let
+  cfg = config.${namespace}.desktop.hyprland;
 in
 {
   options.${namespace}.desktop.hyprland = with types; {
-    enable = mkBoolOpt false
-      "Whether or not to use Hyprland as the desktop environment.";
+    enable = mkBoolOpt false "Whether or not to use Hyprland as the desktop environment.";
   };
 
   config = mkIf cfg.enable {
-    environment = { sessionVariables.WLR_NO_HARDWARE_CURSORS = "1"; };
+    environment = {
+      sessionVariables.WLR_NO_HARDWARE_CURSORS = "1";
+    };
     programs.hyprland = {
       enable = true;
       withUWSM = true;
@@ -36,8 +44,7 @@ in
         after = [ "graphical-session.target" ];
         serviceConfig = {
           Type = "simple";
-          ExecStart =
-            "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+          ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
           Restart = "on-failure";
           RestartSec = 1;
           TimeoutStopSec = 10;
@@ -55,8 +62,12 @@ in
     };
 
     olympus = {
-      programs = { thunar = enabled; };
-      services = { polkit-gnome = enabled; };
+      programs = {
+        thunar = enabled;
+      };
+      services = {
+        polkit-gnome = enabled;
+      };
     };
   };
 }

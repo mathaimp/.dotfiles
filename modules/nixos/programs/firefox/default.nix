@@ -1,8 +1,9 @@
-{ config
-, lib
-, namespace
-, pkgs
-, ...
+{
+  config,
+  lib,
+  namespace,
+  pkgs,
+  ...
 }:
 with lib;
 with lib.${namespace};

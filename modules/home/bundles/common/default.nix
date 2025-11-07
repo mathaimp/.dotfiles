@@ -1,12 +1,18 @@
-{ options, config, lib, pkgs, namespace, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  namespace,
+  ...
+}:
 with lib;
 with lib.${namespace};
-let cfg = config.${namespace}.bundles.common;
+let
+  cfg = config.${namespace}.bundles.common;
 in
 {
   options.${namespace}.bundles.common = with types; {
-    enable =
-      mkBoolOpt false "Whether or not to enable common bundle configuration.";
+    enable = mkBoolOpt false "Whether or not to enable common bundle configuration.";
   };
 
   config = mkIf cfg.enable {
@@ -22,13 +28,17 @@ in
     ];
 
     olympus = {
-      misc = { xdg = enabled; };
+      misc = {
+        xdg = enabled;
+      };
       programs = {
         kitty = enabled;
         sops = enabled;
         stylix = enabled;
       };
-      services = { ssh = enabled; };
+      services = {
+        ssh = enabled;
+      };
     };
   };
 }

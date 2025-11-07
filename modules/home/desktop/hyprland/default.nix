@@ -1,13 +1,23 @@
-{ options, osConfig, config, lib, pkgs, inputs, namespace, ... }:
+{
+  osConfig,
+  config,
+  lib,
+  namespace,
+  ...
+}:
 with lib;
 with lib.${namespace};
 let
   cfg = config.${namespace}.desktop.hyprland;
   stylixEnabled = config.${namespace}.programs.stylix.enable or false;
   stylixColors = if stylixEnabled then osConfig.lib.stylix.colors else null;
-  terminalChoice = if config.${namespace}.programs.kitty.enable then "kitty"
-                    else if config.${namespace}.programs.ghostty.enable then "ghostty"
-                    else "xterm"; # fallback
+  terminalChoice =
+    if config.${namespace}.programs.kitty.enable then
+      "kitty"
+    else if config.${namespace}.programs.ghostty.enable then
+      "ghostty"
+    else
+      "xterm"; # fallback
 in
 {
   options.${namespace}.desktop.hyprland = with types; {
@@ -15,7 +25,9 @@ in
   };
   config = mkIf cfg.enable {
 
-    olympus.desktop.hyprland = { keybinds = enabled; };
+    olympus.desktop.hyprland = {
+      keybinds = enabled;
+    };
 
     services.playerctld.enable = true;
 
@@ -64,8 +76,7 @@ in
         general.gaps_out = 6;
         general.gaps_in = 3;
         general."col.active_border" = lib.mkForce "rgb(${stylixColors.base03})";
-        general."col.inactive_border" =
-          lib.mkForce "rgb(${stylixColors.base02})";
+        general."col.inactive_border" = lib.mkForce "rgb(${stylixColors.base02})";
 
         input.kb_options = "ctrl:nocaps";
         decoration.blur.enabled = true;

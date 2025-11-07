@@ -1,7 +1,14 @@
-{ options, config, lib, pkgs, namespace, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  namespace,
+  ...
+}:
 with lib;
 with lib.${namespace};
-let cfg = config.${namespace}.bundles.server;
+let
+  cfg = config.${namespace}.bundles.server;
 in
 {
   options.${namespace}.bundles.server = with types; {
@@ -10,7 +17,13 @@ in
 
   config = mkIf cfg.enable {
 
-    environment.systemPackages = with pkgs; [ wget curl git fastfetch aria2 ];
+    environment.systemPackages = with pkgs; [
+      wget
+      curl
+      git
+      fastfetch
+      aria2
+    ];
 
     services = {
       udisks2.enable = true; # Required for e-reader connections to calibre
@@ -19,7 +32,9 @@ in
     olympus = {
       config.nix = enabled;
 
-      hardware = { networking = enabled; };
+      hardware = {
+        networking = enabled;
+      };
 
       programs = {
         nh = enabled;

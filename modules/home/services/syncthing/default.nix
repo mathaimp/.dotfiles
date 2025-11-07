@@ -1,10 +1,8 @@
-{ options
-, config
-, lib
-, pkgs
-, inputs
-, namespace
-, ...
+{
+  config,
+  lib,
+  namespace,
+  ...
 }:
 with lib;
 with lib.${namespace};
@@ -50,7 +48,11 @@ in
         folders = {
           "KeePass" = {
             path = "/home/mathai/M/KeePass";
-            devices = [ "phone" "ares" "hermes" ];
+            devices = [
+              "phone"
+              "ares"
+              "hermes"
+            ];
             versioning = {
               type = "simple";
               params = {

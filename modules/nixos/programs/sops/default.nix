@@ -1,10 +1,10 @@
-{ options
-, config
-, lib
-, pkgs
-, namespace
-, inputs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  namespace,
+  inputs,
+  ...
 }:
 with lib;
 with lib.${namespace};
@@ -34,7 +34,6 @@ in
         generateKey = true;
       };
     };
-
 
   };
 }

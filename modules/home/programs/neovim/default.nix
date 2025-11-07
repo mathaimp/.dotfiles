@@ -1,9 +1,9 @@
-{ config
-, pkgs
-, lib
-, namespace
-, inputs
-, ...
+{
+  config,
+  pkgs,
+  lib,
+  namespace,
+  ...
 }:
 with lib;
 with lib.${namespace};
@@ -17,7 +17,8 @@ in
   };
   config = mkIf cfg.enable {
 
-    xdg.configFile."nvim".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/nvim";
+    xdg.configFile."nvim".source =
+      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/nvim";
 
     home.sessionVariables = {
       EDITOR = "nvim";
@@ -51,7 +52,10 @@ in
         "--suffix"
         "NIX_LD_LIBRARY_PATH"
         ":"
-        "${lib.makeLibraryPath [pkgs.stdenv.cc.cc pkgs.zlib]}"
+        "${lib.makeLibraryPath [
+          pkgs.stdenv.cc.cc
+          pkgs.zlib
+        ]}"
         "--set"
         "NIX_LD"
         "${linker}"

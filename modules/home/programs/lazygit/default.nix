@@ -1,8 +1,6 @@
 {
-  options,
   config,
   lib,
-  pkgs,
   namespace,
   ...
 }:
@@ -14,8 +12,8 @@ let
 
   stylixEnabled = config.${namespace}.programs.stylix.enable or false;
 
-  accent   = if stylixEnabled then "#${config.lib.stylix.colors.base0D}" else null;
-  muted    = if stylixEnabled then "#${config.lib.stylix.colors.base03}" else null;
+  accent = if stylixEnabled then "#${config.lib.stylix.colors.base0D}" else null;
+  muted = if stylixEnabled then "#${config.lib.stylix.colors.base03}" else null;
   selected = if stylixEnabled then "#${config.lib.stylix.colors.base02}" else null;
 in
 {

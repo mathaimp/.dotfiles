@@ -1,7 +1,14 @@
-{ options, config, lib, pkgs, namespace, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  namespace,
+  ...
+}:
 with lib;
 with lib.${namespace};
-let cfg = config.${namespace}.services.docker;
+let
+  cfg = config.${namespace}.services.docker;
 in
 {
   options.${namespace}.services.docker = with types; {
@@ -12,19 +19,20 @@ in
     environment.systemPackages = with pkgs; [ xorg.xhost ];
     virtualisation.docker = {
       enable = true;
-      storageDriver =
-        if (config.${namespace}.hardware.btrfs.enable) then
-          "btrfs"
-        else
-          "overlay2";
+      storageDriver = if (config.${namespace}.hardware.btrfs.enable) then "btrfs" else "overlay2";
       rootless = {
         enable = true;
         setSocketVariable = true;
-        daemon.settings = { "dns" = [ "8.8.8.8" "1.1.1.1" ]; };
+        daemon.settings = {
+          "dns" = [
+            "8.8.8.8"
+            "1.1.1.1"
+          ];
+        };
       };
     };
-    hardware.nvidia-container-toolkit.enable =
-      builtins.any (driver: driver == "nvidia")
-        config.services.xserver.videoDrivers;
+    hardware.nvidia-container-toolkit.enable = builtins.any (
+      driver: driver == "nvidia"
+    ) config.services.xserver.videoDrivers;
   };
 }

@@ -1,9 +1,8 @@
-{ options
-, config
-, lib
-, pkgs
-, namespace
-, ...
+{
+  config,
+  lib,
+  namespace,
+  ...
 }:
 with lib;
 with lib.${namespace};
@@ -47,6 +46,9 @@ in
         enable = true;
       };
     };
-    users.users.immich.extraGroups = [ "video" "render" ];
+    users.users.immich.extraGroups = [
+      "video"
+      "render"
+    ];
   };
 }

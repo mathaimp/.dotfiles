@@ -1,4 +1,11 @@
-{ options, config, osConfig, lib, pkgs, inputs, namespace, ... }:
+{
+  config,
+  osConfig,
+  lib,
+  pkgs,
+  namespace,
+  ...
+}:
 with lib;
 with lib.${namespace};
 let
@@ -12,7 +19,10 @@ in
   };
   config = mkIf cfg.enable {
 
-    home.packages = with pkgs; [ libnotify swaynotificationcenter ];
+    home.packages = with pkgs; [
+      libnotify
+      swaynotificationcenter
+    ];
 
     home.file.".config/swaync/configSchema.json".source = ./configSchema.json;
 

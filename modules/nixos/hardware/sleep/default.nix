@@ -1,7 +1,13 @@
-{ options, config, lib, pkgs, namespace, ... }:
+{
+  config,
+  lib,
+  namespace,
+  ...
+}:
 with lib;
 with lib.${namespace};
-let cfg = config.${namespace}.hardware.sleep;
+let
+  cfg = config.${namespace}.hardware.sleep;
 in
 {
   options.${namespace}.hardware.sleep = with types; {

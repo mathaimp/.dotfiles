@@ -1,11 +1,10 @@
-{ options
-, config
-, osConfig
-, lib
-, pkgs
-, inputs
-, namespace
-, ...
+{
+  config,
+  osConfig,
+  lib,
+  pkgs,
+  namespace,
+  ...
 }:
 with lib;
 with lib.${namespace};
@@ -13,7 +12,9 @@ let
   cfg = config.${namespace}.programs.hyprlock;
   weatherScript = (pkgs.writeShellScriptBin "weather" (builtins.readFile ./scripts/weather.sh));
   infolockScript = (pkgs.writeShellScriptBin "infolock" (builtins.readFile ./scripts/infolock.sh));
-  playerctlockScript = (pkgs.writeShellScriptBin "playerctlock" (builtins.readFile ./scripts/playerctlock.sh));
+  playerctlockScript = (
+    pkgs.writeShellScriptBin "playerctlock" (builtins.readFile ./scripts/playerctlock.sh)
+  );
   stylixEnabled = config.${namespace}.programs.stylix.enable or false;
   stylixColors = if stylixEnabled then osConfig.lib.stylix.colors else null;
 in
@@ -22,18 +23,21 @@ in
     enable = mkBoolOpt false "Enable hyprlock";
   };
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-      bc
-      jq
-      playerctl
-    ] ++ [
-      weatherScript
-      infolockScript
-      playerctlockScript
-    ];
+    home.packages =
+      with pkgs;
+      [
+        bc
+        jq
+        playerctl
+      ]
+      ++ [
+        weatherScript
+        infolockScript
+        playerctlockScript
+      ];
 
     sops.secrets = mkIf (osConfig.${namespace}.programs.sops.enable or false) {
-      "weather/api" = {};
+      "weather/api" = { };
     };
 
     programs.hyprlock = {
@@ -169,7 +173,7 @@ in
             valign = "center";
           }
 
-          # PLAYER ALBUM 
+          # PLAYER ALBUM
           {
             monitor = "";
             text = ''cmd[update:100] echo "$(playerctlock --album)"'';

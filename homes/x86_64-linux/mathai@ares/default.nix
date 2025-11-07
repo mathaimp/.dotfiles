@@ -1,6 +1,12 @@
-{ config, lib, osConfig, namespace, ... }:
+{
+  lib,
+  osConfig,
+  namespace,
+  ...
+}:
 with lib;
-with lib.${namespace}; {
+with lib.${namespace};
+{
   snowfallorg.user.enable = true;
   olympus = {
     bundles = {

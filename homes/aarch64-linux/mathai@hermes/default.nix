@@ -1,8 +1,8 @@
-{ config
-, lib
-, osConfig
-, namespace
-, ...
+{
+  lib,
+  osConfig,
+  namespace,
+  ...
 }:
 with lib;
 with lib.${namespace};

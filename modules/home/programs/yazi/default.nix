@@ -1,10 +1,9 @@
-{ options
-, config
-, lib
-, pkgs
-, inputs
-, namespace
-, ...
+{
+  config,
+  lib,
+  inputs,
+  namespace,
+  ...
 }:
 with lib;
 with lib.${namespace};
@@ -51,7 +50,10 @@ in
             desc = "Maximize or restore the preview pane";
           }
           {
-            on = [ "c" "m" ];
+            on = [
+              "c"
+              "m"
+            ];
             run = "plugin chmod";
             desc = "Chmod on selected files";
           }

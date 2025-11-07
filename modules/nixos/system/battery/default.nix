@@ -1,8 +1,8 @@
-{ options
-, config
-, lib
-, namespace
-, ...
+{
+  config,
+  lib,
+  namespace,
+  ...
 }:
 with lib;
 with lib.${namespace};
@@ -36,8 +36,6 @@ in
     # powerManagement.powertop.enable = true;
 
     # Enable thermald (only necessary if on Intel CPUs)
-    services.thermald.enable = mkIf
-      (!config.hardware.cpu.intel.updateMicrocode)
-      true;
+    services.thermald.enable = mkIf (!config.hardware.cpu.intel.updateMicrocode) true;
   };
 }

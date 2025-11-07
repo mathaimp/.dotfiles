@@ -1,4 +1,11 @@
-{ options, config, lib, pkgs, inputs, namespace, ... }:
+{
+  options,
+  config,
+  lib,
+  pkgs,
+  namespace,
+  ...
+}:
 with lib;
 with lib.${namespace};
 let
@@ -8,7 +15,7 @@ in
   options.${namespace}.programs.stylix = with types; {
     enable = mkBoolOpt false "Enable Stylix integration.";
   };
-  
+
   config = mkIf cfg.enable (mkMerge [
     {
       home.packages = [ pkgs.papirus-icon-theme ];

@@ -1,7 +1,13 @@
-{ options, config, lib, pkgs, namespace, ... }:
+{
+  config,
+  lib,
+  namespace,
+  ...
+}:
 with lib;
 with lib.${namespace};
-let cfg = config.${namespace}.services.calibre-web;
+let
+  cfg = config.${namespace}.services.calibre-web;
 in
 {
   options.${namespace}.services.calibre-web = with types; {
@@ -9,7 +15,9 @@ in
   };
 
   config = mkIf cfg.enable {
-    sops.secrets = { "hardcover-api" = { }; };
+    sops.secrets = {
+      "hardcover-api" = { };
+    };
     virtualisation.oci-containers.containers = {
       calibre-web-automated = {
         pull = "newer";
@@ -33,8 +41,7 @@ in
 
       calibre-web-automated-book-downloader = {
         pull = "newer";
-        image =
-          "ghcr.io/calibrain/calibre-web-automated-book-downloader:latest";
+        image = "ghcr.io/calibrain/calibre-web-automated-book-downloader:latest";
         autoStart = true;
         ports = [ "8084:8084" ];
         environment = {

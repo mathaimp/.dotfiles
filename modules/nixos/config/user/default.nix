@@ -1,8 +1,9 @@
-{ config
-, lib
-, pkgs
-, namespace
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  namespace,
+  ...
 }:
 with lib;
 with lib.${namespace};
@@ -16,7 +17,7 @@ in
     email = mkOpt str "mathewp8616@gmail.com" "The email of the user.";
     extraGroups = mkOpt (listOf str) [ ] "Groups for the user to be assigned.";
     extraOptions = mkOpt attrs { } (mdDoc "Extra options passed to `users.users.<name>`.");
-    sshKeys = mkOpt (listOf str) [] "List of SSH keys to authorize for the user.";
+    sshKeys = mkOpt (listOf str) [ ] "List of SSH keys to authorize for the user.";
   };
 
   config = mkMerge [
@@ -51,4 +52,3 @@ in
     })
   ];
 }
-

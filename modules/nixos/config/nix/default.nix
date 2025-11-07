@@ -1,7 +1,15 @@
-{ config, lib, pkgs, namespace, inputs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  namespace,
+  inputs,
+  ...
+}:
 with lib;
 with lib.${namespace};
-let cfg = config.${namespace}.config.nix;
+let
+  cfg = config.${namespace}.config.nix;
 in
 {
   options.${namespace}.config.nix = {
@@ -25,10 +33,16 @@ in
       };
 
       settings = {
-        trusted-users = [ "root" "@wheel" ];
+        trusted-users = [
+          "root"
+          "@wheel"
+        ];
         sandbox = true;
         auto-optimise-store = true;
-        allowed-users = [ "root" "@wheel" ];
+        allowed-users = [
+          "root"
+          "@wheel"
+        ];
         experimental-features = "nix-command flakes";
         http-connections = 50;
         warn-dirty = false;

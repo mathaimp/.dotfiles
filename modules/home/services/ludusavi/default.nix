@@ -1,7 +1,13 @@
-{ config, lib, namespace, ... }:
+{
+  config,
+  lib,
+  namespace,
+  ...
+}:
 with lib;
 with lib.${namespace};
-let cfg = config.${namespace}.services.ludusavi;
+let
+  cfg = config.${namespace}.services.ludusavi;
 in
 {
   options.${namespace}.services.ludusavi = with types; {
@@ -14,9 +20,13 @@ in
       backupNotification = true;
 
       settings = {
-        backup = { path = "~/Games/ludusavi-backup/"; };
+        backup = {
+          path = "~/Games/ludusavi-backup/";
+        };
         language = "en-US";
-        restore = { path = "~/Games/ludusavi-backup/"; };
+        restore = {
+          path = "~/Games/ludusavi-backup/";
+        };
         roots = [
           {
             path = "~/.local/share/Steam";

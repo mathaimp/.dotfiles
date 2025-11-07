@@ -1,7 +1,13 @@
-{ options, config, lib, pkgs, namespace, ... }:
+{
+  config,
+  lib,
+  namespace,
+  ...
+}:
 with lib;
 with lib.${namespace};
-let cfg = config.${namespace}.hardware.nvidia;
+let
+  cfg = config.${namespace}.hardware.nvidia;
 in
 {
   options.${namespace}.hardware.nvidia = with types; {
@@ -43,7 +49,7 @@ in
       # accessible via `nvidia-settings`.
       nvidiaSettings = true;
 
-      # Enable Dynamic Boosts, Good on AC Power 
+      # Enable Dynamic Boosts, Good on AC Power
       # Switches power between gpu and cpu based on usage.
       dynamicBoost.enable = true;
 

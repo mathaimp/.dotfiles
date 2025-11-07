@@ -1,7 +1,13 @@
-{ config, lib, namespace, ... }:
+{
+  config,
+  lib,
+  namespace,
+  ...
+}:
 with lib;
 with lib.${namespace};
-let cfg = config.${namespace}.services.tailscale;
+let
+  cfg = config.${namespace}.services.tailscale;
 in
 {
   options.${namespace}.services.tailscale = with types; {
@@ -9,7 +15,9 @@ in
   };
 
   config = mkIf cfg.enable {
-    sops.secrets = { tailscale = { }; };
+    sops.secrets = {
+      tailscale = { };
+    };
     services.tailscale = {
       enable = true;
       authKeyFile = config.sops.secrets.tailscale.path;

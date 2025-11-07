@@ -1,9 +1,8 @@
-{ options
-, config
-, lib
-, pkgs
-, namespace
-, ...
+{
+  config,
+  lib,
+  namespace,
+  ...
 }:
 with lib;
 with lib.${namespace};
@@ -17,8 +16,8 @@ in
 
   config = mkIf cfg.enable {
     sops.secrets = {
-      "cloudflared/cert" = {};
-      "cloudflared/immich" = {};
+      "cloudflared/cert" = { };
+      "cloudflared/immich" = { };
     };
     services.cloudflared = {
       enable = true;

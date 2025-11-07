@@ -1,9 +1,9 @@
-{ options
-, config
-, lib
-, pkgs
-, namespace
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  namespace,
+  ...
 }:
 with lib;
 with lib.${namespace};
@@ -30,14 +30,16 @@ in
     programs.fzf = {
       enable = true;
       enableZshIntegration = true;
-      colors = mkIf stylixEnabled (lib.mkForce {
-        "fg+" = accent;
-        "bg+" = "-1";
-        "fg" = foreground;
-        "bg" = "-1";
-        "prompt" = muted;
-        "pointer" = accent;
-        });
+      colors = mkIf stylixEnabled (
+        lib.mkForce {
+          "fg+" = accent;
+          "bg+" = "-1";
+          "fg" = foreground;
+          "bg" = "-1";
+          "prompt" = muted;
+          "pointer" = accent;
+        }
+      );
       defaultOptions = [
         "--margin=1"
         "--layout=reverse"
