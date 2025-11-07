@@ -1,10 +1,8 @@
-{ options
-, config
-, lib
-, pkgs
-, inputs
-, namespace
-, ...
+{
+  config,
+  lib,
+  namespace,
+  ...
 }:
 with lib;
 with lib.${namespace};
@@ -32,6 +30,8 @@ in
         window_padding_width = 5;
         copy_on_select = true;
         clipboard_control = "write-clipboard read-clipboard write-primary read-primary";
+        active_border_color = "None";
+        term = "xterm-256color";
       };
     };
   };

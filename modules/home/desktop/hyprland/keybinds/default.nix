@@ -38,7 +38,7 @@ in
           "$mainMod SHIFT, Q, exec, powermenu"
           "SUPER, SUPER_L, exec, rofi -show drun -theme ~/.config/rofi/launch.rasi"
           # "$mainMod, D, exec, rofi -show drun -theme ~/.config/rofi/launch.rasi"
-          "$mainMod, V, exec, $terminal --class clipse -e clipse"
+          "$mainMod, V, exec, $terminal --class=com.save.clipse -e clipse"
 
           # Windows
           "$mainMod, J, movefocus, d"

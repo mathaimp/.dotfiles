@@ -26,6 +26,7 @@ in
           dark = "Papirus-Dark";
         };
         targets = {
+          ghostty.enable = false;
           kitty.enable = false;
           waybar.enable = false;
           hyprlock.enable = false;

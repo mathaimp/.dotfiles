@@ -5,6 +5,9 @@ let
   cfg = config.${namespace}.desktop.hyprland;
   stylixEnabled = config.${namespace}.programs.stylix.enable or false;
   stylixColors = if stylixEnabled then osConfig.lib.stylix.colors else null;
+  terminalChoice = if config.${namespace}.programs.kitty.enable then "kitty"
+                    else if config.${namespace}.programs.ghostty.enable then "ghostty"
+                    else "xterm"; # fallback
 in
 {
   options.${namespace}.desktop.hyprland = with types; {
@@ -21,8 +24,7 @@ in
       xwayland.enable = true;
       systemd.enable = false; # Don't use with USWM
       settings = {
-
-        "$terminal" = "kitty";
+        "$terminal" = terminalChoice;
         "$browser" = "firefox";
         "$file_manager" = "thunar";
         "$mainMod" = "ALT";
@@ -49,13 +51,14 @@ in
 
         layerrule = [ "blur,waybar" ];
         windowrule = [
-          "opacity 0.95 override 0.95 override 0.95 override, class:kitty"
+          # "opacity 0.95 override 0.95 override 0.95 override, class:kitty"
+          # "opacity 0.95 override 0.95 override 0.95 override, class:com.mitchellh.ghostty"
 
           "float, class:org.keepassxc.KeePassXC"
 
-          "float, class:(clipse)"
-          "size 622 652, class:(clipse)"
-          "stayfocused, class:(clipse)"
+          "float, class:(com.save.clipse)"
+          "size 622 652, class:(com.save.clipse)"
+          "stayfocused, class:(com.save.clipse)"
         ];
 
         general.gaps_out = 6;

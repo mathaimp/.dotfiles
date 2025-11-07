@@ -7,6 +7,9 @@ with lib;
 with lib.${namespace};
 let
   cfg = config.${namespace}.misc.xdg;
+  terminalChoice = if config.${namespace}.programs.kitty.enable then "kitty"
+                    else if config.${namespace}.programs.ghostty.enable then "ghostty"
+                    else "xterm"; # fallback
 in
 {
   options.${namespace}.misc.xdg = {
@@ -20,7 +23,7 @@ in
       desktopEntries."nvim" = {
         name = "Neovim";
         comment = "Edit text files";
-        exec = "kitty -e nvim %F";
+        exec = "${terminalChoice} -e nvim %F";
         icon = "nvim";
         terminal = false;
         type = "Application";

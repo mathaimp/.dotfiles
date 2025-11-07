@@ -1,14 +1,22 @@
-{ options, config, lib, pkgs, inputs, namespace, ... }:
+{
+  options,
+  config,
+  lib,
+  pkgs,
+  inputs,
+  namespace,
+  ...
+}:
 with lib;
 with lib.${namespace};
-let 
+let
   cfg = config.${namespace}.programs.stylix;
 in
 {
   options.${namespace}.programs.stylix = with types; {
     enable = mkBoolOpt false "Enable stylix";
   };
-  
+
   config = mkIf cfg.enable (mkMerge [
     (optionalAttrs (options ? stylix) {
       stylix = {
