@@ -34,7 +34,7 @@ in
           controlPersist = "no";
 
           setEnv = {
-            TERM = "term-256color";
+            TERM = "xterm-256color";
           };
 
         };
