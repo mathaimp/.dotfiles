@@ -21,8 +21,6 @@ in
       libsecret
     ];
 
-    programs.seahorse.enable = true;
-
     security = {
       pam.services.gdm.enableGnomeKeyring = true;
       pam.services.gdm-password.enableGnomeKeyring = true;
