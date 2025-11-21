@@ -25,24 +25,10 @@ in
       xwayland.enable = true;
     };
 
-    services.displayManager.gdm = {
-      enable = true;
-      wayland = true;
-    };
-
     services = {
       gvfs.enable = true;
       devmon.enable = true;
       upower.enable = true;
-    };
-
-    xdg.portal = {
-      enable = true;
-      wlr.enable = true;
-      extraPortals = with pkgs; [
-        xdg-desktop-portal-gtk
-        xdg-desktop-portal-hyprland
-      ];
     };
 
     olympus = {
@@ -50,7 +36,9 @@ in
         thunar = enabled;
       };
       services = {
+        gdm = enabled;
         polkit-gnome = enabled;
+        xdg = enabled;
       };
     };
   };
