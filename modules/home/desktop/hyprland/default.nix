@@ -61,7 +61,6 @@ in
 
         exec = lib.mkIf stylixEnabled [ "swww img ${osConfig.stylix.image}" ];
 
-        layerrule = [ "blur,waybar" ];
         windowrule = [
           # "opacity 0.95 override 0.95 override 0.95 override, class:kitty"
           # "opacity 0.95 override 0.95 override 0.95 override, class:com.mitchellh.ghostty"
