@@ -47,8 +47,10 @@ with lib.${namespace};
       avahi = enabled;
       calibre-web = enabled;
       immich = enabled;
+      glance = enabled;
       nginx = enabled;
       tailscale = enabled;
+      vaultwarden = enabled;
     };
   };
 

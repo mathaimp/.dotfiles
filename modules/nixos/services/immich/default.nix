@@ -26,7 +26,6 @@ in
 
       secretsFile = config.sops.secrets."immich".path;
 
-      openFirewall = true;
       host = "0.0.0.0";
       mediaLocation = "/data/immich";
 

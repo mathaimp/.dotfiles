@@ -172,7 +172,7 @@ in
             sponsorblock
             darkreader
             zotero-connector
-            keepassxc-browser
+            bitwarden
             multi-account-containers
             temporary-containers
             improved-tube
@@ -237,9 +237,6 @@ in
             default_area = "menupanel";
           };
           "zotero@chnm.gmu.edu" = {
-            default_area = "navbar";
-          };
-          "keepassxc-browser@keepassxc.org" = {
             default_area = "navbar";
           };
           "{3c6bf0cc-3ae2-42fb-9993-0d33104fdcaf}" = {

@@ -21,6 +21,10 @@ in
 
     services.nginx = {
       enable = true;
+      recommendedGzipSettings = true;
+      recommendedOptimisation = true;
+      recommendedProxySettings = true;
+      recommendedTlsSettings = true;
       virtualHosts."immich.mathai.duckdns.org" = {
         useACMEHost = "mathai.duckdns.org";
         forceSSL = true;
@@ -66,7 +70,7 @@ in
       domain = "mathai.duckdns.org";
       extraDomainNames = [ "*.mathai.duckdns.org" ];
       dnsProvider = "duckdns";
-      dnsPropagationCheck = false;
+      dnsPropagationCheck = true;
       credentialsFile = config.sops.secrets."duckdns-token".path;
     };
 
