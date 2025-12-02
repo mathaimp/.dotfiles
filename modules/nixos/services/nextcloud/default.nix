@@ -16,6 +16,10 @@ in
   };
 
   config = mkIf cfg.enable {
+    sops.secrets = {
+      "nextcloud" = { };
+    };
+
     services.nextcloud = {
       enable = true;
       configureRedis = true;
@@ -37,7 +41,7 @@ in
         dbuser = "nextcloud";
         dbname = "nextcloud";
         adminuser = "root";
-        adminpassFile = "/home/mathai/test.txt";
+        adminpassFile = config.sops.secrets."nextcloud".path;
       };
     };
 
