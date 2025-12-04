@@ -24,6 +24,7 @@ in
         enable = true;
         setSocketVariable = true;
         daemon.settings = {
+          features.cdi = true;
           "dns" = [
             "8.8.8.8"
             "1.1.1.1"
