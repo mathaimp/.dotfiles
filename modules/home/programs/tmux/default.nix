@@ -21,6 +21,7 @@ in
       mouse = true;
       keyMode = "vi";
       prefix = "C-Space";
+      baseIndex = 1;
       sensibleOnTop = true;
       plugins = with pkgs; [
         tmuxPlugins.vim-tmux-navigator
@@ -58,13 +59,10 @@ in
 
         bind Enter split-window -h -c "#{pane_current_path}"
 
-        set -g base-index 1
-        set -g pane-base-index 1
-        set-window-option -g pane-base-index 1
-        set-option -g renumber-windows on
-
         bind -n M-H previous-window
         bind -n M-L next-window 
+
+        set-option -g allow-passthrough on
       '';
     };
   };
