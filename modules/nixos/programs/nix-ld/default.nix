@@ -12,7 +12,7 @@ let
 in
 {
   options.${namespace}.programs.nix-ld = {
-    enable = mkBoolOpt false "${namespace}.programs.nix-ld.enable";
+    enable = mkBoolOpt false "Enable nix-ld";
   };
 
   config = mkIf cfg.enable {

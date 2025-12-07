@@ -11,7 +11,7 @@ let
 in
 {
   options.${namespace}.programs.nh = {
-    enable = mkBoolOpt false "${namespace}.programs.nh.enable";
+    enable = mkBoolOpt false "Enable the nix helper (nh)";
   };
 
   config = mkIf cfg.enable {
