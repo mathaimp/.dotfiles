@@ -27,7 +27,6 @@ in
 
     olympus.desktop.hyprland = {
       keybinds = enabled;
-      monitors = enabled;
     };
 
     services.playerctld.enable = true;
@@ -43,7 +42,7 @@ in
       settings = {
         "$terminal" = terminalChoice;
         "$browser" = "firefox";
-        "$file_manager" = "thunar";
+        "$file_manager" = "nautilus";
         "$mainMod" = "ALT";
 
         input.numlock_by_default = true;

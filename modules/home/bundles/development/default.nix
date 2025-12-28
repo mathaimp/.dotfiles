@@ -20,6 +20,8 @@ in
       caligula
       nvitop
 
+      zed-editor
+
       # python
       uv
 

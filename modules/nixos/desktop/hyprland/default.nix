@@ -33,7 +33,8 @@ in
 
     olympus = {
       programs = {
-        thunar = enabled;
+        # thunar = enabled;
+        nautilus = enabled;
       };
       services = {
         gdm = enabled;
