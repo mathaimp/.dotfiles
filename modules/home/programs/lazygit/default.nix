@@ -8,8 +8,6 @@ with lib;
 with lib.${namespace};
 let
   cfg = config.${namespace}.programs.lazygit;
-  transparentButtons = mkBoolOpt false "${namespace}.programs.lazygit.trasparentButtons";
-
   stylixEnabled = config.${namespace}.programs.stylix.enable or false;
 
   accent = if stylixEnabled then "#${config.lib.stylix.colors.base0D}" else null;
@@ -26,14 +24,14 @@ in
       enable = true;
       settings = lib.mkForce {
         gui = {
-          theme = lib.mkIf stylixEnabled ({
+          theme = lib.mkIf stylixEnabled {
             activeBorderColor = [
               accent
               "bold"
             ];
             inactiveBorderColor = [ muted ];
             selectedLineBgColor = [ selected ];
-          });
+          };
           showListFooter = false;
           showRandomTip = false;
           showCommandLog = false;
