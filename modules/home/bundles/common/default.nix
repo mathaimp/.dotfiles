@@ -29,7 +29,7 @@ in
 
     olympus = {
       misc = {
-        xdg = enabled;
+        desktopEntries = enabled;
       };
       programs = {
         kitty = enabled;

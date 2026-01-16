@@ -8,7 +8,7 @@
 with lib;
 with libEx.${namespace};
 let
-  cfg = config.${namespace}.misc.xdg;
+  cfg = config.${namespace}.misc.desktopEntries;
   terminalChoice =
     if config.${namespace}.programs.kitty.enable then
       "kitty"
@@ -18,8 +18,8 @@ let
       "xterm"; # fallback
 in
 {
-  options.${namespace}.misc.xdg = {
-    enable = mkBoolOpt false "${namespace}.misc.xdg.enable";
+  options.${namespace}.misc.desktopEntries = {
+    enable = mkBoolOpt false "${namespace}.misc.desktopEntries.enable";
   };
 
   config = mkIf cfg.enable {

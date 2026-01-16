@@ -35,6 +35,7 @@ in
       };
       services = {
         hypridle = enabled;
+        xdg = enabled;
       };
     };
   };

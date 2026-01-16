@@ -27,7 +27,7 @@ in
           credentialsFile = config.sops.secrets."cloudflared/immich".path;
           default = "http_status:404";
           ingress = {
-            "mathai.qzz.io" = "http://localhost:2283";
+            "mathai.duckdns.org" = "http://localhost:2283";
           };
         };
       };

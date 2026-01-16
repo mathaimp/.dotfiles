@@ -38,7 +38,6 @@ in
       services = {
         gdm = enabled;
         polkit-gnome = enabled;
-        xdg = enabled;
       };
     };
   };
