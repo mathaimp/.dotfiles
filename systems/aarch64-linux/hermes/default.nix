@@ -52,9 +52,10 @@ with lib.${namespace};
       glance = enabled;
       nextcloud = enabled;
       nginx = enabled;
+      radarr = enabled;
+      sonarr = enabled;
       tailscale = enabled;
       vaultwarden = enabled;
-      radarr = enabled;
     };
   };
 
