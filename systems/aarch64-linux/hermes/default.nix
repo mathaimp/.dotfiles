@@ -52,6 +52,7 @@ with lib.${namespace};
       glance = enabled;
       nextcloud = enabled;
       nginx = enabled;
+      prowlarr = enabled;
       radarr = enabled;
       sonarr = enabled;
       tailscale = enabled;
