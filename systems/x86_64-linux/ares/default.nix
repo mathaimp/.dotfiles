@@ -1,12 +1,15 @@
 {
   lib,
+  inputs,
   namespace,
   ...
 }:
 with lib;
 with lib.${namespace};
 {
-  imports = [ ./hardware.nix ];
+  imports = [
+    ./hardware.nix
+  ];
 
   networking.hostName = "ares";
 

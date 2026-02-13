@@ -21,7 +21,6 @@ in
     environment.systemPackages = with pkgs; [
       lutris
       piper
-      wineWowPackages.stable
     ];
 
   };

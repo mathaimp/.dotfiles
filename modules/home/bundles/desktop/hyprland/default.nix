@@ -13,7 +13,7 @@ let
 in
 {
   options.${namespace}.bundles.desktop.hyprland = with types; {
-    enable = mkBoolOpt false "Whether or not to enable common bundle configuration.";
+    enable = mkBoolOpt false "Whether or not to enable hyprland bundle configuration.";
   };
 
   config = mkIf cfg.enable {

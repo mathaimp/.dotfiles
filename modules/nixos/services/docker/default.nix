@@ -16,7 +16,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ xorg.xhost ];
+    environment.systemPackages = with pkgs; [ xhost ];
     virtualisation.docker = {
       enable = true;
       storageDriver = if (config.${namespace}.hardware.btrfs.enable) then "btrfs" else "overlay2";

@@ -20,6 +20,7 @@ in
       enable = true;
       openFirewall = true;
       group = config.services.jellyfin.group;
+      user = config.services.jellyfin.user;
       dataDir = "/data/radarr";
     };
   };
