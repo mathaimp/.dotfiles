@@ -50,6 +50,7 @@ with lib.${namespace};
       cloudflare-warp = enabled;
       immich = enabled;
       jellyfin = enabled;
+      jellyseerr = enabled;
       glance = enabled;
       nextcloud = enabled;
       nginx = enabled;
