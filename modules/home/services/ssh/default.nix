@@ -42,9 +42,10 @@ in
 
         "github.com" = {
           user = "git";
-          hostname = "github.com";
+          hostname = "ssh.github.com";
           identityFile = "${config.home.homeDirectory}/.ssh/id_github";
           identitiesOnly = true;
+          port = 443;
         };
 
         "blazer" = {

@@ -26,7 +26,6 @@ in
       wget
       ncdu
       duf
-      appimage-run
       which
       trash-cli
       tealdeer

@@ -25,7 +25,6 @@ with libEx.${namespace};
     };
     services = {
       ludusavi = enabled;
-      kdeconnect = enabled;
       rclone = enabled;
     };
   };
