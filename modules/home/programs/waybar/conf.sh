@@ -4,7 +4,7 @@
 
 # CONFIGURE YOUR DEADLINE HERE (in Unix timestamp)
 # To get timestamp: date -d "2026-03-01 12:00:00 UTC" +%s
-DATE="2026-03-15 12:00:00 UTC"
+DATE="2026-03-31 12:00:00 UTC"
 PAPER_DEADLINE=$(date -d "${DATE}" +%s)
 CONF_NAME="RAL 2026"
 
