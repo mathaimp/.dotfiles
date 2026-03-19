@@ -46,6 +46,7 @@ with lib.${namespace};
     services = {
       avahi = enabled;
       bazarr = enabled;
+      caddy = enabled;
       calibre-web = enabled;
       cloudflare-warp = enabled;
       immich = enabled;
@@ -53,7 +54,6 @@ with lib.${namespace};
       jellyseerr = enabled;
       glance = enabled;
       # nextcloud = enabled;
-      nginx = enabled;
       prowlarr = enabled;
       qbittorrent = enabled;
       radarr = enabled;

@@ -12,6 +12,7 @@ with lib.${namespace};
   ];
 
   networking.hostName = "ares";
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ]; # cross-compile to hermes
 
   olympus = {
     bundles = {
@@ -38,7 +39,7 @@ with lib.${namespace};
     programs = {
       plymouth = enabled;
       stylix = enabled;
-      # wine = enabled;
+      wine = enabled;
     };
 
     services = {

@@ -44,24 +44,21 @@ in
         adminpassFile = config.sops.secrets."nextcloud".path;
       };
     };
-
-    services.nginx.virtualHosts."nixcloud".listen = [
-      {
-        addr = "127.0.0.1";
-        port = 8009;
+    services.caddy.virtualHosts."cloud.mathai.duckdns.org".extraConfig = ''
+      encode zstd gzip
+      reverse_proxy localhost:8009
+      request_body {
+        max_size 10GB
       }
-    ];
-
-    services.nginx.virtualHosts."cloud.mathai.duckdns.org" = {
-      forceSSL = true;
-      useACMEHost = "mathai.duckdns.org";
-      serverName = "cloud.mathai.duckdns.org";
-      root = "/data/nextcloud"; # Nextcloud installation path (adjust if needed)
-      locations."/" = {
-        proxyPass = "http://127.0.0.1:8009";
-        proxyWebsockets = true;
-        recommendedProxySettings = true;
-      };
-    };
+      header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "SAMEORIGIN"
+        X-Permitted-Cross-Domain-Policies "none"
+        X-Robots-Tag "noindex, nofollow"
+        X-XSS-Protection "1; mode=block"
+        -X-Powered-By
+      }
+    '';
   };
 }

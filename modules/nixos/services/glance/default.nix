@@ -263,21 +263,12 @@ in
         ];
       };
     };
-
-    services.nginx.virtualHosts."mathai.duckdns.org" = {
-      useACMEHost = "mathai.duckdns.org";
-      forceSSL = true;
-      locations."/" = {
-        proxyPass = "http://127.0.0.1:8080";
-        proxyWebsockets = true;
-        recommendedProxySettings = true;
-        extraConfig = ''
-          client_max_body_size 50M;
-          proxy_read_timeout   600s;
-          proxy_send_timeout   600s;
-          send_timeout         600s;
-        '';
-      };
-    };
+    services.caddy.virtualHosts."mathai.duckdns.org".extraConfig = ''
+      encode zstd gzip
+      reverse_proxy localhost:8080
+      request_body {
+        max_size 50MB
+      }
+    '';
   };
 }

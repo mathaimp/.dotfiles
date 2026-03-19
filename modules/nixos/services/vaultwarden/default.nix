@@ -27,14 +27,11 @@ in
         ROCKET_LOG = "critical";
       };
     };
-    services.nginx.virtualHosts."vault.mathai.duckdns.org" = {
-      useACMEHost = "mathai.duckdns.org";
-      forceSSL = true;
-      locations."/" = {
-        proxyPass = "http://127.0.0.1:${toString config.services.vaultwarden.config.ROCKET_PORT}";
-        proxyWebsockets = true;
-        recommendedProxySettings = true;
-      };
-    };
+    services.caddy.virtualHosts."vault.mathai.duckdns.org".extraConfig = ''
+      encode zstd gzip
+      reverse_proxy localhost:${toString config.services.vaultwarden.config.ROCKET_PORT} {
+        header_up X-Real-IP {remote_host}
+      }
+    '';
   };
 }

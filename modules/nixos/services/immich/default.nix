@@ -50,21 +50,12 @@ in
       "video"
       "render"
     ];
-
-    services.nginx.virtualHosts."immich.mathai.duckdns.org" = {
-      useACMEHost = "mathai.duckdns.org";
-      forceSSL = true;
-      locations."/" = {
-        proxyPass = "http://[::1]:2283";
-        proxyWebsockets = true;
-        recommendedProxySettings = true;
-        extraConfig = ''
-          client_max_body_size 50000M;
-          proxy_read_timeout   600s;
-          proxy_send_timeout   600s;
-          send_timeout         600s;
-        '';
-      };
-    };
+    services.caddy.virtualHosts."immich.mathai.duckdns.org".extraConfig = ''
+      encode zstd gzip
+      reverse_proxy localhost:2283
+      request_body {
+        max_size 50000MB
+      }
+    '';
   };
 }
