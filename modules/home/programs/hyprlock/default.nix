@@ -11,10 +11,10 @@ with lib;
 with libEx.${namespace};
 let
   cfg = config.${namespace}.programs.hyprlock;
-  weatherScript = (pkgs.writeShellScriptBin "weather" (builtins.readFile ./scripts/weather.sh));
-  infolockScript = (pkgs.writeShellScriptBin "infolock" (builtins.readFile ./scripts/infolock.sh));
-  playerctlockScript = (
-    pkgs.writeShellScriptBin "playerctlock" (builtins.readFile ./scripts/playerctlock.sh)
+  weatherScript = pkgs.writeShellScriptBin "weather" (builtins.readFile ./scripts/weather.sh);
+  infolockScript = pkgs.writeShellScriptBin "infolock" (builtins.readFile ./scripts/infolock.sh);
+  playerctlockScript = pkgs.writeShellScriptBin "playerctlock" (
+    builtins.readFile ./scripts/playerctlock.sh
   );
   stylixEnabled = config.${namespace}.programs.stylix.enable or false;
   stylixColors = if stylixEnabled then osConfig.lib.stylix.colors else null;

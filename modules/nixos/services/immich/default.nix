@@ -31,7 +31,7 @@ in
       accelerationDevices = null;
 
       machine-learning = {
-        enable = false;
+        enable = true;
         # As immich user has no home
         environment = {
           HF_XET_CACHE = "/var/cache/immich/huggingface-xet";

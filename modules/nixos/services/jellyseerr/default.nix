@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   namespace,
   ...
 }:
@@ -9,7 +8,6 @@ with lib;
 with lib.${namespace};
 let
   cfg = config.${namespace}.services.jellyseerr;
-  dataDir = "/data/jellyseerr";
 in
 {
   options.${namespace}.services.jellyseerr = with types; {

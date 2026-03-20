@@ -32,15 +32,17 @@ in
       443
     ];
 
-    security.acme.acceptTerms = true;
-    security.acme.defaults.email = "ssl@mathai.duckdns.org";
+    security.acme = {
+      acceptTerms = true;
+      defaults.email = "ssl@mathai.duckdns.org";
 
-    security.acme.certs."mathai.duckdns.org" = {
-      domain = "mathai.duckdns.org";
-      extraDomainNames = [ "*.mathai.duckdns.org" ];
-      dnsProvider = "duckdns";
-      dnsPropagationCheck = true;
-      credentialsFile = config.sops.secrets."duckdns-token".path;
+      certs."mathai.duckdns.org" = {
+        domain = "mathai.duckdns.org";
+        extraDomainNames = [ "*.mathai.duckdns.org" ];
+        dnsProvider = "duckdns";
+        dnsPropagationCheck = true;
+        credentialsFile = config.sops.secrets."duckdns-token".path;
+      };
     };
 
     users.users.nginx.extraGroups = [ "acme" ];

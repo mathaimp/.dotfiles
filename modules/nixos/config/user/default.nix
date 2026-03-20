@@ -32,7 +32,7 @@ in
         group = "users";
         shell = pkgs.zsh;
         uid = 1000;
-        extraGroups = cfg.extraGroups;
+        inherit (cfg) extraGroups;
         openssh.authorizedKeys.keys = cfg.sshKeys;
         password = mkIf (cfg.password != null) cfg.password;
       };
@@ -40,17 +40,20 @@ in
 
     # Conditional sops configuration
     (mkIf config.${namespace}.programs.sops.enable {
-      users.mutableUsers = false;
 
       sops.secrets."${cfg.name}-password".neededForUsers = true;
       sops.secrets."root-password".neededForUsers = true;
 
-      users.users.${cfg.name} = {
-        hashedPasswordFile = config.sops.secrets."${cfg.name}-password".path;
-      };
+      users = {
+        mutableUsers = false;
+        users.${cfg.name} = {
+          hashedPasswordFile = config.sops.secrets."${cfg.name}-password".path;
+        };
 
-      users.users.root = {
-        hashedPasswordFile = config.sops.secrets."root-password".path;
+        users.root = {
+          hashedPasswordFile = config.sops.secrets."root-password".path;
+        };
+
       };
     })
   ];

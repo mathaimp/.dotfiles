@@ -20,14 +20,17 @@ in
       file-roller
     ];
 
-    programs.thunar.enable = true;
-    programs.xfconf.enable = true; # To save preferances
-    services.gvfs.enable = true; # Mount, trash, and other functionalities
-    services.tumbler.enable = true; # Thumbnail support for images
-    programs.thunar.plugins = with pkgs.xfce; [
-      thunar-archive-plugin
-      thunar-volman
-    ];
-
+    services = {
+      gvfs.enable = true; # Mount, trash, and other functionalities
+      tumbler.enable = true; # Thumbnail support for images
+    };
+    programs = {
+      thunar.enable = true;
+      xfconf.enable = true; # To save preferances
+      thunar.plugins = with pkgs.xfce; [
+        thunar-archive-plugin
+        thunar-volman
+      ];
+    };
   };
 }

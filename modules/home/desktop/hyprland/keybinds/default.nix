@@ -10,7 +10,7 @@ with lib;
 with libEx.${namespace};
 let
   cfg = config.${namespace}.desktop.hyprland.keybinds;
-  powermenuScript = (pkgs.writeShellScriptBin "powermenu" (builtins.readFile ./scripts/powermenu.sh));
+  powermenuScript = pkgs.writeShellScriptBin "powermenu" (builtins.readFile ./scripts/powermenu.sh);
 in
 {
   options.${namespace}.desktop.hyprland.keybinds = with types; {

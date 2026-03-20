@@ -32,7 +32,8 @@ in
         desktopEntries = enabled;
       };
       programs = {
-        kitty = enabled;
+        # kitty = enabled;
+        ghostty = enabled;
         sops = enabled;
         stylix = enabled;
         zed = enabled;

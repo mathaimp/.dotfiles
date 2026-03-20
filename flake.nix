@@ -94,8 +94,8 @@
         ];
 
         lib = import ./lib {
-          nixpkgs = nixpkgs;
-          namespace = inputs.self.namespace;
+          inherit nixpkgs;
+          inherit (inputs.self) namespace;
         };
 
         nixosConfigurations = import ./lib/mkHosts.nix {
@@ -103,11 +103,11 @@
         };
 
         nixosModules = import ./lib/mkNixosModules.nix {
-          lib = nixpkgs.lib;
+          inherit (nixpkgs) lib;
         };
 
         homeModules = import ./lib/mkHomeModules.nix {
-          lib = nixpkgs.lib;
+          inherit (nixpkgs) lib;
         };
       };
     };

@@ -1,6 +1,5 @@
 {
   config,
-  pkgs,
   lib,
   namespace,
   ...
@@ -19,17 +18,16 @@ in
 
   config = mkIf cfg.enable {
 
-    environment.systemPackages = [
-      pkgs.sbctl
-    ];
     # Lanzaboote replaces systemd boot
-    boot.loader.systemd-boot.enable = lib.mkForce false;
+    boot = {
+      loader.systemd-boot.enable = lib.mkForce false;
 
-    boot.initrd.systemd.network.wait-online.enable = cfg.wait-for-network;
+      initrd.systemd.network.wait-online.enable = cfg.wait-for-network;
 
-    boot.lanzaboote = {
-      enable = true;
-      pkiBundle = "/var/lib/sbctl";
+      lanzaboote = {
+        enable = true;
+        pkiBundle = "/var/lib/sbctl";
+      };
     };
   };
 }

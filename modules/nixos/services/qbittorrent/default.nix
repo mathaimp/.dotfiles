@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   namespace,
   ...
 }:
@@ -18,8 +17,7 @@ in
   config = mkIf cfg.enable {
     services.qbittorrent = {
       enable = true;
-      user = config.services.jellyfin.user;
-      group = config.services.jellyfin.group;
+      inherit (config.services.jellyfin) user group;
       profileDir = "/data";
       webuiPort = 8081;
     };

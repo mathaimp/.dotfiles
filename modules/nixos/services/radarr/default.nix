@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   namespace,
   ...
 }:
@@ -18,8 +17,7 @@ in
   config = mkIf cfg.enable {
     services.radarr = {
       enable = true;
-      group = config.services.jellyfin.group;
-      user = config.services.jellyfin.user;
+      inherit (config.services.jellyfin) user group;
       dataDir = "/data/radarr";
     };
   };

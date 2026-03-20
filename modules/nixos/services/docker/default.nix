@@ -19,7 +19,7 @@ in
     environment.systemPackages = with pkgs; [ xhost ];
     virtualisation.docker = {
       enable = true;
-      storageDriver = if (config.${namespace}.hardware.btrfs.enable) then "btrfs" else "overlay2";
+      storageDriver = if config.${namespace}.hardware.btrfs.enable then "btrfs" else "overlay2";
       rootless = {
         enable = true;
         setSocketVariable = true;

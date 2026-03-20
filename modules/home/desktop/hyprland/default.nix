@@ -31,18 +31,21 @@ in
       keybinds = enabled;
     };
 
-    services.playerctld.enable = true;
-    services.swayosd.enable = true;
-    services.clipse.enable = true;
-    services.network-manager-applet.enable = true;
+    services = {
+      playerctld.enable = true;
+      swayosd.enable = true;
+      clipse.enable = true;
+      network-manager-applet.enable = true;
 
-    services.hyprpaper = {
-      enable = true;
-      settings = {
-        splash = false;
-        preload = [ stylixWallpaper ];
-        wallpaper = [ stylixWallpaper ];
+      hyprpaper = {
+        enable = true;
+        settings = {
+          splash = false;
+          preload = [ stylixWallpaper ];
+          wallpaper = [ stylixWallpaper ];
+        };
       };
+
     };
 
     wayland.windowManager.hyprland = {
@@ -67,19 +70,19 @@ in
           "NIXOS_OZONE_WL,1"
         ];
 
-
         windowrule = [
           "float on, match:class com.save.clipse"
           "size 622 652, match:class com.save.clipse"
           "stay_focused on, match:class com.save.clipse"
         ];
 
-        general.gaps_out = 6;
-        general.gaps_in = 3;
-        general.border_size = 2;
-        general."col.active_border" = lib.mkForce "rgb(${stylixColors.base03})";
-        general."col.inactive_border" = lib.mkForce "rgb(${stylixColors.base02})";
-
+        general = {
+          gaps_out = 6;
+          gaps_in = 3;
+          border_size = 2;
+          "col.active_border" = lib.mkForce "rgb(${stylixColors.base03})";
+          "col.inactive_border" = lib.mkForce "rgb(${stylixColors.base02})";
+        };
         animation = [
           "windows,1,4,default"
           "windowsOut,1,4,default"
@@ -93,12 +96,13 @@ in
         decoration.blur.enabled = true;
         decoration.rounding = 10;
 
-        misc.vfr = true;
-        misc.disable_hyprland_logo = true;
-        misc.disable_splash_rendering = true;
-        misc.mouse_move_enables_dpms = true;
-        misc.key_press_enables_dpms = true;
-
+        misc = {
+          vfr = true;
+          disable_hyprland_logo = true;
+          disable_splash_rendering = true;
+          mouse_move_enables_dpms = true;
+          key_press_enables_dpms = true;
+        };
       };
     };
   };

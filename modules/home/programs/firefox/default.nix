@@ -12,14 +12,13 @@ with libEx.${namespace};
 let
   cfg = config.${namespace}.programs.firefox;
 
-  firefoxAddonsPkgs =
-    import inputs.nixpkgs {
-      system = pkgs.stdenv.hostPlatform.system;
-      config.allowUnfree = true;
-      overlays = [
-        inputs.firefox-addons.overlays.default
-      ];
-    };
+  firefoxAddonsPkgs = import inputs.nixpkgs {
+    inherit (pkgs.stdenv.hostPlatform) system;
+    config.allowUnfree = true;
+    overlays = [
+      inputs.firefox-addons.overlays.default
+    ];
+  };
 in
 {
   options.${namespace}.programs.firefox = {
@@ -27,6 +26,10 @@ in
   };
 
   config = mkIf cfg.enable {
+
+    stylix.targets.firefox.enable = true;
+    # stylix.targets.firefox.firefoxGnomeTheme.enable = true;
+    stylix.targets.firefox.profileNames = [ "default" ];
 
     home.sessionVariables = {
       BROWSER = "firefox";
@@ -72,6 +75,7 @@ in
         };
 
         settings = {
+          "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
           # Enable HTTPS-Only Mode
           "dom.security.https_only_mode" = true;
           "dom.security.https_only_mode_ever_enabled" = true;

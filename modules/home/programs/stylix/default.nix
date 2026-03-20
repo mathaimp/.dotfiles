@@ -34,7 +34,6 @@ in
           dark = "Papirus-Dark";
         };
         targets = {
-          firefox.profileNames = mkIf config.${namespace}.programs.firefox.enable [ "default" ];
           ghostty.enable = false;
           kitty.enable = false;
           waybar.enable = false;
