@@ -2,6 +2,7 @@
   osConfig,
   config,
   lib,
+  pkgs,
   libEx,
   namespace,
   ...
@@ -30,6 +31,12 @@ in
     olympus.desktop.hyprland = {
       keybinds = enabled;
     };
+
+    home.packages = with pkgs; [
+      wl-clipboard
+      brightnessctl
+      sway-contrib.grimshot
+    ];
 
     services = {
       playerctld.enable = true;

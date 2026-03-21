@@ -28,6 +28,7 @@ with lib.${namespace};
       };
     };
     desktop.hyprland = enabled;
+    desktop.niri = enabled;
     hardware = {
       bluetooth = enabled;
       btrfs = enabled;

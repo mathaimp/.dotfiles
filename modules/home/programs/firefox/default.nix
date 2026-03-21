@@ -27,9 +27,6 @@ in
 
   config = mkIf cfg.enable {
 
-    stylix.targets.firefox.colorTheme.enable = true;
-    stylix.targets.firefox.profileNames = [ "default" ];
-
     home.sessionVariables = {
       BROWSER = "firefox";
     };

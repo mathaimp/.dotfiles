@@ -8,18 +8,18 @@
 with lib;
 with libEx.${namespace};
 let
-  cfg = config.${namespace}.bundles.desktop.hyprland;
+  cfg = config.${namespace}.bundles.desktop.niri;
 in
 {
-  options.${namespace}.bundles.desktop.hyprland = with types; {
-    enable = mkBoolOpt false "Whether or not to enable hyprland bundle configuration.";
+  options.${namespace}.bundles.desktop.niri = with types; {
+    enable = mkBoolOpt false "Whether or not to enable niri bundle configuration.";
   };
 
   config = mkIf cfg.enable {
 
     olympus = {
       desktop = {
-        hyprland = enabled;
+        niri = enabled;
         noctalia = enabled;
       };
       services = {

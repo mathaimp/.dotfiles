@@ -567,7 +567,7 @@ in
 
         audio = {
           volumeStep = 5;
-          volumeOverdrive = true;
+          volumeOverdrive = false;
           spectrumFrameRate = 30;
           visualizerType = "linear";
           mprisBlacklist = [ ];
@@ -626,10 +626,10 @@ in
         };
 
         idle = {
-          enabled = false;
-          screenOffTimeout = 600;
-          lockTimeout = 660;
-          suspendTimeout = 1800;
+          enabled = true;
+          screenOffTimeout = 600; # 10 min
+          lockTimeout = 360; # 6 min
+          suspendTimeout = 900; # 15 min
           fadeDuration = 5;
           screenOffCommand = "";
           lockCommand = "";

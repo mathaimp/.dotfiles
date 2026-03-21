@@ -34,6 +34,10 @@ in
           dark = "Papirus-Dark";
         };
         targets = {
+          firefox = {
+            colorTheme.enable = true;
+            profileNames = [ "default" ];
+          };
           ghostty.enable = false;
           kitty.enable = false;
           waybar.enable = false;

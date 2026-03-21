@@ -8,11 +8,11 @@
 with lib;
 with libEx.${namespace};
 {
-
   olympus = {
     bundles = {
       common = enabled;
       desktop.hyprland = enabled;
+      desktop.niri = enabled;
       development = enabled;
       office = enabled;
       shell = enabled;

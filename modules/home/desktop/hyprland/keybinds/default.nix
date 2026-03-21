@@ -29,7 +29,7 @@ in
           "$mainMod, E, fullscreen"
           ", PRINT, exec, grimshot savecopy anything"
 
-          "$mainMod, A, exec, loginctl lock-session"
+          "$mainMod, A, exec, noctalia-shell ipc call lockScreen lock"
           "$mainMod SHIFT, Q, exec, noctalia-shell ipc call sessionMenu toggle"
           "SUPER, SUPER_L, exec, noctalia-shell ipc call launcher toggle"
           # "$mainMod, D, exec, rofi -show drun -theme ~/.config/rofi/launch.rasi"
@@ -81,7 +81,7 @@ in
         ];
         bindle = [
           # Volume
-          ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.2 @DEFAULT_AUDIO_SINK@ 5%+"
+          ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
           ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
           # Brightness
           ", XF86MonBrightnessUp, exec, brightnessctl set 5%+"
