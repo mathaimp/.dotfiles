@@ -1,6 +1,7 @@
-{ inputs
-, self
-, ...
+{
+  inputs,
+  self,
+  ...
 }:
 {
   flake.nixosConfigurations.hermes = inputs.nixpkgs.lib.nixosSystem {
@@ -16,7 +17,6 @@
         inputs.home-manager.nixosModules.default
         inputs.nixos-hardware.nixosModules.raspberry-pi-4
 
-        inputs.disko.nixosModules.disko
         self.diskoConfigurations.hermes
 
         self.nixosModules.server-bundle

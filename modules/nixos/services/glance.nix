@@ -1,7 +1,8 @@
 {
   flake.nixosModules.glance =
-    { config
-    , ...
+    {
+      config,
+      ...
     }:
     {
       sops.secrets = {
@@ -106,14 +107,39 @@
                           icon = "si:jellyfin";
                         }
                         {
-                          title = "Nextcloud";
-                          url = "https://cloud.mathai.duckdns.org/";
-                          icon = "si:nextcloud";
+                          title = "Jellyseerr";
+                          url = "https://jellyseerr.mathai.duckdns.org/";
+                          icon = "si:themoviedatabase";
                         }
+                        # {
+                        #   title = "Nextcloud";
+                        #   url = "https://cloud.mathai.duckdns.org/";
+                        #   icon = "si:nextcloud";
+                        # }
                         {
                           title = "Vaultwarden";
                           url = "https://vault.mathai.duckdns.org/";
                           icon = "si:vaultwarden";
+                        }
+                        {
+                          title = "Radarr";
+                          url = "https://radarr.mathai.duckdns.org/";
+                          icon = "si:radarr";
+                        }
+                        {
+                          title = "Sonarr";
+                          url = "https://sonarr.mathai.duckdns.org/";
+                          icon = "si:sonarr";
+                        }
+                        {
+                          title = "Bazarr";
+                          url = "https://bazarr.mathai.duckdns.org/";
+                          icon = "si:subtitleedit";
+                        }
+                        {
+                          title = "Qbittorrent";
+                          url = "https://torrent.mathai.duckdns.org/";
+                          icon = "si:qbittorrent";
                         }
                       ];
                     }

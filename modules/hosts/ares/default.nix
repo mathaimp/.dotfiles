@@ -23,7 +23,7 @@
 
       self.nixosModules.plymouth
       self.nixosModules.stylix
-      self.nixosModules.wine
+      # self.nixosModules.wine
 
       self.nixosModules.avahi
       self.nixosModules.docker

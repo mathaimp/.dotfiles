@@ -16,6 +16,7 @@
 
         gemini-cli
         codex
+        opencode
 
         # python
         uv

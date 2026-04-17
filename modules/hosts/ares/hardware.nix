@@ -1,9 +1,10 @@
 {
   flake.nixosModules.hostAres =
-    { config
-    , lib
-    , modulesPath
-    , ...
+    {
+      config,
+      lib,
+      modulesPath,
+      ...
     }:
     {
       imports = [
@@ -50,20 +51,6 @@
           ];
         };
 
-        "/home" = {
-          device = "/dev/disk/by-uuid/b71a234e-6ef0-4fe4-b592-f254aa147858";
-          fsType = "btrfs";
-          options = [
-            "subvol=@home"
-            "noatime"
-            "compress=zstd:1"
-            "ssd"
-            "discard=async"
-            "space_cache=v2"
-            "commit=120"
-          ];
-        };
-
         "/nix" = {
           device = "/dev/disk/by-uuid/b71a234e-6ef0-4fe4-b592-f254aa147858";
           fsType = "btrfs";
@@ -87,11 +74,11 @@
           ];
         };
 
-        "/var/log" = {
+        "/persist" = {
           device = "/dev/disk/by-uuid/b71a234e-6ef0-4fe4-b592-f254aa147858";
           fsType = "btrfs";
           options = [
-            "subvol=@log"
+            "subvol=@persist"
             "noatime"
             "compress=zstd:1"
             "ssd"
@@ -99,7 +86,6 @@
             "space_cache=v2"
             "commit=120"
           ];
-          neededForBoot = true;
         };
 
         "/boot" = {

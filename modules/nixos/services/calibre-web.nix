@@ -30,7 +30,7 @@
             "/data/calibre/library:/calibre-library"
             "/data/calibre/plugins:/config/.config/calibre/plugins"
           ];
-          ports = [ "127.0.0.1:8083:8083" ];
+          ports = [ "0.0.0.0:8083:8083" ];
         };
 
         calibre-web-automated-book-downloader = {

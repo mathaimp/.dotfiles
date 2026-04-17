@@ -1,7 +1,8 @@
 {
   flake.nixosModules.wine =
-    { pkgs
-    , ...
+    {
+      pkgs,
+      ...
     }:
     {
       programs.gamemode.enable = true;
@@ -14,7 +15,7 @@
       environment.systemPackages = with pkgs; [
         lutris
         piper
-        steam
+        # steam
       ];
 
     };
