@@ -1,8 +1,7 @@
 {
   flake.nixosModules.sonarr =
-    {
-      config,
-      ...
+    { config
+    , ...
     }:
     {
       services.sonarr = {

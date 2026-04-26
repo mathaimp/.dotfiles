@@ -1,8 +1,7 @@
 {
   flake.nixosModules.qbittorent =
-    {
-      config,
-      ...
+    { config
+    , ...
     }:
     {
       services.qbittorrent = {

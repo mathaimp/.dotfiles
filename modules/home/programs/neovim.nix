@@ -1,7 +1,6 @@
 {
   flake.homeModules.neovim =
-    { config
-    , pkgs
+    { pkgs
     , lib
     , ...
     }:
@@ -9,26 +8,37 @@
       linker = lib.fileContents "${pkgs.binutils}/nix-support/dynamic-linker";
     in
     {
-      xdg.configFile."nvim".source =
-        config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/nvim";
 
-      home.sessionVariables = {
-        EDITOR = "nvim";
+      home = {
+        activation = {
+          unlinkNvimConfig = lib.hm.dag.entryBefore [ "checkFilesChanged" ] ''
+            rm -rf ~/.config/nvim
+          '';
+          linkNvimConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+            rm -rf ~/.config/nvim
+            ln -sfn ~/.dotfiles/nvim ~/.config/nvim
+          '';
+        };
+
+        sessionVariables = {
+          EDITOR = "nvim";
+        };
       };
 
       programs.neovim = {
         package = pkgs.neovim-unwrapped;
         defaultEditor = true;
         enable = true;
-        withRuby = true;
-        withPython3 = true;
-        withNodeJs = true;
+        withRuby = false;
+        withPython3 = false;
+        withNodeJs = false;
         vimAlias = true;
         vimdiffAlias = true;
         viAlias = true;
         extraPackages = with pkgs; [
           rustc
           cargo
+          python3
           ripgrep
           curl
           fd

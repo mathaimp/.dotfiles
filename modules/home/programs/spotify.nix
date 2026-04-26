@@ -20,8 +20,8 @@
             hidePodcasts
             shuffle # shuffle+ (special characters are sanitized out of extension names)
           ];
-          theme = lib.mkForce spicePkgs.themes.ziro;
-          colorScheme = lib.mkForce "rose-pine";
+          theme = lib.mkForce spicePkgs.themes.sleek;
+          colorScheme = lib.mkForce "Nord";
           # # OLD THEME
           # theme = lib.mkForce spicePkgs.themes.text;
           # colorScheme = lib.mkForce "RosePine";

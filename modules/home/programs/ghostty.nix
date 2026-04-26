@@ -10,7 +10,7 @@
       installBatSyntax = true;
       installVimSyntax = true;
       settings = {
-        theme = "Rose Pine";
+        theme = "Nord";
         font-size = 14;
         window-padding-x = 10;
         window-padding-y = 10;

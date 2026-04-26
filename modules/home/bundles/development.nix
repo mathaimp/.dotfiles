@@ -12,7 +12,7 @@
       home.packages = with pkgs; [
         caligula
         nvitop
-        tomato-c
+        planify
 
         gemini-cli
         codex

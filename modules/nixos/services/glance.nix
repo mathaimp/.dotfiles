@@ -1,8 +1,7 @@
 {
   flake.nixosModules.glance =
-    {
-      config,
-      ...
+    { config
+    , ...
     }:
     {
       sops.secrets = {

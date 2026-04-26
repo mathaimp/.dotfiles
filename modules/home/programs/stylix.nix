@@ -5,15 +5,15 @@
     , ...
     }:
     {
-      home.packages = [ pkgs.papirus-icon-theme ];
       gtk.gtk4.theme = config.gtk.theme;
-      gtk.iconTheme.name = "Papirus-Dark";
       stylix = {
         enable = true;
         autoEnable = true;
         icons = {
           enable = true;
-          package = pkgs.papirus-icon-theme;
+          package = pkgs.papirus-icon-theme.override {
+            color = "bluegrey";
+          };
           light = "Papirus-Light";
           dark = "Papirus-Dark";
         };

@@ -1,16 +1,15 @@
 { inputs, ... }:
 {
   flake.nixosModules.stylix =
-    {
-      pkgs,
-      ...
+    { pkgs
+    , ...
     }:
     {
       imports = [ inputs.stylix.nixosModules.stylix ];
       stylix = {
         enable = true;
         autoEnable = true;
-        base16Scheme = "${pkgs.base16-schemes}/share/themes/rose-pine.yaml";
+        base16Scheme = "${pkgs.base16-schemes}/share/themes/nord.yaml";
         cursor = {
           package = pkgs.bibata-cursors;
           name = "Bibata-Modern-Classic";
@@ -40,7 +39,7 @@
             terminal = 13;
           };
         };
-        image = ./cherry.png;
+        image = ./fish.png;
         polarity = "dark";
       };
     };
