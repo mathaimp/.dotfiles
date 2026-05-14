@@ -14,7 +14,7 @@
 
         "$mainMod, A, exec, noctalia-shell ipc call lockScreen lock"
         "$mainMod SHIFT, Q, exec, noctalia-shell ipc call sessionMenu toggle"
-        "SUPER, SUPER_L, exec, noctalia-shell ipc call launcher toggle"
+        "SUPER, SPACE, exec, noctalia-shell ipc call launcher toggle"
         # "$mainMod, D, exec, rofi -show drun -theme ~/.config/rofi/launch.rasi"
         "$mainMod, V, exec, noctalia-shell ipc call launcher clipboard"
 

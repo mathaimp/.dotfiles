@@ -1,10 +1,11 @@
 {
   flake.homeModules.hyprland =
-    { osConfig
-    , config
-    , lib
-    , pkgs
-    , ...
+    {
+      osConfig,
+      config,
+      lib,
+      pkgs,
+      ...
     }:
     let
       stylixColors = osConfig.lib.stylix.colors;
@@ -46,10 +47,13 @@
         enable = true;
         xwayland.enable = true;
         settings = {
+
           "$terminal" = terminalChoice;
           "$browser" = "firefox";
           "$file_manager" = "nautilus";
           "$mainMod" = "SUPER";
+
+          exec-once = [ "noctalia-shell" ];
 
           input.numlock_by_default = true;
 

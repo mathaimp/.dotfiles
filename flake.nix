@@ -51,6 +51,7 @@
       flake = false;
     };
     disko.url = "github:nix-community/disko";
+    direnv-instant.url = "github:Mic92/direnv-instant";
   };
 
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);

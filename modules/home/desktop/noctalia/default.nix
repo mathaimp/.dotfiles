@@ -1,9 +1,10 @@
 { inputs, ... }:
 {
   flake.homeModules.noctalia =
-    { config
-    , lib
-    , ...
+    {
+      config,
+      lib,
+      ...
     }:
     let
       terminalChoice =
@@ -22,7 +23,6 @@
 
       programs.noctalia-shell = {
         enable = true;
-        systemd.enable = true;
 
         settings = {
           settingsVersion = 0;
@@ -647,10 +647,6 @@
             ];
           };
         };
-      };
-
-      systemd.user.services.noctalia-shell = {
-        Service.Environment = "QT_QPA_PLATFORMTHEME=gtk3";
       };
     };
 }

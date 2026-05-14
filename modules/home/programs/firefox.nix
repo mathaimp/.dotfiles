@@ -1,8 +1,10 @@
 { inputs, ... }:
 {
   flake.homeModules.firefox =
-    { pkgs
-    , ...
+    {
+      pkgs,
+      config,
+      ...
     }:
     let
       firefoxAddonsPkgs = import inputs.nixpkgs {
@@ -20,6 +22,7 @@
 
       programs.firefox = {
         enable = true;
+        configPath = "${config.xdg.configHome}/mozilla/firefox";
         profiles.default = {
           id = 0;
           name = "Default";
