@@ -1,8 +1,9 @@
 {
   flake.homeModules.ssh =
-    { config
-    , lib
-    , ...
+    {
+      config,
+      lib,
+      ...
     }:
     {
       programs.ssh = {
@@ -64,6 +65,13 @@
             identityFile = "${config.home.homeDirectory}/.ssh/id_ed25519";
             identitiesOnly = true;
           };
+          "hermes" = {
+            user = "mathai";
+            hostname = "100.119.255.54";
+            identityFile = "${config.home.homeDirectory}/.ssh/id_ed25519";
+            identitiesOnly = true;
+          };
+
         };
       };
       services.ssh-agent.enable = true;

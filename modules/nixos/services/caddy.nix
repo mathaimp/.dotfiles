@@ -1,8 +1,9 @@
 {
   flake.nixosModules.caddy =
-    { config
-    , pkgs
-    , ...
+    {
+      config,
+      pkgs,
+      ...
     }:
     {
       sops.secrets."duckdns-token" = { };
@@ -11,7 +12,7 @@
         enable = true;
         package = pkgs.caddy.withPlugins {
           plugins = [ "github.com/caddy-dns/duckdns@v0.5.0" ];
-          hash = "sha256-pLrGS7nykBAFga3v90IJ7tt2mjLxrBJI2E5mCSGCeg4=";
+          hash = "sha256-PC0r+dzU9Dp1yjE+k6AXGct6Hhz0zbE0EWbnweHwl2o=";
         };
         globalConfig = ''
           acme_dns duckdns {

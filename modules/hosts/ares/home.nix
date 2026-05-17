@@ -1,23 +1,22 @@
 { self, ... }:
 {
-  flake.homeModules.mathai-ares =
-    {
-      imports = [
-        self.homeModules.common-bundle
-        self.homeModules.desktop-bundle
-        self.homeModules.development-bundle
-        self.homeModules.office-bundle
-        self.homeModules.shell-bundle
+  flake.homeModules.mathai-ares = {
+    imports = [
+      self.homeModules.common-bundle
+      self.homeModules.desktop-bundle
+      self.homeModules.development-bundle
+      self.homeModules.office-bundle
+      self.homeModules.shell-bundle
 
-        self.homeModules.hyprland
-        self.homeModules.niri
+      self.homeModules.hyprland
+      self.homeModules.niri
 
-        self.homeModules.firefox
-        self.homeModules.spotify
-        self.homeModules.yazi
+      self.homeModules.firefox
+      self.homeModules.spotify
+      self.homeModules.yazi
 
-        self.homeModules.rclone
-      ];
-      home.stateVersion = "24.05";
-    };
+      self.homeModules.rclone
+    ];
+    home.stateVersion = "24.05";
+  };
 }
