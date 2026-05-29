@@ -3,7 +3,7 @@
   flake.nixosModules.niri = {
     imports = [
       self.nixosModules.nautilus
-      self.nixosModules.gdm
+      self.nixosModules.sddm
       self.nixosModules.polkit-gnome
     ];
     programs.niri = {

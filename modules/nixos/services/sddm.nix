@@ -1,8 +1,10 @@
+{ inputs, ... }:
 {
   flake.nixosModules.sddm =
-    { config
-    , pkgs
-    , ...
+    {
+      config,
+      pkgs,
+      ...
     }:
     let
       stylixColors = config.lib.stylix.colors;
@@ -11,14 +13,9 @@
 
       services.displayManager.sddm = {
         enable = true;
-        wayland = {
-          enable = true;
-          compositor = "weston";
-        };
-        autoNumlock = true;
+        # wayland.enable = true;
         package = pkgs.kdePackages.sddm;
-        enableHidpi = true;
-        theme = "sddm-astronaut-theme";
+        theme = "pixie";
         settings = {
           Theme = {
             CursorTheme = config.stylix.cursor.name;
@@ -27,54 +24,21 @@
         };
         extraPackages = with pkgs; [
           kdePackages.qtsvg
-          kdePackages.qtvirtualkeyboard
-          kdePackages.qtmultimedia
+          kdePackages.qtdeclarative
+          kdePackages.qt5compat
         ];
       };
-      environment.systemPackages = with pkgs; [
-        (sddm-astronaut.override {
-          themeConfig = {
-            Font = "${config.stylix.fonts.sansSerif.name}";
-            FontSize = config.stylix.fonts.sizes.applications;
-            Background = "${config.stylix.image}";
-            FullBlur = "true";
-            BlurMax = "64";
-            Blur = "1.0";
-
-            HeaderTextColor = "#${stylixColors.base05}";
-            DateTextColor = "#${stylixColors.base05}";
-            TimeTextColor = "#${stylixColors.base05}";
-
-            LoginFieldBackgroundColor = "#${stylixColors.base00}";
-            PasswordFieldBackgroundColor = "#${stylixColors.base00}";
-            LoginFieldTextColor = "#${stylixColors.base05}";
-            PasswordFieldTextColor = "#${stylixColors.base05}";
-            UserIconColor = "#${stylixColors.base05}";
-            PasswordIconColor = "#${stylixColors.base05}";
-
-            PlaceholderTextColor = "#${stylixColors.base04}";
-            WarningColor = "#${stylixColors.base0A}";
-
-            LoginButtonTextColor = "#${stylixColors.base05}";
-            LoginButtonBackgroundColor = "#${stylixColors.base00}";
-            SystemButtonsIconsColor = "#${stylixColors.base05}";
-            SessionButtonTextColor = "#${stylixColors.base05}";
-            VirtualKeyboardButtonTextColor = "#${stylixColors.base05}";
-
-            DropdownTextColor = "#${stylixColors.base05}";
-            DropdownSelectedBackgroundColor = "#${stylixColors.base02}";
-            DropdownBackgroundColor = "#${stylixColors.base00}";
-
-            HighlightTextColor = "#${stylixColors.base0D}";
-            HighlightBackgroundColor = "#${stylixColors.base04}";
-            HighlightBorderColor = "#${stylixColors.base04}";
-
-            HoverUserIconColor = "#${stylixColors.base0D}";
-            HoverPasswordIconColor = "#${stylixColors.base0D}";
-            HoverSystemButtonsIconsColor = "#${stylixColors.base0D}";
-            HoverSessionButtonTextColor = "#${stylixColors.base0D}";
-            HoverVirtualKeyboardButtonTextColor = "#${stylixColors.base0D}";
-          };
+      environment.systemPackages = [
+        (inputs.pixie-sddm.packages.${pkgs.stdenv.hostPlatform.system}.pixie-sddm.override {
+          background = config.stylix.image;
+          avatar = ../../home/desktop/noctalia/face.png;
+          primaryColor = "#${stylixColors.base0D}";
+          accentColor = "#${stylixColors.base0D}";
+          backgroundColor = "#${stylixColors.base00}";
+          autoColor = false;
+          textColor = "#${stylixColors.base05}";
+          fontFamily = "${config.stylix.fonts.sansSerif.name}";
+          fontSize = config.stylix.fonts.sizes.applications;
         })
       ];
     };

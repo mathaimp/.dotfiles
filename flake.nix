@@ -52,6 +52,7 @@
     };
     disko.url = "github:nix-community/disko";
     direnv-instant.url = "github:Mic92/direnv-instant";
+    pixie-sddm.url = "github:xCaptaiN09/pixie-sddm";
   };
 
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
