@@ -8,17 +8,19 @@ let
     else
       "xterm";
 
-  workspaceBinds = lib.concatMapStrings (
-    x:
-    let
-      ws = toString (x + 1);
-      key = toString (if x + 1 == 10 then 0 else x + 1);
-    in
-    ''
-      hl.bind("SUPER + ${key}", hl.dsp.focus({ workspace = ${ws} }))
-      hl.bind("SUPER + SHIFT + ${key}", hl.dsp.window.move({ workspace = ${ws} }))
-    ''
-  ) (lib.range 0 9);
+  workspaceBinds = lib.concatMapStrings
+    (
+      x:
+      let
+        ws = toString (x + 1);
+        key = toString (if x + 1 == 10 then 0 else x + 1);
+      in
+      ''
+        hl.bind("SUPER + ${key}", hl.dsp.focus({ workspace = ${ws} }))
+        hl.bind("SUPER + SHIFT + ${key}", hl.dsp.window.move({ workspace = ${ws} }))
+      ''
+    )
+    (lib.range 0 9);
 in
 {
   wayland.windowManager.hyprland.extraConfig = ''

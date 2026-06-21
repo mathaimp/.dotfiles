@@ -1,10 +1,9 @@
 { inputs, ... }:
 {
   flake.homeModules.noctalia =
-    {
-      config,
-      lib,
-      ...
+    { config
+    , lib
+    , ...
     }:
     let
       terminalChoice =

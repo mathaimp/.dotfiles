@@ -1,10 +1,9 @@
 { inputs, ... }:
 {
   flake.nixosModules.sddm =
-    {
-      config,
-      pkgs,
-      ...
+    { config
+    , pkgs
+    , ...
     }:
     let
       stylixColors = config.lib.stylix.colors;

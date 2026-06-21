@@ -1,15 +1,14 @@
 {
   flake.homeModules.atuin =
-    { pkgs, config
+    { config
     , ...
     }:
     {
-            sops.secrets = {
+      sops.secrets = {
         "atuin-key" = {
           path = "${config.home.homeDirectory}/.local/share/atuin/key";
         };
       };
-
 
       programs.atuin = {
         enable = true;
@@ -22,7 +21,11 @@
           invert = true;
           workspaces = true;
           secrets_filter = true;
-          history_filter = [ "^cd \\.\\.$" "^ls$" "^exit$" ];
+          history_filter = [
+            "^cd \\.\\.$"
+            "^ls$"
+            "^exit$"
+          ];
         };
       };
     };

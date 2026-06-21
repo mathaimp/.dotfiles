@@ -1,9 +1,7 @@
 {
   flake.homeModules.stylix =
-    {
-      pkgs,
-      config,
-      ...
+    { pkgs
+    , ...
     }:
     {
       stylix = {

@@ -1,8 +1,7 @@
 {
   flake.nixosModules.vms =
-    {
-      pkgs,
-      ...
+    { pkgs
+    , ...
     }:
     {
       # Set up virtualisation

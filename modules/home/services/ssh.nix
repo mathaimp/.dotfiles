@@ -1,9 +1,8 @@
 {
   flake.homeModules.ssh =
-    {
-      config,
-      lib,
-      ...
+    { config
+    , lib
+    , ...
     }:
     {
       programs.ssh = {

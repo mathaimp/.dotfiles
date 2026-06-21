@@ -1,8 +1,7 @@
 {
   flake.nixosModules.wine =
-    {
-      pkgs,
-      ...
+    { pkgs
+    , ...
     }:
     {
       programs.gamemode.enable = true;

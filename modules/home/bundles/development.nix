@@ -1,9 +1,8 @@
 { self, ... }:
 {
   flake.homeModules.development-bundle =
-    {
-      pkgs,
-      ...
+    { pkgs
+    , ...
     }:
     {
       imports = [
@@ -19,7 +18,7 @@
 
         gemini-cli
         codex
-        pi-coding-agent
+        opencode
 
         # python
         uv
