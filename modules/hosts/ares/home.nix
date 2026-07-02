@@ -9,6 +9,8 @@
       self.homeModules.shell-bundle
 
       self.homeModules.hyprland
+      self.homeModules.hyprlock
+      self.homeModules.hypridle
       # self.homeModules.niri
 
       self.homeModules.firefox

@@ -34,7 +34,7 @@
         configType = "lua";
         extraConfig = ''
           hl.on("hyprland.start", function()
-            hl.exec_cmd("noctalia-shell")
+            hl.exec_cmd("noctalia")
           end)
 
           hl.env("XDG_CURRENT_DESKTOP", "Hyprland")
@@ -61,6 +61,9 @@
                 active_border   = "rgb(${stylixColors.base03})",
                 inactive_border = "rgb(${stylixColors.base02})",
               },
+            },
+            cursor = {
+                no_hardware_cursors = true,
             },
             decoration = {
               rounding = 10,

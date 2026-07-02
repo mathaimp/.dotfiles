@@ -41,10 +41,10 @@ in
     hl.bind("PRINT", hl.dsp.exec_cmd("grimshot savecopy anything"))
 
     -- Noctalia
-    hl.bind(mainMod .. " + A",         hl.dsp.exec_cmd("noctalia-shell ipc call lockScreen lock"))
+    hl.bind(mainMod .. " + A",         hl.dsp.exec_cmd("loginctl lock-session"))
     hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exec_cmd("noctalia-shell ipc call sessionMenu toggle"))
-    hl.bind(mainMod .. " + SPACE",     hl.dsp.exec_cmd("noctalia-shell ipc call launcher toggle"))
-    hl.bind(mainMod .. " + V",         hl.dsp.exec_cmd("noctalia-shell ipc call launcher clipboard"))
+    hl.bind(mainMod .. " + SPACE",     hl.dsp.exec_cmd("noctalia msg panel-toggle launcher"))
+    hl.bind(mainMod .. " + V",         hl.dsp.exec_cmd("noctalia msg panel-toggle clipboard"))
 
     -- Focus
     hl.bind(mainMod .. " + H", hl.dsp.focus({ direction = "left" }))

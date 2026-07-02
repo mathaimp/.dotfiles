@@ -5,23 +5,23 @@
         enable = true;
         settings = {
           general = {
-            lock_cmd = "noctalia-shell ipc call lockScreen lock";
+            lock_cmd = "pidof hyprlock || hyprlock";
             before_sleep_cmd = "loginctl lock-session";
             after_sleep_cmd = "hyprctl dispatch dpms on";
           };
           listener = [
             {
-              timeout = 270;
+              timeout = 600;
               on-timeout = "brightnessctl -s set 0";
               on-resume = "brightnessctl -r";
             }
             {
-              timeout = 300;
+              timeout = 630;
               on-timeout = "hyprctl dispatch dpms off";
               on-resume = "hyprctl dispatch dpms on";
             }
             {
-              timeout = 360;
+              timeout = 660;
               on-timeout = "loginctl lock-session";
             }
             {

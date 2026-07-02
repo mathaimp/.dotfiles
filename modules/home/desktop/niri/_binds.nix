@@ -6,9 +6,8 @@ let
   noctalia =
     cmd:
     [
-      "noctalia-shell"
-      "ipc"
-      "call"
+      "noctalia"
+      "msg"
     ]
     ++ (pkgs.lib.splitString " " cmd);
   terminalChoice =
@@ -37,12 +36,10 @@ in
     "Mod+W".action = toggle-window-floating;
     "Alt+Return".action = fullscreen-window;
 
-    "Mod+A".action.spawn = noctalia "lockScreen lock";
+    "Mod+A".action.spawn = "loginctl lock-session";
     "Mod+Shift+Q".action.spawn = noctalia "sessionMenu toggle";
 
-    "Mod+Space".action.spawn = noctalia "launcher toggle";
-
-    "Mod+Tab".action.spawn = noctalia "launcher windows";
+    "Mod+Space".action.spawn = noctalia "panel-toggle launcher";
 
     "Mod+E".action = maximize-column;
 
@@ -83,7 +80,8 @@ in
     "Mod+9".action.focus-workspace = 9;
     "Mod+0".action.focus-workspace = 10;
 
-    "Mod+V".action.spawn = noctalia "launcher clipboard";
+    "Mod+V".action.spawn = noctalia "panel-toggle clipboard";
+
 
     "Print".action = spawn [
       "niri"

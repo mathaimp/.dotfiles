@@ -30,7 +30,6 @@
       environment.systemPackages = [
         (inputs.pixie-sddm.packages.${pkgs.stdenv.hostPlatform.system}.pixie-sddm.override {
           background = config.stylix.image;
-          avatar = ../../home/desktop/noctalia/face.png;
           primaryColor = "#${stylixColors.base0D}";
           accentColor = "#${stylixColors.base0D}";
           backgroundColor = "#${stylixColors.base00}";
