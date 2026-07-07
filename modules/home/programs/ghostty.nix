@@ -12,8 +12,10 @@
       settings = {
         theme = "Nord";
         font-size = 14;
-        window-padding-x = 10;
-        window-padding-y = 10;
+        window-padding-x = 8;
+        window-padding-y = 0;
+        window-padding-balance = true;
+        window-padding-color = "extend";
         copy-on-select = "clipboard";
       };
     };
