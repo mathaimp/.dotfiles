@@ -28,6 +28,7 @@
 
         # For hibernation with swapfile and luks encryption
         kernelParams = [
+          "pcie_aspm=force" # ignore buggy NVMe/PCIe power states
           "resume=/dev/mapper/nixos-root"
           "resume_offset=533760"
         ];
