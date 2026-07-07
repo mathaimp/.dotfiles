@@ -37,7 +37,7 @@ in
     "Alt+Return".action = fullscreen-window;
 
     "Mod+A".action.spawn = "loginctl lock-session";
-    "Mod+Shift+Q".action.spawn = noctalia "sessionMenu toggle";
+    "Mod+Shift+Q".action.spawn = "wlogout -b 6";
 
     "Mod+Space".action.spawn = noctalia "panel-toggle launcher";
 

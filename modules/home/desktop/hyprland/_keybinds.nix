@@ -42,7 +42,7 @@ in
 
     -- Noctalia
     hl.bind(mainMod .. " + A",         hl.dsp.exec_cmd("loginctl lock-session"))
-    hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exec_cmd("noctalia-shell ipc call sessionMenu toggle"))
+    hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exec_cmd("wlogout -b 6"))
     hl.bind(mainMod .. " + SPACE",     hl.dsp.exec_cmd("noctalia msg panel-toggle launcher"))
     hl.bind(mainMod .. " + V",         hl.dsp.exec_cmd("noctalia msg panel-toggle clipboard"))
 

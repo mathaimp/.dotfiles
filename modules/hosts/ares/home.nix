@@ -11,6 +11,7 @@
       self.homeModules.hyprland
       self.homeModules.hyprlock
       self.homeModules.hypridle
+      self.homeModules.wlogout
       # self.homeModules.niri
 
       self.homeModules.firefox
