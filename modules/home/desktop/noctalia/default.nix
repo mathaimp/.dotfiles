@@ -1,8 +1,7 @@
 { inputs, ... }:
 {
   flake.homeModules.noctalia =
-    {
-      ...
+    { ...
     }:
     {
       imports = [

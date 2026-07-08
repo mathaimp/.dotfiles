@@ -634,7 +634,7 @@ translucentWidgets = true
 [wallpaper]
 automationEnabled = false
 enableMultiMonitorDirectories = false
-enabled = true
+enabled = false
 favorites = []
 fillColor = "#000000"
 fillMode = "crop"

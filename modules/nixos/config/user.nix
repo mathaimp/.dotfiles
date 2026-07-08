@@ -2,6 +2,7 @@
   flake.nixosModules.user =
     { config
     , lib
+    , options
     , pkgs
     , ...
     }:
@@ -73,7 +74,7 @@
           // cfg.extraOptions;
         }
 
-        (lib.mkIf cfg.useSopsPassword {
+        (lib.mkIf (cfg.useSopsPassword && options ? sops) {
           sops.secrets."${cfg.name}-password".neededForUsers = true;
           sops.secrets."root-password".neededForUsers = true;
 

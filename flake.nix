@@ -27,7 +27,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-secrets = {
-      url = "git+ssh://git@github.com/mathewp88/.nix-secrets?shallow=1&ref=main";
+      url = "git+ssh://git@github.com/mathaimp/.nix-secrets?shallow=1&ref=main";
       flake = false;
     };
     niri-flake = {

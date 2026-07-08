@@ -510,13 +510,13 @@
         "rev": "98c9d1af8165ac4e53c109108da2230c30eacd4e",
         "shallow": true,
         "type": "git",
-        "url": "ssh://git@github.com/mathewp88/.nix-secrets"
+        "url": "ssh://git@github.com/mathaimp/.nix-secrets"
       },
       "original": {
         "ref": "main",
         "shallow": true,
         "type": "git",
-        "url": "ssh://git@github.com/mathewp88/.nix-secrets"
+        "url": "ssh://git@github.com/mathaimp/.nix-secrets"
       }
     },
     "nixos-hardware": {
@@ -878,11 +878,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1782165805,
-        "narHash": "sha256-478kKQBvK6SYTOdN2h9jhKJv94nbXRbFMfuL1WshErg=",
+        "lastModified": 1783174389,
+        "narHash": "sha256-aCWC8ngycU7OdJrU2+Je3qf+1a2ykuBvpPhZT/9tXMc=",
         "owner": "Mic92",
         "repo": "sops-nix",
-        "rev": "56b24064fdcaedca53553b1a6d607fd23b613a24",
+        "rev": "f1406619a3884cd5c47992a70b8b35c9c0fcb4c9",
         "type": "github"
       },
       "original": {

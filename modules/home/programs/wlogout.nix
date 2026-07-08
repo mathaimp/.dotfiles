@@ -1,29 +1,59 @@
 {
   flake.homeModules.wlogout =
-    { config, pkgs, lib, ... }:
+    { config, pkgs, ... }:
     let
       c = config.lib.stylix.colors.withHashtag;
 
-      fntSize   = 16;
+      fntSize = 16;
       buttonRad = 25;
       activeRad = 20;
-      mgn       = 20;
-      hvr       = 10;
+      mgn = 20;
+      hvr = 10;
 
       fontName = config.stylix.fonts.sansSerif.name;
-      icons    = "${pkgs.wlogout}/share/wlogout/icons";
+      icons = "${pkgs.wlogout}/share/wlogout/icons";
     in
     {
       programs.wlogout = {
         enable = true;
 
         layout = [
-          { label = "lock";      action = "loginctl lock-session";                      text = "Lock";      keybind = "l"; }
-          { label = "logout";    action = "loginctl terminate-session '$XDG_SESSION_ID'";       text = "Logout";    keybind = "e"; }
-          { label = "suspend";   action = "loginctl lock-session && systemctl suspend"; text = "Suspend";   keybind = "u"; }
-          { label = "shutdown";  action = "systemctl poweroff";            text = "Shutdown";  keybind = "s"; }
-          { label = "hibernate"; action = "systemctl hibernate";           text = "Hibernate"; keybind = "h"; }
-          { label = "reboot";    action = "systemctl reboot";              text = "Reboot";    keybind = "r"; }
+          {
+            label = "lock";
+            action = "loginctl lock-session";
+            text = "Lock";
+            keybind = "l";
+          }
+          {
+            label = "logout";
+            action = "loginctl terminate-session '$XDG_SESSION_ID'";
+            text = "Logout";
+            keybind = "e";
+          }
+          {
+            label = "suspend";
+            action = "loginctl lock-session && systemctl suspend";
+            text = "Suspend";
+            keybind = "u";
+          }
+          {
+            label = "shutdown";
+            action = "systemctl poweroff";
+            text = "Shutdown";
+            keybind = "s";
+          }
+          {
+            label = "hibernate";
+            action = "systemctl hibernate";
+            text = "Hibernate";
+            keybind = "h";
+          }
+          {
+            label = "reboot";
+            action = "systemctl reboot";
+            text = "Reboot";
+            keybind = "r";
+          }
         ];
 
         style = ''
