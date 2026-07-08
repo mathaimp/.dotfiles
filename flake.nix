@@ -34,10 +34,6 @@
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    noctalia = {
-      url = "github:noctalia-dev/noctalia";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -50,6 +46,7 @@
       url = "github:yazi-rs/plugins";
       flake = false;
     };
+    noctalia.url = "github:noctalia-dev/noctalia/cachix";
     disko.url = "github:nix-community/disko";
     direnv-instant.url = "github:Mic92/direnv-instant";
     pixie-sddm.url = "github:xCaptaiN09/pixie-sddm";

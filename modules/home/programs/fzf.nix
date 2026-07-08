@@ -1,9 +1,10 @@
 {
   flake.homeModules.fzf =
-    { config
-    , lib
-    , pkgs
-    , ...
+    {
+      config,
+      lib,
+      pkgs,
+      ...
     }:
     let
       stylixEnabled = config.programs.stylix.enable or false;
@@ -19,7 +20,8 @@
 
       programs.fzf = {
         enable = true;
-        enableZshIntegration = true;
+        enableZshIntegration = false;
+        historyWidget.zsh.command = ""; # Diable while uisng atuin
         colors = lib.mkIf stylixEnabled (
           lib.mkForce {
             "fg+" = accent;
@@ -40,12 +42,12 @@
           "-i"
           "--no-bold"
         ];
-        fileWidgetOptions = [
+        fileWidget.options = [
           "--walker-skip .git,node_modules,target"
           "--preview 'bat -n --color=always {}'"
           "--bind 'ctrl-/:change-preview-window(down|hidden|)'"
         ];
-        changeDirWidgetOptions = [
+        changeDirWidget.options = [
           "--walker-skip .git,node_modules,target"
           "--preview 'tree -C {}'"
         ];

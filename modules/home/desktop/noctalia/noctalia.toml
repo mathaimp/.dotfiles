@@ -552,7 +552,6 @@ showKeybinds = true
     keybind = "7"
 
 [shell]
-font_family = "SFPro Nerd Font"
 password_style = "random"
 settings_show_advanced = true
 

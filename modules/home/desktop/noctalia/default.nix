@@ -1,7 +1,8 @@
 { inputs, ... }:
 {
   flake.homeModules.noctalia =
-    { ...
+    {
+      ...
     }:
     {
       imports = [
@@ -10,7 +11,7 @@
 
       programs.noctalia = {
         enable = true;
-        settings = builtins.readFile ./noctalia.toml;
+        settings = fromTOML (builtins.readFile ./noctalia.toml);
       };
     };
 }
