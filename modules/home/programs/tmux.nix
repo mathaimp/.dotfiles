@@ -10,13 +10,20 @@
         keyMode = "vi";
         prefix = "C-Space";
         baseIndex = 1;
-        sensibleOnTop = true;
+        sensibleOnTop = false;
         plugins = with pkgs; [
           tmuxPlugins.vim-tmux-navigator
           tmuxPlugins.yank
         ];
         extraConfig = ''
           set-option -ga terminal-overrides ",xterm*:Tc"
+
+          # --- Sensible defaults (replaces tmuxplugin-sensible) ---
+          set -g display-time 4000
+          set -g status-interval 5
+          bind C-p previous-window
+          bind C-n next-window
+          bind R source-file ~/.config/tmux/tmux.conf \; display-message "Sourced ~/.config/tmux/tmux.conf!"
 
           bind-key -T copy-mode-vi v send-keys -X begin-selection
           bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
