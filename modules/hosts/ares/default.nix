@@ -31,6 +31,8 @@
       self.nixosModules.tailscale
       self.nixosModules.printing
 
+      self.nixosModules.wine
+
       self.nixosModules.automatic-timezone
       self.nixosModules.battery
       self.nixosModules.secure-boot

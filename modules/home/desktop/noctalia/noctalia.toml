@@ -77,6 +77,7 @@ widgetSpacing = 6
     [bar.widgets]
     center = [ "workspaces" ]
     end = [ "caffeine", "network", "battery", "control-center" ]
+    margin_edge = 4
     margin_ends = 12
     radius = 8
     start = [ "clock", "sysmon", "temp", "ram" ]
