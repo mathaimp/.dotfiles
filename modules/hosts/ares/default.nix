@@ -6,57 +6,61 @@
     ];
   };
 
-  flake.nixosModules.hostAres = {
-    imports = [
-      inputs.home-manager.nixosModules.default
-      inputs.nixos-hardware.nixosModules.omen-16-n0280nd
+  flake.nixosModules.hostAres =
+    { pkgs, ... }:
+    {
+      imports = [
+        inputs.home-manager.nixosModules.default
+        inputs.nixos-hardware.nixosModules.omen-16-n0280nd
 
-      self.nixosModules.common-bundle
-      self.nixosModules.user
+        self.nixosModules.common-bundle
+        self.nixosModules.user
 
-      self.nixosModules.hyprland
-      # self.nixosModules.niri
-      self.nixosModules.cloudflare-warp
-      self.nixosModules.bluetooth
-      self.nixosModules.btrfs
-      self.nixosModules.nvidia
-      self.nixosModules.sleep
+        self.nixosModules.hyprland
+        # self.nixosModules.niri
+        self.nixosModules.cloudflare-warp
+        self.nixosModules.bluetooth
+        self.nixosModules.btrfs
+        self.nixosModules.nvidia
+        self.nixosModules.sleep
 
-      self.nixosModules.plymouth
-      self.nixosModules.stylix
+        self.nixosModules.plymouth
+        self.nixosModules.stylix
 
-      self.nixosModules.avahi
-      self.nixosModules.docker
-      self.nixosModules.keyd
-      self.nixosModules.tailscale
-      self.nixosModules.printing
+        self.nixosModules.avahi
+        self.nixosModules.docker
+        self.nixosModules.keyd
+        self.nixosModules.tailscale
+        self.nixosModules.printing
 
-      self.nixosModules.wine
+        self.nixosModules.wine
 
-      self.nixosModules.automatic-timezone
-      self.nixosModules.battery
-      self.nixosModules.secure-boot
-    ];
+        self.nixosModules.automatic-timezone
+        self.nixosModules.battery
+        self.nixosModules.secure-boot
+      ];
 
-    preferences = {
-      user = {
-        name = "mathai";
-        extraGroups = [
-          "networkmanager"
-          "wheel"
-          "dialout"
-        ];
+      preferences = {
+        user = {
+          name = "mathai";
+          extraGroups = [
+            "networkmanager"
+            "wheel"
+            "dialout"
+          ];
+        };
+        secure-boot.wait-for-network = false;
       };
-      secure-boot.wait-for-network = false;
-    };
 
-    home-manager = {
-      users.mathai = self.homeModules.mathai-ares;
-      useUserPackages = true;
-      useGlobalPkgs = true;
-    };
+      boot.kernelPackages = pkgs.linuxPackages_latest;
 
-    networking.hostName = "ares";
-    system.stateVersion = "24.05";
-  };
+      home-manager = {
+        users.mathai = self.homeModules.mathai-ares;
+        useUserPackages = true;
+        useGlobalPkgs = true;
+      };
+
+      networking.hostName = "ares";
+      system.stateVersion = "24.05";
+    };
 }
