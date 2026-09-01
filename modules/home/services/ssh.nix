@@ -60,7 +60,7 @@
 
           "void" = {
             User = "mathai.mathew";
-            HostName = "10.2.36.213";
+            HostName = "10.1.69.56";
             IdentityFile = "${config.home.homeDirectory}/.ssh/id_ed25519";
             IdentitiesOnly = true;
           };

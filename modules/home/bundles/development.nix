@@ -16,7 +16,6 @@
         nvitop
         gh
 
-        gemini-cli
         codex
         opencode
 
