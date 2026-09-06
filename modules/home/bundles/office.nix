@@ -5,6 +5,8 @@
       ...
     }:
     {
+      programs.vesktop.enable = true;
+
       home.packages = with pkgs; [
         tsukimi
         evince

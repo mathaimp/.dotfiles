@@ -42,7 +42,7 @@
             "root"
             "@wheel"
           ];
-          experimental-features = "nix-command flakes";
+          experimental-features = [ "nix-command flakes" ];
           http-connections = 50;
           warn-dirty = false;
           log-lines = 50;
