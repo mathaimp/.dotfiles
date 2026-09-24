@@ -16,8 +16,14 @@
         defaultKeymap = "emacs";
         historySubstringSearch = {
           enable = true;
-          searchDownKey = [ "$terminfo[kcud1]" ];
-          searchUpKey = [ "$terminfo[kcuu1]" ];
+          searchDownKey = [
+            "$terminfo[kcud1]"
+            "^[[B"
+          ];
+          searchUpKey = [
+            "$terminfo[kcuu1]"
+            "^[[A"
+          ];
         };
         history = {
           size = 100000;

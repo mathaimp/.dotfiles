@@ -12,7 +12,7 @@
       services.immich = {
         enable = true;
 
-        settings = builtins.fromJSON (builtins.readFile ./immich.json);
+        # settings = builtins.fromJSON (builtins.readFile ./immich.json);
 
         secretsFile = config.sops.secrets."immich".path;
 

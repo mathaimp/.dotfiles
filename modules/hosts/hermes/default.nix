@@ -62,7 +62,7 @@
         neovim
       ];
 
-      # boot.kernelPackages = pkgs.linuxKernel.packages.linux_rpi4;
+      boot.kernelPackages = pkgs.linuxPackages;
 
       home-manager = {
         users.mathai = self.homeModules.mathai-hermes;

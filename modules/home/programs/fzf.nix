@@ -20,8 +20,7 @@
 
       programs.fzf = {
         enable = true;
-        enableZshIntegration = false;
-        historyWidget.zsh.command = ""; # Diable while uisng atuin
+        enableZshIntegration = true;
         colors = lib.mkIf stylixEnabled (
           lib.mkForce {
             "fg+" = accent;

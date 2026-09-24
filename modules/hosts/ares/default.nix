@@ -53,6 +53,7 @@
       };
 
       boot.kernelPackages = pkgs.linuxPackages_latest;
+      boot.loader.systemd-boot.configurationLimit = 20; # Not enough space in /boot =(
 
       home-manager = {
         users.mathai = self.homeModules.mathai-ares;

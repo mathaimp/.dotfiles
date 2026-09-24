@@ -7,7 +7,6 @@
     }:
     {
       imports = [
-        self.homeModules.atuin
         self.homeModules.direnv
       ];
 
@@ -18,6 +17,7 @@
 
         codex
         opencode
+        pi-coding-agent
 
         # python
         uv
