@@ -8,6 +8,7 @@
     {
       imports = [
         self.homeModules.direnv
+        self.homeModules.pi
       ];
 
       home.packages = with pkgs; [
@@ -17,7 +18,6 @@
 
         codex
         opencode
-        pi-coding-agent
 
         # python
         uv
