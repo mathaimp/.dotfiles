@@ -12,6 +12,7 @@
           pkgs.ripgrep
           pkgs.socat
           pkgs.bubblewrap
+          pkgs.libnotify
         ];
         context = ./context.md;
       };

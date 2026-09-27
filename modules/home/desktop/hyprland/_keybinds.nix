@@ -31,7 +31,7 @@ in
 
         -- Window control
         hl.bind(mainMod .. " + Q",         hl.dsp.window.close())
-        hl.bind(mainMod .. " + E",         hl.dsp.window.fullscreen())
+        hl.bind(mainMod .. " + E",         hl.dsp.window.fullscreen({action = "toggle", mode = "maximized"}))
         hl.bind(mainMod .. " + T",         hl.dsp.window.float({ action = "toggle" }))
         hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("hyprctl reload"))
 
