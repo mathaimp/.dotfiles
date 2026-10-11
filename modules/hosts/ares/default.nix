@@ -17,6 +17,7 @@
         self.nixosModules.user
 
         self.nixosModules.hyprland
+        self.nixosModules.gnome
         # self.nixosModules.niri
         self.nixosModules.cloudflare-warp
         self.nixosModules.bluetooth

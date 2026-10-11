@@ -46,7 +46,7 @@
 
           "neon" = {
             User = "mathai.mathew";
-            HostName = "10.2.36.71";
+            HostName = "10.1.69.89";
             IdentityFile = "${config.home.homeDirectory}/.ssh/id_ed25519";
             IdentitiesOnly = true;
           };

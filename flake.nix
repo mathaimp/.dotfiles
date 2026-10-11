@@ -50,6 +50,9 @@
     disko.url = "github:nix-community/disko";
     direnv-instant.url = "github:Mic92/direnv-instant";
     pixie-sddm.url = "github:xCaptaiN09/pixie-sddm";
+    claude-code.url = "github:sadjow/claude-code-nix";
+    # Zotero 10.0.4 is broken on current nixpkgs (needs Firefox ESR 140, nixpkgs has 153). Remove once fixed upstream.
+    nixpkgs-zotero.url = "github:NixOS/nixpkgs/eaad089433ca2bb662274377d33df3d0e51ef28b";
   };
 
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);

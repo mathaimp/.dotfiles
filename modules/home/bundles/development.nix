@@ -1,4 +1,4 @@
-{ self, ... }:
+{ inputs, self, ... }:
 {
   flake.homeModules.development-bundle =
     {
@@ -17,6 +17,7 @@
         gh
 
         codex
+        inputs.claude-code.packages.${pkgs.stdenv.hostPlatform.system}.default
         opencode
 
         # python
@@ -24,7 +25,7 @@
 
         # Notes
         obsidian
-        zotero
+        inputs.nixpkgs-zotero.legacyPackages.${pkgs.stdenv.hostPlatform.system}.zotero # pinned, see flake.nix
 
         # robotics
         arduino-cli
