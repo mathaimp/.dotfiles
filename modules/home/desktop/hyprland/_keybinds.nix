@@ -60,7 +60,8 @@ in
     (bind "${mod} + A" (exec "loginctl lock-session") [ ])
     (bind "${mod} + SHIFT + Q" (exec "wlogout -b 6") [ ])
     (bind "${mod} + SPACE" (exec "qs -c default ipc call launcher toggle") [ ])
-    (bind "${mod} + V" (exec "noctalia msg panel-toggle clipboard") [ ])
+    # Clipboard history: clipse in a floating terminal (see the window_rule in default.nix).
+    (bind "${mod} + V" (exec "${terminalChoice} --class=com.save.clipse -e clipse") [ ])
     (bind "${mod} + C" (exec "qs -c default ipc call quicksettings toggle") [ ])
 
     # Focus
