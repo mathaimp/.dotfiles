@@ -1,8 +1,6 @@
 { osConfig, ... }:
 {
   wayland.windowManager.niri.settings = {
-    spawn-at-startup = "noctalia";
-
     input = {
       keyboard = {
         xkb.layout = "us";

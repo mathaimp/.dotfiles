@@ -64,7 +64,7 @@ PanelWindow {
 
                     Icon {
                         anchors.centerIn: parent
-                        glyph: 0xEA37 // bluetooth
+                        glyph: Glyphs.bluetooth
                         color: Theme.accent
                     }
                 }

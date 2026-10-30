@@ -4,13 +4,6 @@
   ...
 }:
 let
-  noctalia = cmd: {
-    spawn = [
-      "noctalia"
-      "msg"
-    ]
-    ++ (lib.splitString " " cmd);
-  };
   swayosd = args: {
     _props.allow-when-locked = true;
     spawn = [ "swayosd-client" ] ++ args;
@@ -70,7 +63,13 @@ in
       "launcher"
       "toggle"
     ];
-    "Mod+V" = noctalia "panel-toggle clipboard";
+    # Clipboard history (clipse). Unlike Hyprland, no float rule is set for it here.
+    "Mod+V".spawn = [
+      "ghostty"
+      "--class=com.save.clipse"
+      "-e"
+      "clipse"
+    ];
     "Mod+C".spawn = [
       "qs"
       "-c"

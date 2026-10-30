@@ -65,10 +65,10 @@ PanelWindow {
             Widget {
                 wantsStatDetails: true
                 tooltipRows: SystemStats.tooltipRows("cpu")
-                spacing: 8
+                spacing: 5
 
                 SysStat {
-                    icon: 0xFA77 // brand-speedtest
+                    icon: Glyphs.speedometer
                     value: SystemStats.cpu
                     fraction: SystemStats.cpu / 100
                     label: Math.round(SystemStats.cpu) + "%"
@@ -76,7 +76,7 @@ PanelWindow {
                     critical: 90
                 }
                 SysStat {
-                    icon: 0xEC2C // flame
+                    icon: Glyphs.flame
                     value: SystemStats.temp
                     fraction: (SystemStats.temp - SystemStats.tempMin) / (SystemStats.tempMax - SystemStats.tempMin)
                     label: Math.round(SystemStats.temp) + "°C"
@@ -84,7 +84,7 @@ PanelWindow {
                     critical: 85
                 }
                 SysStat {
-                    icon: 0xEF8E // cpu
+                    icon: Glyphs.cpu
                     value: SystemStats.ramPct
                     fraction: SystemStats.ramPct / 100
                     label: SystemStats.ramUsedMib >= 1024
@@ -301,6 +301,7 @@ PanelWindow {
             Widget {
                 id: networkWidget
                 anchors.verticalCenter: parent.verticalCenter
+                padding: 8 // the neighbouring pills carry their own padding, so these need a bit more
                 tooltipRows: network.tooltipRows
 
                 Network {
@@ -311,6 +312,7 @@ PanelWindow {
             Widget {
                 visible: UPower.displayDevice.isLaptopBattery
                 anchors.verticalCenter: parent.verticalCenter
+                padding: 8
                 tooltipRows: battery.tooltipRows
 
                 Battery {
@@ -340,7 +342,7 @@ PanelWindow {
 
                 Icon {
                     anchors.centerIn: parent
-                    glyph: 0xEB20 // settings
+                    glyph: Glyphs.settings
                     color: parent.active ? Theme.bg : Theme.fg
                 }
 

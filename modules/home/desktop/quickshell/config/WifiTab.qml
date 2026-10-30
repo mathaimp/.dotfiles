@@ -83,7 +83,7 @@ ColumnLayout {
 
                 Icon {
                     anchors.centerIn: parent
-                    glyph: Networking.wifiEnabled ? 0xEB52 : 0xECFA // wifi / wifi-off
+                    glyph: Networking.wifiEnabled ? Glyphs.wifi : Glyphs.wifiOff
                 }
             }
 
@@ -110,7 +110,7 @@ ColumnLayout {
 
             IconButton {
                 visible: !!root.device && Networking.wifiEnabled
-                glyph: 0xEB0B // plus
+                glyph: Glyphs.plus
                 glyphSize: 14
                 implicitWidth: 28
                 implicitHeight: 28
@@ -233,11 +233,11 @@ ColumnLayout {
                         spacing: 8
 
                         Icon {
-                            glyph: row.signal >= 0.8 ? 0xEB52 // wifi
-                                : row.signal >= 0.6 ? 0xEBFC // wifi-3
-                                : row.signal >= 0.35 ? 0xEBA5 // wifi-2
-                                : row.signal >= 0.15 ? 0xEBA4 // wifi-1
-                                : 0xEBA3 // wifi-0
+                            glyph: row.signal >= 0.8 ? Glyphs.wifi
+                                : row.signal >= 0.6 ? Glyphs.wifi3
+                                : row.signal >= 0.35 ? Glyphs.wifi2
+                                : row.signal >= 0.15 ? Glyphs.wifi1
+                                : Glyphs.wifi0
                             color: row.modelData.connected ? Theme.accent : Theme.fg
                         }
 
@@ -270,13 +270,13 @@ ColumnLayout {
 
                         Icon {
                             visible: row.secured
-                            glyph: 0xEAE2 // lock
+                            glyph: Glyphs.lock
                             color: Qt.alpha(Theme.fg, 0.7)
                         }
 
                         IconButton {
                             visible: row.modelData.known
-                            glyph: 0xEB41 // trash
+                            glyph: Glyphs.trash
                             glyphSize: 14
                             implicitWidth: 28
                             implicitHeight: 28
@@ -327,7 +327,7 @@ ColumnLayout {
                                 anchors.right: parent.right
                                 anchors.verticalCenter: parent.verticalCenter
                                 anchors.rightMargin: 4
-                                glyph: root.askingReveal ? 0xECF0 : 0xEA9A // eye-off / eye
+                                glyph: root.askingReveal ? Glyphs.eyeOff : Glyphs.eye
                                 glyphSize: 14
                                 implicitWidth: 28
                                 implicitHeight: 26

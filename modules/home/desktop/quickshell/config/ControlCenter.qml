@@ -15,10 +15,11 @@ PanelWindow {
 
     readonly property bool isOpen: Panels.quickSettingsScreen === modelData
     readonly property var tabs: [
-        { id: "home", title: "Home", glyph: 0xEAC1 }, // home
-        { id: "audio", title: "Audio", glyph: 0xEB51 }, // volume
-        { id: "wifi", title: "Wi-Fi", glyph: 0xEB52 }, // wifi
-        { id: "bluetooth", title: "Bluetooth", glyph: 0xEA37 } // bluetooth
+        { id: "home", title: "Home", glyph: Glyphs.home },
+        { id: "audio", title: "Audio", glyph: Glyphs.volume },
+        { id: "notifications", title: "Notifications", glyph: Glyphs.bell },
+        { id: "wifi", title: "Wi-Fi", glyph: Glyphs.wifi },
+        { id: "bluetooth", title: "Bluetooth", glyph: Glyphs.bluetooth }
     ]
 
     visible: isOpen
@@ -112,7 +113,7 @@ PanelWindow {
                             color: Theme.fg
                         }
                         IconButton {
-                            glyph: 0xEB55 // x
+                            glyph: Glyphs.x
                             glyphSize: 14
                             implicitWidth: 28
                             implicitHeight: 28
@@ -126,6 +127,7 @@ PanelWindow {
                         Layout.fillWidth: true
                         Layout.fillHeight: true
                         sourceComponent: Panels.tab === "audio" ? audioTab
+                            : Panels.tab === "notifications" ? notificationsTab
                             : Panels.tab === "wifi" ? wifiTab
                             : Panels.tab === "bluetooth" ? bluetoothTab
                             : homeTab
@@ -140,6 +142,10 @@ PanelWindow {
             Component {
                 id: audioTab
                 AudioTab {}
+            }
+            Component {
+                id: notificationsTab
+                NotificationsTab {}
             }
             Component {
                 id: wifiTab

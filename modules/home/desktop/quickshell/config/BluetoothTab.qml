@@ -25,16 +25,16 @@ ColumnLayout {
 
     function glyphFor(icon) {
         if (icon.includes("headset") || icon.includes("headphone") || icon.includes("audio"))
-            return 0xEABD; // headphones
+            return Glyphs.headphones;
         if (icon.includes("keyboard"))
-            return 0xEBD6; // keyboard
+            return Glyphs.keyboard;
         if (icon.includes("mouse"))
-            return 0xEAF9; // mouse
+            return Glyphs.mouse;
         if (icon.includes("phone"))
-            return 0xEA8A; // device-mobile
+            return Glyphs.deviceMobile;
         if (icon.includes("gaming"))
-            return 0xF1D2; // device-gamepad-2
-        return 0xEA37; // bluetooth
+            return Glyphs.gamepad2;
+        return Glyphs.bluetooth;
     }
 
     spacing: 12
@@ -67,9 +67,9 @@ ColumnLayout {
 
                 Icon {
                     anchors.centerIn: parent
-                    glyph: !root.adapter?.enabled ? 0xECEB // bluetooth-off
-                        : root.devices.some(d => d.connected) ? 0xECEA // bluetooth-connected
-                        : 0xEA37 // bluetooth
+                    glyph: !root.adapter?.enabled ? Glyphs.bluetoothOff
+                        : root.devices.some(d => d.connected) ? Glyphs.bluetoothConnected
+                        : Glyphs.bluetooth
                 }
             }
 
@@ -212,7 +212,7 @@ ColumnLayout {
 
                     IconButton {
                         visible: row.modelData.paired
-                        glyph: 0xEB41 // trash
+                        glyph: Glyphs.trash
                         glyphSize: 14
                         implicitWidth: 28
                         implicitHeight: 28

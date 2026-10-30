@@ -56,7 +56,7 @@ Rectangle {
 
             IconButton {
                 id: menuButton
-                glyph: 0xEA94 // dots-vertical
+                glyph: Glyphs.dotsVertical
                 glyphSize: 13
                 implicitWidth: 24
                 implicitHeight: 24
@@ -140,8 +140,8 @@ Rectangle {
                         anchors.right: parent.right
                         anchors.rightMargin: 8
                         anchors.verticalCenter: parent.verticalCenter
-                        glyph: 0xEA5E // check
-                        font.pixelSize: 14
+                        glyph: Glyphs.check
+                        size: 14
                         color: Theme.accent
                     }
 

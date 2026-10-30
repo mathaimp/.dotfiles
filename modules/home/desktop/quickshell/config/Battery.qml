@@ -65,8 +65,8 @@ Item {
         return h > 0 ? `${h}h ${m}m` : `${m}m`;
     }
 
-    // Tabler x / bolt-filled / plug-filled, as in v4 (see Icon.qml)
-    readonly property int stateIcon: !ready ? 0xEB55 : charging ? 0x10021 : 0xF6B3
+    // x while unknown, otherwise a lightning bolt (charging, or plugged in but not charging)
+    readonly property int stateIcon: ready ? Glyphs.bolt : Glyphs.x
 
     // Toggles between percentage and bolt every 4s while charging.
     property bool showStateIcon: false
@@ -139,7 +139,7 @@ Item {
         opacity: !root.ready || (root.charging ? root.showStateIcon : root.pluggedIn) ? 1 : 0
         visible: opacity > 0
         glyph: root.stateIcon
-        font.pixelSize: 11
+        size: 11
         color: root.textColor
 
         Behavior on opacity {

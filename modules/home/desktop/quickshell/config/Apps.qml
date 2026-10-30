@@ -20,22 +20,22 @@ Singleton {
         });
     }
 
-    // Tab order and icons (Tabler codepoints) as in v4; Pinned and "all" come first.
+    // Tab order and icons as in v4; Pinned and "all" come first.
     readonly property var categoryOrder: ["AudioVideo", "Chat", "Development", "Education", "Game", "Graphics", "Network", "Office", "System", "WebBrowser", "Misc"]
     readonly property var categoryIcons: ({
-            all: 0xEBB6, // apps
-            Pinned: 0xEC9C, // pin
-            AudioVideo: 0xEAFC, // music
-            Chat: 0xEAED, // message-circle
-            Development: 0xEA77, // code
-            Education: 0xECF7, // school
-            Game: 0xEB63, // device-gamepad
-            Graphics: 0xEBB8, // brush
-            Network: 0xEB52, // wifi
-            Office: 0xEAA2, // file-text
-            System: 0xEA89, // device-desktop
-            WebBrowser: 0xEB54, // world
-            Misc: 0xEA95 // dots
+            all: Glyphs.apps,
+            Pinned: Glyphs.pin,
+            AudioVideo: Glyphs.music,
+            Chat: Glyphs.messageCircle,
+            Development: Glyphs.code,
+            Education: Glyphs.school,
+            Game: Glyphs.gamepad,
+            Graphics: Glyphs.brush,
+            Network: Glyphs.wifi,
+            Office: Glyphs.fileText,
+            System: Glyphs.deviceDesktop,
+            WebBrowser: Glyphs.world,
+            Misc: Glyphs.dots
         })
     readonly property var categoryNames: ({
             all: "All",

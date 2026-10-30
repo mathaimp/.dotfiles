@@ -124,7 +124,7 @@ Rectangle {
                 anchors.left: parent.left
                 anchors.leftMargin: 12
                 anchors.verticalCenter: parent.verticalCenter
-                glyph: 0xEB1C // search
+                glyph: Glyphs.search
                 color: Qt.alpha(Theme.fg, 0.6)
             }
 

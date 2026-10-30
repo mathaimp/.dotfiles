@@ -72,7 +72,7 @@ Rectangle {
         }
 
         IconButton {
-            glyph: root.muted ? 0xF1C3 : 0xEB51 // volume-off / volume
+            glyph: root.muted ? Glyphs.volumeOff : Glyphs.volume
             glyphSize: 14
             variant: root.muted ? "destructive" : "default"
             onClicked: root.node.audio.muted = !root.muted

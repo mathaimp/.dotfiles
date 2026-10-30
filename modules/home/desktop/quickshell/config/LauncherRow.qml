@@ -80,8 +80,8 @@ Rectangle {
 
             Icon {
                 anchors.centerIn: parent
-                glyph: root.pinned ? 0xF68D : 0xEC9C // pin-filled / pin
-                font.pixelSize: 15
+                glyph: root.pinned ? Glyphs.pinFilled : Glyphs.pin
+                size: 15
                 color: root.selected ? Theme.bg : Theme.accent
                 opacity: pinMouse.containsMouse || root.pinned ? 1 : 0.6
             }

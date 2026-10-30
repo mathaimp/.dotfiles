@@ -56,7 +56,7 @@ in
     # Screenshot
     (bind "PRINT" (exec "grimshot savecopy anything") [ ])
 
-    # Session / Noctalia
+    # Session
     (bind "${mod} + A" (exec "loginctl lock-session") [ ])
     (bind "${mod} + SHIFT + Q" (exec "wlogout -b 6") [ ])
     (bind "${mod} + SPACE" (exec "qs -c default ipc call launcher toggle") [ ])

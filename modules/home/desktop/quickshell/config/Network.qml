@@ -16,14 +16,14 @@ Item {
     readonly property var activeDevice: wiredDevice ?? (wifiNetwork ? wifiDevice : null)
     readonly property real signal: wifiNetwork?.signalStrength ?? 0 // 0..1
     // v5's glyphForState / wifiGlyphForSignal.
-    readonly property int glyph: wiredDevice ? 0xECCC // ethernet
-        : !Networking.wifiEnabled ? 0xECFA // wifi-off
-        : !wifiNetwork ? 0xEBFD // wifi-exclamation
-        : signal >= 0.8 ? 0xEB52 // wifi
-        : signal >= 0.6 ? 0xEBFC // wifi-3
-        : signal >= 0.35 ? 0xEBA5 // wifi-2
-        : signal >= 0.15 ? 0xEBA4 // wifi-1
-        : 0xEBA3 // wifi-0
+    readonly property int glyph: wiredDevice ? Glyphs.ethernet
+        : !Networking.wifiEnabled ? Glyphs.wifiOff
+        : !wifiNetwork ? Glyphs.wifiExclamation
+        : signal >= 0.8 ? Glyphs.wifi
+        : signal >= 0.6 ? Glyphs.wifi3
+        : signal >= 0.35 ? Glyphs.wifi2
+        : signal >= 0.15 ? Glyphs.wifi1
+        : Glyphs.wifi0
 
     property string ipv4: ""
     property string band: ""
@@ -82,8 +82,8 @@ Item {
             bandProc.running = true;
     }
 
-    implicitWidth: icon.implicitWidth
-    implicitHeight: icon.implicitHeight
+    implicitWidth: icon.width
+    implicitHeight: icon.height
 
     Icon {
         id: icon

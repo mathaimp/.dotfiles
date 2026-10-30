@@ -5,7 +5,7 @@ import QtQuick
 Row {
     id: root
 
-    required property int icon // Tabler code point (see Icon.qml)
+    required property int icon // a Glyphs.* code point (see Icon.qml)
     required property real value // in the same unit as the thresholds
     required property real fraction // meter fill, 0..1
     required property string label

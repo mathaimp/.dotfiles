@@ -30,8 +30,8 @@ ColumnLayout {
             title: "Output"
             node: Pipewire.defaultAudioSink
             devices: root.outputs
-            icon: 0xEB51 // volume
-            muteIcon: 0xF1C3 // volume-off
+            icon: Glyphs.volume
+            muteIcon: Glyphs.volumeOff
             onPicked: n => Pipewire.preferredDefaultAudioSink = n
         }
         DeviceCard {
@@ -40,8 +40,8 @@ ColumnLayout {
             title: "Input"
             node: Pipewire.defaultAudioSource
             devices: root.inputs
-            icon: 0xEAF0 // microphone
-            muteIcon: 0xED16 // microphone-off
+            icon: Glyphs.microphone
+            muteIcon: Glyphs.microphoneOff
             onPicked: n => Pipewire.preferredDefaultAudioSource = n
         }
     }

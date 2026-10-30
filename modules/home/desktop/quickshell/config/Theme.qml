@@ -16,10 +16,11 @@ Singleton {
     readonly property color critical: json.critical
     readonly property string font: json.font
     readonly property int fontSize: 14
-    // All bar glyphs share one size, as in v5 (baseGlyphSize = 16).
     readonly property string iconFont: iconLoader.name
+    // All bar glyphs share one size, as in v5 (baseGlyphSize = 16).
     readonly property int iconSize: 16
 
+    // The Lucide icon font; theme.json holds its path in the Nix store.
     FontLoader {
         id: iconLoader
         source: json.iconFont ? "file://" + json.iconFont : ""

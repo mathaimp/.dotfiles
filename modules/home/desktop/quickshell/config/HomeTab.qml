@@ -21,8 +21,8 @@ ColumnLayout {
     SliderCard {
         Layout.fillWidth: true
         visible: !!root.sink
-        icon: 0xEB51 // volume
-        muteIcon: 0xF1C3 // volume-off
+        icon: Glyphs.volume
+        muteIcon: Glyphs.volumeOff
         title: "Output"
         subtitle: root.sink?.description ?? ""
         value: root.sink?.audio?.volume ?? 0
@@ -35,8 +35,8 @@ ColumnLayout {
     SliderCard {
         Layout.fillWidth: true
         visible: !!root.source
-        icon: 0xEAF0 // microphone
-        muteIcon: 0xED16 // microphone-off
+        icon: Glyphs.microphone
+        muteIcon: Glyphs.microphoneOff
         title: "Microphone"
         subtitle: root.source?.description ?? ""
         value: root.source?.audio?.volume ?? 0
@@ -49,7 +49,7 @@ ColumnLayout {
     SliderCard {
         Layout.fillWidth: true
         visible: Brightness.any
-        icon: 0xFB24 // brightness-up-filled
+        icon: Glyphs.brightness
         title: "Brightness"
         subtitle: "All displays"
         value: Brightness.value

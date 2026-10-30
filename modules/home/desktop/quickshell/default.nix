@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ ... }:
 {
   flake.homeModules.quickshell =
     {
@@ -45,8 +45,8 @@
         warning = colors.base0A;
         critical = colors.base08;
         font = osConfig.stylix.fonts.sansSerif.name;
-        # Noctalia v5's Tabler-based icon font (has a few icons official Tabler lacks, e.g. wifi-3).
-        iconFont = "${inputs.noctalia}/assets/fonts/noctalia-tabler.ttf";
+        # Lucide icon font (see config/Glyphs.qml).
+        iconFont = "${pkgs.lucide}/share/fonts/truetype/Lucide.ttf";
       };
 
       # Render on the AMD iGPU via Mesa only; otherwise glvnd also loads the Nvidia EGL driver (~34 MB).

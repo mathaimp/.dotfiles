@@ -58,18 +58,6 @@
             }
           ];
 
-          on = [
-            {
-              _args = [
-                "hyprland.start"
-                (lib.generators.mkLuaInline ''
-                  function()
-                    hl.exec_cmd("noctalia")
-                  end'')
-              ];
-            }
-          ];
-
           env =
             lib.mapAttrsToList
               (name: value: {

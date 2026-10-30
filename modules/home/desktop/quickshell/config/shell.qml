@@ -18,6 +18,25 @@ ShellRoot {
         delegate: Launcher {}
     }
 
+    // Popup notifications (also instantiates the NotificationCenter daemon at startup).
+    Variants {
+        model: Quickshell.screens
+        delegate: NotificationPopups {}
+    }
+
+    // Keybind targets: `qs -c default ipc call notifications toggleDnd` / `clear`.
+    IpcHandler {
+        target: "notifications"
+
+        function toggleDnd(): void {
+            NotificationCenter.dnd = !NotificationCenter.dnd;
+        }
+
+        function clear(): void {
+            NotificationCenter.clear();
+        }
+    }
+
     // Keybind target: `qs -c default ipc call launcher toggle`.
     IpcHandler {
         target: "launcher"

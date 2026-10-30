@@ -58,8 +58,9 @@ Item {
         height: root.pillHeight
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
-        glyph: Caffeine.enabled ? 0xEAFB : 0xF165 // mug / mug-off
+        glyph: Glyphs.mug
         color: root.fgColor
+        opacity: Caffeine.enabled ? 1 : 0.5 // no "coffee-off" icon, so the off state is dimmed
     }
 
     MouseArea {

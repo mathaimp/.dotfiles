@@ -31,7 +31,7 @@ Rectangle {
     Icon {
         anchors.centerIn: parent
         glyph: root.glyph
-        font.pixelSize: root.glyphSize
+        size: root.glyphSize
         color: root.variant === "tabActive" || root.variant === "destructive" ? Theme.bg : Theme.fg
     }
 

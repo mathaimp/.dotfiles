@@ -106,7 +106,7 @@ Rectangle {
                 anchors.right: parent.right
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.rightMargin: 4
-                glyph: on ? 0xECF0 : 0xEA9A // eye-off / eye
+                glyph: on ? Glyphs.eyeOff : Glyphs.eye
                 glyphSize: 14
                 implicitWidth: 28
                 implicitHeight: 26
@@ -283,7 +283,7 @@ Rectangle {
                 spacing: 8
 
                 IconButton {
-                    glyph: 0xEA19 // arrow-left
+                    glyph: Glyphs.arrowLeft
                     glyphSize: 14
                     implicitWidth: 28
                     implicitHeight: 28
