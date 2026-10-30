@@ -1,6 +1,6 @@
 # Olympus NixOS Config
 
-A multi-host NixOS flake built on **flake-parts** + **import-tree**, covering a Hyprland laptop, a Raspberry Pi home server, and a VM testbed. Themes are handled with **Stylix** (Nord), secrets with **sops-nix**, and secure boot via **lanzaboote**.
+A multi-host NixOS flake built on **flake-parts** + **import-tree**, covering a Hyprland laptop, a Raspberry Pi home server, and a VM testbed. Themes are handled with **Stylix**, secrets with **sops-nix**, and secure boot via **lanzaboote**.
 
 ## Customising for your machine
 
@@ -14,6 +14,8 @@ Each host is just a folder under `modules/hosts/` (see `ares`, `hermes`, or `pro
 3. **Change the user details.** Defaults live in `modules/nixos/config/user.nix` (`name`, `fullName`, `email`) — change those, or override them per-host under `preferences.user`. The username flows into the `home-manager.users.<name>` mapping, so keep them consistent. (Search for the text `mathai` in the repo, and if you find it anywhere you probably have to replace it)
 4. **Update your git identity** in `modules/home/programs/git/.gitconfig` (name, email, signing key).
 5. **Pick your modules.** Each host's `default.nix` imports only the NixOS/home modules it needs — add or remove things like `nvidia`, `bluetooth`, `docker`, desktop environments, etc.
+
+Default apps are not hard-coded: the terminal and browser modules set `preferences.terminal` / `preferences.browser` (e.g. importing `homeModules.ghostty` sets the terminal to ghostty), and keybinds only exist for what is enabled. See `modules/home/desktop/preferences.nix`.
 
 ### Secrets (sops-nix)
 
@@ -36,6 +38,7 @@ To get a working build without sops, follow **`proteus`** — it sets `preferenc
 | OS | NixOS (nixos-unstable) |
 | Flake layout | flake-parts + import-tree |
 | WM | Hyprland (niri also wired up) |
+| Shell | Quickshell (QML bar, control center, launcher, notifications), colours from Stylix |
 | Theming | Stylix (Nord, dark) + Papirus icons |
 | Terminal | Ghostty (Kitty also wired up) |
 | Editor | Neovim ([separate repo](https://github.com/mathaimp/nvim), submodule) + Zed |
