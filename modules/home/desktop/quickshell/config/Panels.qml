@@ -3,15 +3,28 @@ import QtQuick
 import Quickshell
 import Quickshell.Hyprland
 
-// Which screen (if any) has the control center open, and which tab it shows.
+// Which screen (if any) has the control center or the launcher open, and which tab the control
+// center shows. Only one of the two is open at a time (both take exclusive keyboard focus).
 Singleton {
     id: root
 
     property var quickSettingsScreen: null
+    property var launcherScreen: null
     property string tab: "home" // remembered between opens
 
     function toggleQuickSettings(screen) {
+        launcherScreen = null;
         quickSettingsScreen = quickSettingsScreen === screen ? null : screen;
+    }
+
+    // Open (or close) the launcher on the focused monitor.
+    function toggleLauncher() {
+        if (launcherScreen) {
+            launcherScreen = null;
+        } else {
+            quickSettingsScreen = null;
+            launcherScreen = focusedScreen();
+        }
     }
 
     // The focused monitor (Hyprland), else the first screen.

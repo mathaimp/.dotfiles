@@ -61,7 +61,15 @@ in
     "Mod+A".spawn-sh = "loginctl lock-session";
     "Mod+Shift+Q".spawn-sh = "wlogout -b 6";
 
-    "Mod+Space" = noctalia "panel-toggle launcher";
+    "Mod+Space".spawn = [
+      "qs"
+      "-c"
+      "default"
+      "ipc"
+      "call"
+      "launcher"
+      "toggle"
+    ];
     "Mod+V" = noctalia "panel-toggle clipboard";
     "Mod+C".spawn = [
       "qs"
