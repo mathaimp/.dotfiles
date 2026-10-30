@@ -6,12 +6,12 @@
         enable = true;
 
         nssmdns4 = true;
-        publish = {
+        settings.publish = {
           # Needed for detecting the scanner
-          enable = true;
+          disable-publishing = false;
 
-          addresses = true;
-          userServices = true;
+          disable-user-service-publishing = false;
+          publish-addresses = true;
         };
       };
       printing = {

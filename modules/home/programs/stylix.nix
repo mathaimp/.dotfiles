@@ -27,6 +27,8 @@
           hyprlock.enable = false;
           neovim.enable = false;
           neovide.enable = false;
+          # Our rofi module does its own theming
+          rofi.enable = false;
           tmux.enable = false;
         };
       };
