@@ -6,6 +6,8 @@
     }:
     {
 
+      preferences.terminal = "kitty";
+
       home.sessionVariables = {
         TERMINAL = "kitty";
       };

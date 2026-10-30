@@ -75,8 +75,8 @@
               fail_color = "rgba(${stylixColors.base08-rgb-r}, ${stylixColors.base08-rgb-g}, ${stylixColors.base08-rgb-b}, 0.1)";
               fail_transition = 400;
               #font_family = "JetBrains Mono Nerd Font Mono";
-              placeholder_text = ''<span foreground="##cdd6f4">  $USER</span>'';
-              fail_text = ''<span foreground="##cdd6f4">$FAIL</span>'';
+              placeholder_text = ''<span foreground="##${stylixColors.base05}">  $USER</span>'';
+              fail_text = ''<span foreground="##${stylixColors.base05}">$FAIL</span>'';
               hide_input = false;
               position = "0%, -43.5%";
               halign = "center";

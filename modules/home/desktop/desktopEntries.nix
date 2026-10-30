@@ -2,32 +2,30 @@
   flake.homeModules.desktopEntries =
     {
       config,
+      lib,
       ...
     }:
     let
-      terminalChoice =
-        if config.programs.kitty.enable then
-          "kitty"
-        else if config.programs.ghostty.enable then
-          "ghostty"
-        else
-          "xterm"; # fallback
+      inherit (config.preferences) terminal;
     in
     {
       xdg = {
         enable = true;
         userDirs.enable = true;
-        desktopEntries."nvim" = {
-          name = "Neovim";
-          comment = "Edit text files";
-          exec = "${terminalChoice} -e nvim %F";
-          icon = "nvim";
-          terminal = false;
-          type = "Application";
-          categories = [
-            "Utility"
-            "TextEditor"
-          ];
+        # Needs a terminal to run in.
+        desktopEntries = lib.mkIf (terminal != null) {
+          "nvim" = {
+            name = "Neovim";
+            comment = "Edit text files";
+            exec = "${terminal} -e nvim %F";
+            icon = "nvim";
+            terminal = false;
+            type = "Application";
+            categories = [
+              "Utility"
+              "TextEditor"
+            ];
+          };
         };
       };
     };

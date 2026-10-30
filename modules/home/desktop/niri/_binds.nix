@@ -13,13 +13,10 @@ let
     _props.cooldown-ms = 150;
     ${action} = { };
   };
-  terminalChoice =
-    if config.programs.kitty.enable then
-      "kitty"
-    else if config.programs.ghostty.enable then
-      "ghostty"
-    else
-      "xterm"; # fallback
+  # What is enabled decides which binds exist (the default apps come from preferences.nix).
+  apps = config.preferences;
+  osd = config.services.swayosd.enable;
+  shell = config.programs.quickshell.enable;
 
   workspaceBinds = lib.mergeAttrsList (
     map (
@@ -35,12 +32,10 @@ let
   );
 in
 {
-  wayland.windowManager.niri.settings.binds = workspaceBinds // {
+  wayland.windowManager.niri.settings.binds =
+    workspaceBinds
+    // {
     "Mod+Shift+Slash".show-hotkey-overlay = { };
-
-    "Mod+Return".spawn = terminalChoice;
-    "Mod+F".spawn = "firefox";
-    "Mod+D".spawn = "nautilus";
 
     "Mod+Q".close-window = { };
     "Mod+Shift+R".spawn = [
@@ -52,34 +47,6 @@ in
     "Alt+Return".fullscreen-window = { };
 
     "Mod+A".spawn-sh = "loginctl lock-session";
-    "Mod+Shift+Q".spawn-sh = "wlogout -b 6";
-
-    "Mod+Space".spawn = [
-      "qs"
-      "-c"
-      "default"
-      "ipc"
-      "call"
-      "launcher"
-      "toggle"
-    ];
-    # Clipboard history (clipse). Unlike Hyprland, no float rule is set for it here.
-    "Mod+V".spawn = [
-      "ghostty"
-      "--class=com.save.clipse"
-      "-e"
-      "clipse"
-    ];
-    "Mod+C".spawn = [
-      "qs"
-      "-c"
-      "default"
-      "ipc"
-      "call"
-      "quicksettings"
-      "toggle"
-    ];
-
     "Mod+E".maximize-column = { };
 
     "Mod+H".focus-column-left = { };
@@ -111,6 +78,35 @@ in
     "Mod+Ctrl+WheelScrollDown" = wheel "move-column-to-workspace-up";
     "Mod+Ctrl+WheelScrollUp" = wheel "move-column-to-workspace-down";
 
+    "Ctrl+Alt+Delete".quit = { };
+    "Mod+Shift+P".power-off-monitors = { };
+  }
+  // lib.optionalAttrs (apps.terminal != null) {
+    "Mod+Return".spawn = apps.terminal;
+  }
+  // lib.optionalAttrs (apps.browser != null) {
+    "Mod+F".spawn = apps.browser;
+  }
+  // lib.optionalAttrs (apps.fileManager != null) {
+    "Mod+D".spawn = apps.fileManager;
+  }
+  // lib.optionalAttrs config.programs.wlogout.enable {
+    "Mod+Shift+Q".spawn-sh = "wlogout -b 6";
+  }
+  // lib.optionalAttrs shell {
+    "Mod+Space".spawn-sh = "qs -c default ipc call launcher toggle";
+    "Mod+C".spawn-sh = "qs -c default ipc call quicksettings toggle";
+  }
+  # Clipboard history (clipse). Unlike Hyprland, no float rule is set for it here.
+  // lib.optionalAttrs (config.services.clipse.enable && apps.terminal != null) {
+    "Mod+V".spawn = [
+      apps.terminal
+      "--class=com.save.clipse"
+      "-e"
+      "clipse"
+    ];
+  }
+  // lib.optionalAttrs osd {
     "XF86AudioPlay" = swayosd [
       "--playerctl"
       "play-pause"
@@ -148,14 +144,11 @@ in
     # swayosd-client moves the built-in panel; the shell moves external monitors by the same step.
     "XF86MonBrightnessUp" = {
       _props.allow-when-locked = true;
-      spawn-sh = "swayosd-client --brightness +5; qs -c default ipc call brightness stepExternal 0.05";
+      spawn-sh = "swayosd-client --brightness +5" + lib.optionalString shell "; qs -c default ipc call brightness stepExternal 0.05";
     };
     "XF86MonBrightnessDown" = {
       _props.allow-when-locked = true;
-      spawn-sh = "swayosd-client --brightness -5; qs -c default ipc call brightness stepExternal -0.05";
+      spawn-sh = "swayosd-client --brightness -5" + lib.optionalString shell "; qs -c default ipc call brightness stepExternal -0.05";
     };
-
-    "Ctrl+Alt+Delete".quit = { };
-    "Mod+Shift+P".power-off-monitors = { };
   };
 }

@@ -1,5 +1,7 @@
 {
   flake.homeModules.ghostty = {
+    preferences.terminal = "ghostty";
+
     home.sessionVariables = {
       TERMINAL = "ghostty";
     };

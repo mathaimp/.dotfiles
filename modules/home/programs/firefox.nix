@@ -16,6 +16,8 @@
       };
     in
     {
+      preferences.browser = "firefox";
+
       home.sessionVariables = {
         BROWSER = "firefox";
       };

@@ -2,7 +2,6 @@
 {
   flake.homeModules.quickshell =
     {
-      config,
       osConfig,
       pkgs,
       ...
@@ -27,8 +26,7 @@
 
       programs.quickshell = {
         enable = true;
-        # Symlink straight to the repo so QML edits live-reload without a rebuild.
-        configs.default = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/modules/home/desktop/quickshell/config";
+        configs.default = ./config;
         activeConfig = "default";
         systemd.enable = true;
       };

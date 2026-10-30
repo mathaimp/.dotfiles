@@ -1,6 +1,7 @@
 {
   flake.homeModules.hyprland =
     {
+      config,
       lib,
       osConfig,
       pkgs,
@@ -22,17 +23,6 @@
       ];
       services = {
         playerctld.enable = true;
-        # Clipboard history daemon; Mod+V opens the clipse TUI (history is plaintext, so keep passwords in Bitwarden).
-        clipse = {
-          enable = true;
-          # Ghostty speaks the kitty graphics protocol; the default "basic" mode shows nothing useful there.
-          settings.imageDisplay = {
-            type = "kitty";
-            scaleX = 9;
-            scaleY = 9;
-            heightCut = 2;
-          };
-        };
         hyprpaper = {
           enable = true;
           settings = {
@@ -48,15 +38,13 @@
         configType = "lua";
         settings = {
           # The clipse popup (Mod+V runs the terminal with this class).
-          window_rule = [
-            {
-              name = "clipse";
-              match.class = "com.save.clipse";
-              float = true;
-              size = "622 652";
-              stay_focused = true;
-            }
-          ];
+          window_rule = lib.optional config.services.clipse.enable {
+            name = "clipse";
+            match.class = "com.save.clipse";
+            float = true;
+            size = "622 652";
+            stay_focused = true;
+          };
 
           env =
             lib.mapAttrsToList

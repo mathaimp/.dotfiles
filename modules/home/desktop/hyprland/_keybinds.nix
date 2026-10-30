@@ -3,13 +3,10 @@ let
   inherit (lib.generators) mkLuaInline toLua;
 
   mod = "SUPER";
-  terminalChoice =
-    if config.programs.kitty.enable then
-      "kitty"
-    else if config.programs.ghostty.enable then
-      "ghostty"
-    else
-      "xterm";
+  # What is enabled decides which binds exist (the default apps come from preferences.nix).
+  apps = config.preferences;
+  osd = config.services.swayosd.enable;
+  shell = config.programs.quickshell.enable;
 
   # bind "KEY" "<hl.dsp expression>" [ { locked = true; } ] -> hl.bind("KEY", <expr>, { ... })
   bind = key: dsp: opts: {
@@ -42,11 +39,6 @@ let
 in
 {
   wayland.windowManager.hyprland.settings.bind = [
-    # Apps
-    (bind "${mod} + RETURN" (exec terminalChoice) [ ])
-    (bind "${mod} + F" (exec "firefox") [ ])
-    (bind "${mod} + D" (exec "nautilus") [ ])
-
     # Window control
     (bind "${mod} + Q" "hl.dsp.window.close()" [ ])
     (bind "${mod} + E" ''hl.dsp.window.fullscreen({ action = "toggle", mode = "maximized" })'' [ ])
@@ -58,11 +50,6 @@ in
 
     # Session
     (bind "${mod} + A" (exec "loginctl lock-session") [ ])
-    (bind "${mod} + SHIFT + Q" (exec "wlogout -b 6") [ ])
-    (bind "${mod} + SPACE" (exec "qs -c default ipc call launcher toggle") [ ])
-    # Clipboard history: clipse in a floating terminal (see the window_rule in default.nix).
-    (bind "${mod} + V" (exec "${terminalChoice} --class=com.save.clipse -e clipse") [ ])
-    (bind "${mod} + C" (exec "qs -c default ipc call quicksettings toggle") [ ])
 
     # Focus
     (bind "${mod} + H" ''hl.dsp.focus({ direction = "left" })'' [ ])
@@ -83,7 +70,28 @@ in
     # Mouse
     (bind "${mod} + mouse:272" "hl.dsp.window.drag()" [ { mouse = true; } ])
     (bind "${mod} + mouse:273" "hl.dsp.window.resize()" [ { mouse = true; } ])
-
+  ]
+  ++ lib.optionals (apps.terminal != null) [
+    (bind "${mod} + RETURN" (exec apps.terminal) [ ])
+  ]
+  ++ lib.optionals (apps.browser != null) [
+    (bind "${mod} + F" (exec apps.browser) [ ])
+  ]
+  ++ lib.optionals (apps.fileManager != null) [
+    (bind "${mod} + D" (exec apps.fileManager) [ ])
+  ]
+  ++ lib.optionals config.programs.wlogout.enable [
+    (bind "${mod} + SHIFT + Q" (exec "wlogout -b 6") [ ])
+  ]
+  ++ lib.optionals shell [
+    (bind "${mod} + SPACE" (exec "qs -c default ipc call launcher toggle") [ ])
+    (bind "${mod} + C" (exec "qs -c default ipc call quicksettings toggle") [ ])
+  ]
+  # Clipboard history: clipse in a floating terminal (see the window_rule in default.nix).
+  ++ lib.optionals (config.services.clipse.enable && apps.terminal != null) [
+    (bind "${mod} + V" (exec "${apps.terminal} --class=com.save.clipse -e clipse") [ ])
+  ]
+  ++ lib.optionals osd [
     # Media
     (bind "XF86AudioPlay" (exec "swayosd-client --playerctl play-pause") locked)
     (bind "XF86AudioPrev" (exec "swayosd-client --playerctl previous") locked)
@@ -93,9 +101,9 @@ in
     (bind "XF86AudioRaiseVolume" (exec "swayosd-client --output-volume raise") lockedRepeat)
     (bind "XF86AudioLowerVolume" (exec "swayosd-client --output-volume lower") lockedRepeat)
 
-    # Brightness
-    (bind "XF86MonBrightnessUp" (exec "swayosd-client --brightness raise; qs -c default ipc call brightness stepExternal 0.05") lockedRepeat)
-    (bind "XF86MonBrightnessDown" (exec "swayosd-client --brightness lower; qs -c default ipc call brightness stepExternal -0.05") lockedRepeat)
+    # Brightness: swayosd moves the built-in panel and shows the OSD; the shell moves external monitors the same step.
+    (bind "XF86MonBrightnessUp" (exec ("swayosd-client --brightness raise" + lib.optionalString shell "; qs -c default ipc call brightness stepExternal 0.05")) lockedRepeat)
+    (bind "XF86MonBrightnessDown" (exec ("swayosd-client --brightness lower" + lib.optionalString shell "; qs -c default ipc call brightness stepExternal -0.05")) lockedRepeat)
   ]
   ++ workspaceBinds;
 }
