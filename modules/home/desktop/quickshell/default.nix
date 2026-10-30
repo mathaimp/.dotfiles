@@ -11,8 +11,19 @@
       colors = osConfig.lib.stylix.colors.withHashtag;
     in
     {
-      # External monitor brightness over DDC/CI (config/Brightness.qml).
-      home.packages = [ pkgs.ddcutil ];
+      home.packages = [
+        # External monitor brightness over DDC/CI (config/Brightness.qml).
+        pkgs.ddcutil
+        # BlueZ pairing agent, driven by config/BluetoothAgent.qml over stdio.
+        (pkgs.writers.writePython3Bin "qs-bt-agent" {
+          libraries = [ pkgs.python3Packages.dbus-fast ];
+          flakeIgnore = [
+            "E501"
+            "F722" # dbus-fast type signatures look like bad annotations
+            "F821"
+          ];
+        } (builtins.readFile ./bt-agent.py))
+      ];
 
       programs.quickshell = {
         enable = true;

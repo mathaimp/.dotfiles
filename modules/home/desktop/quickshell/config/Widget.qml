@@ -14,7 +14,11 @@ Item {
 
     onTooltipOpenChanged: if (wantsStatDetails) SystemStats.detailUsers += tooltipOpen ? 1 : -1
 
-    implicitWidth: holder.implicitWidth + 8
+    // Total horizontal padding. Noctalia v5 uses widgetSpacing = 6 between widgets and none inside,
+    // so this is the whole gap: the bar rows use spacing 0.
+    property int padding: 6
+
+    implicitWidth: holder.implicitWidth + padding
     implicitHeight: 27
 
     Rectangle {

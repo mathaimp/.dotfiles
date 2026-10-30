@@ -14,10 +14,14 @@ Singleton {
         quickSettingsScreen = quickSettingsScreen === screen ? null : screen;
     }
 
-    // For the keybind: open on the focused monitor (Hyprland), else the first screen.
-    function toggleQuickSettingsOnFocused() {
+    // The focused monitor (Hyprland), else the first screen.
+    function focusedScreen() {
         const focused = Quickshell.env("HYPRLAND_INSTANCE_SIGNATURE") !== null ? Hyprland.focusedMonitor?.name : null;
-        const screen = Quickshell.screens.find(s => s.name === focused) ?? Quickshell.screens[0];
-        toggleQuickSettings(quickSettingsScreen ? quickSettingsScreen : screen);
+        return Quickshell.screens.find(s => s.name === focused) ?? Quickshell.screens[0];
+    }
+
+    // For the keybind: open on the focused monitor.
+    function toggleQuickSettingsOnFocused() {
+        toggleQuickSettings(quickSettingsScreen ? quickSettingsScreen : focusedScreen());
     }
 }

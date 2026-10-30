@@ -16,7 +16,9 @@ PanelWindow {
     readonly property bool isOpen: Panels.quickSettingsScreen === modelData
     readonly property var tabs: [
         { id: "home", title: "Home", glyph: 0xEAC1 }, // home
-        { id: "audio", title: "Audio", glyph: 0xEB51 } // volume
+        { id: "audio", title: "Audio", glyph: 0xEB51 }, // volume
+        { id: "wifi", title: "Wi-Fi", glyph: 0xEB52 }, // wifi
+        { id: "bluetooth", title: "Bluetooth", glyph: 0xEA37 } // bluetooth
     ]
 
     visible: isOpen
@@ -123,7 +125,10 @@ PanelWindow {
                     Loader {
                         Layout.fillWidth: true
                         Layout.fillHeight: true
-                        sourceComponent: Panels.tab === "audio" ? audioTab : homeTab
+                        sourceComponent: Panels.tab === "audio" ? audioTab
+                            : Panels.tab === "wifi" ? wifiTab
+                            : Panels.tab === "bluetooth" ? bluetoothTab
+                            : homeTab
                     }
                 }
             }
@@ -135,6 +140,14 @@ PanelWindow {
             Component {
                 id: audioTab
                 AudioTab {}
+            }
+            Component {
+                id: wifiTab
+                WifiTab {}
+            }
+            Component {
+                id: bluetoothTab
+                BluetoothTab {}
             }
         }
     }

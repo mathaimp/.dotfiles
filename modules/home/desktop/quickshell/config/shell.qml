@@ -13,6 +13,12 @@ ShellRoot {
         delegate: ControlCenter {}
     }
 
+    // Bluetooth pairing prompts (also instantiates the BluetoothAgent singleton at startup).
+    Variants {
+        model: Quickshell.screens
+        delegate: PairingDialog {}
+    }
+
     // Keybind targets: `qs -c default ipc call quicksettings toggle`,
     // `qs -c default ipc call quicksettings openTab audio` (opens on that tab).
     IpcHandler {

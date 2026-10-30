@@ -292,7 +292,8 @@ PanelWindow {
             anchors.right: parent.right
             anchors.rightMargin: 12
             anchors.verticalCenter: parent.verticalCenter
-            spacing: 6
+            // Widgets carry their own padding (Widget.qml), so no extra spacing here.
+            spacing: 0
 
             KeepAwake {
                 anchors.verticalCenter: parent.verticalCenter
