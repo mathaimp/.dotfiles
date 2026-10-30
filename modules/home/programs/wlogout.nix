@@ -26,7 +26,7 @@
           }
           {
             label = "logout";
-            action = "loginctl terminate-session '$XDG_SESSION_ID'";
+            action = "loginctl terminate-session \"$XDG_SESSION_ID\"";
             text = "Logout";
             keybind = "e";
           }
