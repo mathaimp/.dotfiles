@@ -102,8 +102,14 @@ in
     (bind "XF86AudioLowerVolume" (exec "swayosd-client --output-volume lower") lockedRepeat)
 
     # Brightness: swayosd moves the built-in panel and shows the OSD; the shell moves external monitors the same step.
-    (bind "XF86MonBrightnessUp" (exec ("swayosd-client --brightness raise" + lib.optionalString shell "; qs -c default ipc call brightness stepExternal 0.05")) lockedRepeat)
-    (bind "XF86MonBrightnessDown" (exec ("swayosd-client --brightness lower" + lib.optionalString shell "; qs -c default ipc call brightness stepExternal -0.05")) lockedRepeat)
+    (bind "XF86MonBrightnessUp" (exec (
+      "swayosd-client --brightness raise"
+      + lib.optionalString shell "; qs -c default ipc call brightness stepExternal 0.05"
+    )) lockedRepeat)
+    (bind "XF86MonBrightnessDown" (exec (
+      "swayosd-client --brightness lower"
+      + lib.optionalString shell "; qs -c default ipc call brightness stepExternal -0.05"
+    )) lockedRepeat)
   ]
   ++ workspaceBinds;
 }

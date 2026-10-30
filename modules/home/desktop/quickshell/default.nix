@@ -1,5 +1,4 @@
-{ ... }:
-{
+_: {
   flake.homeModules.quickshell =
     {
       osConfig,

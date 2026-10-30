@@ -13,7 +13,8 @@
         else
           "true"; # no known compositor: nothing to switch
       # Prefer hyprlock when it is set up; otherwise leave locking to whatever handles the session lock.
-      lock = if config.programs.hyprlock.enable then "pidof hyprlock || hyprlock" else "loginctl lock-session";
+      lock =
+        if config.programs.hyprlock.enable then "pidof hyprlock || hyprlock" else "loginctl lock-session";
     in
     {
       services.hypridle = {

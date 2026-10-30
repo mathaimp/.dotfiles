@@ -15,9 +15,11 @@
     in
     {
       options.preferences = {
+        terminal = command "Command for the default terminal." null;
+        browser = command "Command for the default web browser." null;
         # The file managers are installed by NixOS modules (nautilus.nix, thunar.nix).
         fileManager = command "Command for the default file manager." (
-          if osConfig.programs.nautilus-open-ank-terminal.enable then
+          if osConfig.programs.nautilus-open-any-terminal.enable then
             "nautilus"
           else if osConfig.programs.thunar.enable then
             "thunar"
