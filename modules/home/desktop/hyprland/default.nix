@@ -1,6 +1,7 @@
 {
   flake.homeModules.hyprland =
     {
+      lib,
       osConfig,
       pkgs,
       ...
@@ -34,60 +35,102 @@
         enable = true;
         xwayland.enable = true;
         configType = "lua";
-        extraConfig = ''
-          hl.on("hyprland.start", function()
-            hl.exec_cmd("noctalia")
-          end)
+        settings = {
+          on = [
+            {
+              _args = [
+                "hyprland.start"
+                (lib.generators.mkLuaInline ''
+                  function()
+                    hl.exec_cmd("noctalia")
+                  end'')
+              ];
+            }
+          ];
 
-          hl.env("XDG_CURRENT_DESKTOP", "Hyprland")
-          hl.env("XDG_SESSION_TYPE",    "wayland")
-          hl.env("XDG_SESSION_DESKTOP", "Hyprland")
-          hl.env("NIXOS_OZONE_WL",      "1")
+          env =
+            lib.mapAttrsToList
+              (name: value: {
+                _args = [
+                  name
+                  value
+                ];
+              })
+              {
+                XDG_CURRENT_DESKTOP = "Hyprland";
+                XDG_SESSION_TYPE = "wayland";
+                XDG_SESSION_DESKTOP = "Hyprland";
+                NIXOS_OZONE_WL = "1";
+              };
 
-          hl.workspace_rule({ workspace = "1", persistent = true })
-          hl.workspace_rule({ workspace = "2", persistent = true })
-          hl.workspace_rule({ workspace = "3", persistent = true })
-          hl.workspace_rule({ workspace = "4", persistent = true })
-          hl.workspace_rule({ workspace = "5", persistent = true })
+          workspace_rule = map (ws: {
+            workspace = toString ws;
+            persistent = true;
+          }) (lib.range 1 5);
 
-          hl.config({
+          config = {
             input = {
-              numlock_by_default = true,
-              kb_options = "ctrl:nocaps",
-            },
+              numlock_by_default = true;
+              kb_options = "ctrl:nocaps";
+            };
             general = {
-              gaps_out = 6,
-              gaps_in = 3,
-              border_size = 2,
-              col = {
-                active_border   = "rgb(${stylixColors.base03})",
-                inactive_border = "rgb(${stylixColors.base02})",
-              },
-            },
-            cursor = {
-                no_hardware_cursors = true,
-            },
+              gaps_out = 6;
+              gaps_in = 3;
+              border_size = 2;
+              # Override only Stylix's border colours; keep the rest of its theme.
+              "col.active_border" = lib.mkForce "rgb(${stylixColors.base03})";
+              "col.inactive_border" = lib.mkForce "rgb(${stylixColors.base02})";
+            };
+            cursor.no_hardware_cursors = true;
             decoration = {
-              rounding = 10,
-              blur = {
-                enabled = true,
-              },
-            },
+              rounding = 10;
+              blur.enabled = true;
+            };
             misc = {
-              disable_hyprland_logo    = true,
-              disable_splash_rendering = true,
-              mouse_move_enables_dpms  = true,
-              key_press_enables_dpms   = true,
-            },
-          })
+              disable_hyprland_logo = true;
+              disable_splash_rendering = true;
+              mouse_move_enables_dpms = true;
+              key_press_enables_dpms = true;
+            };
+          };
 
-          hl.animation({ leaf = "windows",    enabled = true, speed = 4, bezier = "default" })
-          hl.animation({ leaf = "windowsOut", enabled = true, speed = 4, bezier = "default" })
-          hl.animation({ leaf = "border",     enabled = true, speed = 2, bezier = "default" })
-          hl.animation({ leaf = "fade",       enabled = true, speed = 2, bezier = "default" })
-          hl.animation({ leaf = "fadeDim",    enabled = true, speed = 2, bezier = "default" })
-          hl.animation({ leaf = "workspaces", enabled = true, speed = 3, bezier = "default" })
-        '';
+          animation =
+            map
+              (
+                { leaf, speed }:
+                {
+                  inherit leaf speed;
+                  enabled = true;
+                  bezier = "default";
+                }
+              )
+              [
+                {
+                  leaf = "windows";
+                  speed = 4;
+                }
+                {
+                  leaf = "windowsOut";
+                  speed = 4;
+                }
+                {
+                  leaf = "border";
+                  speed = 2;
+                }
+                {
+                  leaf = "fade";
+                  speed = 2;
+                }
+                {
+                  leaf = "fadeDim";
+                  speed = 2;
+                }
+                {
+                  leaf = "workspaces";
+                  speed = 3;
+                }
+              ];
+        };
       };
     };
 }

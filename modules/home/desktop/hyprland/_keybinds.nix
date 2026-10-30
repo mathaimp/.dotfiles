@@ -1,5 +1,8 @@
 { lib, config, ... }:
 let
+  inherit (lib.generators) mkLuaInline toLua;
+
+  mod = "SUPER";
   terminalChoice =
     if config.programs.kitty.enable then
       "kitty"
@@ -8,93 +11,89 @@ let
     else
       "xterm";
 
-  workspaceBinds = lib.concatMapStrings (
-    x:
+  # bind "KEY" "<hl.dsp expression>" [ { locked = true; } ] -> hl.bind("KEY", <expr>, { ... })
+  bind = key: dsp: opts: {
+    _args = [
+      key
+      (mkLuaInline dsp)
+    ]
+    ++ opts;
+  };
+  exec = cmd: "hl.dsp.exec_cmd(${toLua { } cmd})";
+  # Media/brightness keys keep working on the lock screen.
+  locked = [ { locked = true; } ];
+  lockedRepeat = [
+    {
+      locked = true;
+      repeating = true;
+    }
+  ];
+
+  workspaceBinds = lib.concatMap (
+    ws:
     let
-      ws = toString (x + 1);
-      key = toString (if x + 1 == 10 then 0 else x + 1);
+      key = toString (if ws == 10 then 0 else ws);
     in
-    ''
-      hl.bind("SUPER + ${key}", hl.dsp.focus({ workspace = ${ws} }))
-      hl.bind("SUPER + SHIFT + ${key}", hl.dsp.window.move({ workspace = ${ws} }))
-    ''
-  ) (lib.range 0 9);
+    [
+      (bind "${mod} + ${key}" "hl.dsp.focus({ workspace = ${toString ws} })" [ ])
+      (bind "${mod} + SHIFT + ${key}" "hl.dsp.window.move({ workspace = ${toString ws} })" [ ])
+    ]
+  ) (lib.range 1 10);
 in
 {
-  wayland.windowManager.hyprland.extraConfig = ''
-        local mainMod = "SUPER"
+  wayland.windowManager.hyprland.settings.bind = [
+    # Apps
+    (bind "${mod} + RETURN" (exec terminalChoice) [ ])
+    (bind "${mod} + F" (exec "firefox") [ ])
+    (bind "${mod} + D" (exec "nautilus") [ ])
 
-        -- Apps
-        hl.bind(mainMod .. " + RETURN", hl.dsp.exec_cmd("${terminalChoice}"))
-        hl.bind(mainMod .. " + F",      hl.dsp.exec_cmd("firefox"))
-        hl.bind(mainMod .. " + D",      hl.dsp.exec_cmd("nautilus"))
+    # Window control
+    (bind "${mod} + Q" "hl.dsp.window.close()" [ ])
+    (bind "${mod} + E" ''hl.dsp.window.fullscreen({ action = "toggle", mode = "maximized" })'' [ ])
+    (bind "${mod} + T" ''hl.dsp.window.float({ action = "toggle" })'' [ ])
+    (bind "${mod} + SHIFT + R" (exec "hyprctl reload") [ ])
 
-        -- Window control
-        hl.bind(mainMod .. " + Q",         hl.dsp.window.close())
-        hl.bind(mainMod .. " + E",         hl.dsp.window.fullscreen({action = "toggle", mode = "maximized"}))
-        hl.bind(mainMod .. " + T",         hl.dsp.window.float({ action = "toggle" }))
-        hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("hyprctl reload"))
+    # Screenshot
+    (bind "PRINT" (exec "grimshot savecopy anything") [ ])
 
-        -- Screenshot
-        hl.bind("PRINT", hl.dsp.exec_cmd("grimshot savecopy anything"))
+    # Session / Noctalia
+    (bind "${mod} + A" (exec "loginctl lock-session") [ ])
+    (bind "${mod} + SHIFT + Q" (exec "wlogout -b 6") [ ])
+    (bind "${mod} + SPACE" (exec "noctalia msg panel-toggle launcher") [ ])
+    (bind "${mod} + V" (exec "noctalia msg panel-toggle clipboard") [ ])
 
-        -- Noctalia
-        hl.bind(mainMod .. " + A",         hl.dsp.exec_cmd("loginctl lock-session"))
-        hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exec_cmd("wlogout -b 6"))
-        hl.bind(mainMod .. " + SPACE",     hl.dsp.exec_cmd("noctalia msg panel-toggle launcher"))
-        hl.bind(mainMod .. " + V",         hl.dsp.exec_cmd("noctalia msg panel-toggle clipboard"))
+    # Focus
+    (bind "${mod} + H" ''hl.dsp.focus({ direction = "left" })'' [ ])
+    (bind "${mod} + J" ''hl.dsp.focus({ direction = "down" })'' [ ])
+    (bind "${mod} + K" ''hl.dsp.focus({ direction = "up" })'' [ ])
+    (bind "${mod} + L" ''hl.dsp.focus({ direction = "right" })'' [ ])
 
-        -- Focus
-        hl.bind(mainMod .. " + H", hl.dsp.focus({ direction = "left" }))
-        hl.bind(mainMod .. " + J", hl.dsp.focus({ direction = "down" }))
-        hl.bind(mainMod .. " + K", hl.dsp.focus({ direction = "up" }))
-        hl.bind(mainMod .. " + L", hl.dsp.focus({ direction = "right" }))
+    # Move window
+    (bind "${mod} + SHIFT + H" ''hl.dsp.window.move({ direction = "left" })'' [ ])
+    (bind "${mod} + SHIFT + J" ''hl.dsp.window.move({ direction = "down" })'' [ ])
+    (bind "${mod} + SHIFT + K" ''hl.dsp.window.move({ direction = "up" })'' [ ])
+    (bind "${mod} + SHIFT + L" ''hl.dsp.window.move({ direction = "right" })'' [ ])
 
-        -- Move window
-        hl.bind(mainMod .. " + SHIFT + H", hl.dsp.window.move({ direction = "left" }))
-        hl.bind(mainMod .. " + SHIFT + J", hl.dsp.window.move({ direction = "down" }))
-        hl.bind(mainMod .. " + SHIFT + K", hl.dsp.window.move({ direction = "up" }))
-        hl.bind(mainMod .. " + SHIFT + L", hl.dsp.window.move({ direction = "right" }))
+    # Scratchpad
+    (bind "${mod} + S" ''hl.dsp.workspace.toggle_special("magic")'' [ ])
+    (bind "${mod} + SHIFT + S" ''hl.dsp.window.move({ workspace = "special:magic" })'' [ ])
 
-        -- Scratchpad
-        hl.bind(mainMod .. " + S",         hl.dsp.workspace.toggle_special("magic"))
-        hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" }))
+    # Mouse
+    (bind "${mod} + mouse:272" "hl.dsp.window.drag()" [ { mouse = true; } ])
+    (bind "${mod} + mouse:273" "hl.dsp.window.resize()" [ { mouse = true; } ])
 
-        -- Workspaces
-        ${workspaceBinds}
+    # Media
+    (bind "XF86AudioPlay" (exec "swayosd-client --playerctl play-pause") locked)
+    (bind "XF86AudioPrev" (exec "swayosd-client --playerctl previous") locked)
+    (bind "XF86AudioNext" (exec "swayosd-client --playerctl next") locked)
+    (bind "XF86AudioMute" (exec "swayosd-client --output-volume mute-toggle") locked)
+    (bind "XF86AudioMicMute" (exec "swayosd-client --input-volume mute-toggle") locked)
+    (bind "XF86AudioRaiseVolume" (exec "swayosd-client --output-volume raise") lockedRepeat)
+    (bind "XF86AudioLowerVolume" (exec "swayosd-client --output-volume lower") lockedRepeat)
 
-        -- Mouse
-        hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })
-        hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
-
-    -- Media
-    hl.bind("XF86AudioPlay",    hl.dsp.exec_cmd("swayosd-client --playerctl play-pause"), { locked = true })
-    hl.bind("XF86AudioPrev",    hl.dsp.exec_cmd("swayosd-client --playerctl previous"),   { locked = true })
-    hl.bind("XF86AudioNext",    hl.dsp.exec_cmd("swayosd-client --playerctl next"),       { locked = true })
-
-    hl.bind("XF86AudioMute",
-        hl.dsp.exec_cmd("swayosd-client --output-volume mute-toggle"),
-        { locked = true })
-
-    hl.bind("XF86AudioMicMute",
-        hl.dsp.exec_cmd("swayosd-client --input-volume mute-toggle"),
-        { locked = true })
-
-    hl.bind("XF86AudioRaiseVolume",
-        hl.dsp.exec_cmd("swayosd-client --output-volume raise"),
-        { locked = true, repeating = true })
-
-    hl.bind("XF86AudioLowerVolume",
-        hl.dsp.exec_cmd("swayosd-client --output-volume lower"),
-        { locked = true, repeating = true })
-
-    -- Brightness
-    hl.bind("XF86MonBrightnessUp",
-        hl.dsp.exec_cmd("swayosd-client --brightness raise"),
-        { locked = true, repeating = true })
-
-    hl.bind("XF86MonBrightnessDown",
-        hl.dsp.exec_cmd("swayosd-client --brightness lower"),
-        { locked = true, repeating = true })
-  '';
+    # Brightness
+    (bind "XF86MonBrightnessUp" (exec "swayosd-client --brightness raise") lockedRepeat)
+    (bind "XF86MonBrightnessDown" (exec "swayosd-client --brightness lower") lockedRepeat)
+  ]
+  ++ workspaceBinds;
 }

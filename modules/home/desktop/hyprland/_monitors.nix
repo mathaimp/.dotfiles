@@ -1,3 +1,12 @@
+{ lib, ... }:
+let
+  workspacesOn =
+    monitor: range:
+    map (ws: {
+      workspace = toString ws;
+      inherit monitor;
+    }) range;
+in
 {
   wayland.windowManager.hyprland.settings = {
     monitor = [
@@ -15,48 +24,6 @@
       }
     ];
 
-    workspace_rule = [
-      {
-        workspace = "1";
-        monitor = "eDP-1";
-      }
-      {
-        workspace = "3";
-        monitor = "eDP-1";
-      }
-      {
-        workspace = "5";
-        monitor = "eDP-1";
-      }
-      {
-        workspace = "7";
-        monitor = "eDP-1";
-      }
-      {
-        workspace = "9";
-        monitor = "eDP-1";
-      }
-
-      {
-        workspace = "2";
-        monitor = "HDMI-A-1";
-      }
-      {
-        workspace = "4";
-        monitor = "HDMI-A-1";
-      }
-      {
-        workspace = "6";
-        monitor = "HDMI-A-1";
-      }
-      {
-        workspace = "8";
-        monitor = "HDMI-A-1";
-      }
-      {
-        workspace = "10";
-        monitor = "HDMI-A-1";
-      }
-    ];
+    workspace_rule = workspacesOn "eDP-1" (lib.range 1 5) ++ workspacesOn "HDMI-A-1" (lib.range 6 10);
   };
 }
