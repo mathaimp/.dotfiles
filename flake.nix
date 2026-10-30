@@ -30,10 +30,6 @@
       url = "git+ssh://git@github.com/mathaimp/.nix-secrets?shallow=1&ref=main";
       flake = false;
     };
-    niri-flake = {
-      url = "github:sodiboo/niri-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";

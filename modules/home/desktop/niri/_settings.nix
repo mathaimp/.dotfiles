@@ -1,38 +1,27 @@
 { osConfig, ... }:
 {
-  programs.niri.settings = {
-    spawn-at-startup = [
-      {
-        command = [
-          "noctalia"
-        ];
-      }
-    ];
+  wayland.windowManager.niri.settings = {
+    spawn-at-startup = "noctalia";
 
     input = {
       keyboard = {
         xkb.layout = "us";
-        numlock = true;
+        numlock = { };
       };
       touchpad = {
-        tap = true;
-        natural-scroll = true;
+        tap = { };
+        natural-scroll = { };
       };
-      mouse.enable = true;
-      trackpoint.enable = true;
-      focus-follows-mouse = {
-        enable = true;
-        max-scroll-amount = "0.0%";
-      };
+      focus-follows-mouse._props.max-scroll-amount = "0.0%";
     };
 
-    prefer-no-csd = true;
+    prefer-no-csd = { };
 
     layout = {
       gaps = 10;
       center-focused-column = "never";
 
-      preset-column-widths = [
+      preset-column-widths._children = [
         { proportion = 0.33333; }
         { proportion = 0.5; }
         { proportion = 0.66667; }
@@ -40,19 +29,18 @@
 
       default-column-width.proportion = 0.5;
 
-      focus-ring.enable = false;
+      focus-ring.off = { };
 
       border = {
-        enable = true;
         width = 2;
-        active.color = "#${osConfig.lib.stylix.colors.base03}";
-        inactive.color = "#${osConfig.lib.stylix.colors.base02}";
+        active-color = "#${osConfig.lib.stylix.colors.base03}";
+        inactive-color = "#${osConfig.lib.stylix.colors.base02}";
       };
 
-      shadow.enable = false;
+      shadow.off = { };
     };
 
-    hotkey-overlay.skip-at-startup = true;
+    hotkey-overlay.skip-at-startup = { };
 
     environment = {
       NIXOS_OZONE_WL = "1";
@@ -66,13 +54,11 @@
 
     overview = {
       zoom = 0.5;
-      workspace-shadow.enable = false;
+      workspace-shadow.off = { };
     };
 
-    gestures.hot-corners.enable = false;
+    gestures.hot-corners.off = { };
 
-    debug = {
-      honor-xdg-activation-with-invalid-serial = { };
-    };
+    debug.honor-xdg-activation-with-invalid-serial = { };
   };
 }
