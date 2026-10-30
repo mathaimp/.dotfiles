@@ -352,7 +352,12 @@ PanelWindow {
                     anchors.fill: parent
                     hoverEnabled: true
                     cursorShape: Qt.PointingHandCursor
-                    onClicked: Panels.toggleQuickSettings(bar.modelData)
+                    onClicked: {
+                        // The gear always opens on Home (the tab is otherwise remembered between opens).
+                        if (Panels.quickSettingsScreen !== bar.modelData)
+                            Panels.tab = "home";
+                        Panels.toggleQuickSettings(bar.modelData);
+                    }
                 }
             }
         }

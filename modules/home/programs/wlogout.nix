@@ -26,7 +26,8 @@
           }
           {
             label = "logout";
-            action = "loginctl terminate-session \"$XDG_SESSION_ID\"";
+            # Fall back to the user's graphical session when the compositor didn't pass XDG_SESSION_ID on.
+            action = "loginctl terminate-session \"\${XDG_SESSION_ID:-$(loginctl show-user \"$(id -u)\" -p Display --value)}\"";
             text = "Logout";
             keybind = "e";
           }

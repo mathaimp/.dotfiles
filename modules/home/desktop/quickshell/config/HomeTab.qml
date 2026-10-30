@@ -2,6 +2,8 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Io
+import Quickshell.Bluetooth
+import Quickshell.Networking
 import Quickshell.Services.Mpris
 import Quickshell.Services.Pipewire
 
@@ -17,6 +19,26 @@ ColumnLayout {
     readonly property var player: Mpris.players.values.find(p => p.isPlaying) ?? Mpris.players.values[0] ?? null
 
     property string uptime: ""
+
+    // Set to a power action while its confirmation is showing.
+    property var confirming: null
+    readonly property var powerActions: [
+        { label: "Lock", glyph: Glyphs.lock, cmd: "loginctl lock-session" },
+        { label: "Suspend", glyph: Glyphs.moon, cmd: "loginctl lock-session && systemctl suspend" },
+        { label: "Log out", glyph: Glyphs.logout, cmd: "loginctl terminate-session \"${XDG_SESSION_ID:-$(loginctl show-user \"$(id -u)\" -p Display --value)}\"", confirm: true },
+        { label: "Reboot", glyph: Glyphs.reboot, cmd: "systemctl reboot", confirm: true },
+        { label: "Power off", glyph: Glyphs.power, cmd: "systemctl poweroff", confirm: true }
+    ]
+
+    function runPower(action, confirmed) {
+        if (action.confirm && !confirmed) {
+            confirming = action;
+            return;
+        }
+        confirming = null;
+        Panels.quickSettingsScreen = null;
+        Quickshell.execDetached(["sh", "-c", action.cmd]);
+    }
 
     function formatUptime(seconds) {
         const d = Math.floor(seconds / 86400);
@@ -85,6 +107,7 @@ ColumnLayout {
 
             ColumnLayout {
                 Layout.fillWidth: true
+                Layout.alignment: Qt.AlignVCenter
                 spacing: 0
 
                 Text {
@@ -101,6 +124,89 @@ ColumnLayout {
                     color: Qt.alpha(Theme.fg, 0.7)
                 }
             }
+
+            // Power actions. Lock and suspend run at once; the rest ask for confirmation first.
+            RowLayout {
+                Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+                spacing: 2
+                visible: !root.confirming
+
+                Repeater {
+                    model: root.powerActions
+
+                    IconButton {
+                        required property var modelData
+                        glyph: modelData.glyph
+                        glyphSize: 16
+                        implicitWidth: 30
+                        implicitHeight: 30
+                        variant: "tab"
+                        onClicked: root.runPower(modelData)
+                    }
+                }
+            }
+
+            RowLayout {
+                Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+                spacing: 6
+                visible: root.confirming
+
+                Text {
+                    text: root.confirming?.label + "?"
+                    font.family: Theme.font
+                    font.pixelSize: 13
+                    color: Theme.fg
+                }
+                TextButton {
+                    text: "Cancel"
+                    onClicked: root.confirming = null
+                }
+                TextButton {
+                    variant: "accent"
+                    text: "Confirm"
+                    onClicked: root.runPower(root.confirming, true)
+                }
+            }
+        }
+    }
+
+    // Quick toggles.
+    RowLayout {
+        Layout.fillWidth: true
+        spacing: 8
+
+        ToggleTile {
+            Layout.fillWidth: true
+            Layout.preferredWidth: 1
+            glyph: Networking.wifiEnabled ? Glyphs.wifi : Glyphs.wifiOff
+            text: "Wi-Fi"
+            checked: Networking.wifiEnabled
+            onClicked: Networking.wifiEnabled = !Networking.wifiEnabled
+        }
+        ToggleTile {
+            Layout.fillWidth: true
+            Layout.preferredWidth: 1
+            visible: !!Bluetooth.defaultAdapter
+            glyph: Bluetooth.defaultAdapter?.enabled ? Glyphs.bluetooth : Glyphs.bluetoothOff
+            text: "Bluetooth"
+            checked: Bluetooth.defaultAdapter?.enabled ?? false
+            onClicked: Bluetooth.defaultAdapter.enabled = !Bluetooth.defaultAdapter.enabled
+        }
+        ToggleTile {
+            Layout.fillWidth: true
+            Layout.preferredWidth: 1
+            glyph: NotificationCenter.dnd ? Glyphs.bellOff : Glyphs.bell
+            text: "Do not disturb"
+            checked: NotificationCenter.dnd
+            onClicked: NotificationCenter.dnd = !NotificationCenter.dnd
+        }
+        ToggleTile {
+            Layout.fillWidth: true
+            Layout.preferredWidth: 1
+            glyph: Glyphs.mug
+            text: "Keep awake"
+            checked: Caffeine.enabled
+            onClicked: Caffeine.toggle()
         }
     }
 
@@ -186,33 +292,84 @@ ColumnLayout {
                 }
             }
 
-            // Progress bar with times, when the player reports a length.
+            // Progress bar with times, when the player reports a length. Click or drag to seek.
             RowLayout {
+                id: progress
                 Layout.fillWidth: true
-                visible: !!root.player && root.player.lengthSupported && root.player.length > 0
+                visible: !!root.player && len > 0
                 spacing: 8
 
+                // Some players (Firefox) report a wrong length right after a seek (none, or the seek time), so
+                // the longest length seen for this track wins; it resets when the track changes.
+                property real lastLength: 0
+                readonly property real len: Math.max(root.player?.length ?? 0, lastLength)
+
+                Component.onCompleted: lastLength = root.player?.length ?? 0
+
+                Connections {
+                    target: root.player
+
+                    function onLengthChanged() {
+                        progress.lastLength = Math.max(progress.lastLength, root.player.length);
+                    }
+                    function onTrackTitleChanged() {
+                        progress.lastLength = 0;
+                    }
+                }
+
+                // Position (s) being dragged to, or -1 when not dragging.
+                property real dragTo: -1
+                readonly property real shown: dragTo >= 0 ? dragTo : (root.player?.position ?? 0)
+
                 Text {
-                    text: root.formatTime(root.player?.position ?? 0)
+                    text: root.formatTime(progress.shown)
                     font.family: Theme.font
                     font.pixelSize: 12
                     color: Qt.alpha(Theme.fg, 0.7)
                 }
-                Rectangle {
+                Item {
+                    id: track
                     Layout.fillWidth: true
-                    implicitHeight: 4
-                    radius: 2
-                    color: Theme.surface
+                    implicitHeight: 16
 
                     Rectangle {
-                        width: parent.width * Math.min(1, (root.player?.position ?? 0) / Math.max(1, root.player?.length ?? 1))
-                        height: parent.height
+                        anchors.verticalCenter: parent.verticalCenter
+                        width: parent.width
+                        height: 4
                         radius: 2
-                        color: Theme.accent
+                        color: Theme.surface
+
+                        Rectangle {
+                            width: parent.width * Math.min(1, progress.shown / Math.max(1, progress.len))
+                            height: parent.height
+                            radius: 2
+                            color: Theme.accent
+                        }
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        enabled: !!root.player?.canSeek
+                        cursorShape: enabled ? Qt.PointingHandCursor : Qt.ArrowCursor
+
+                        function at(x) {
+                            return Math.max(0, Math.min(1, x / width)) * progress.len;
+                        }
+
+                        onPressed: mouse => progress.dragTo = at(mouse.x)
+                        onPositionChanged: mouse => {
+                            if (pressed)
+                                progress.dragTo = at(mouse.x);
+                        }
+                        onReleased: mouse => {
+                            root.player.position = at(mouse.x);
+                            progress.dragTo = -1;
+                        }
+                        onCanceled: progress.dragTo = -1
                     }
                 }
                 Text {
-                    text: root.formatTime(root.player?.length ?? 0)
+                    text: root.formatTime(progress.len)
                     font.family: Theme.font
                     font.pixelSize: 12
                     color: Qt.alpha(Theme.fg, 0.7)

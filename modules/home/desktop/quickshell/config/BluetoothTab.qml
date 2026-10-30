@@ -39,9 +39,21 @@ ColumnLayout {
 
     spacing: 12
 
+    // Discovery has no progress signal either, so the refresh icon spins for one turn.
+    property bool scanning: false
+
+    Timer {
+        id: scanTimer
+        interval: 900 // one full turn of the icon
+        onTriggered: root.scanning = false
+    }
+
     // Only scan while the tab is open.
-    Component.onCompleted: if (adapter?.enabled)
-        adapter.discovering = true
+    Component.onCompleted: if (adapter?.enabled) {
+        adapter.discovering = true;
+        scanning = true;
+        scanTimer.restart();
+    }
     Component.onDestruction: if (adapter)
         adapter.discovering = false
 
@@ -102,9 +114,12 @@ ColumnLayout {
                 implicitWidth: 28
                 implicitHeight: 28
                 variant: "tab"
+                spinning: root.scanning
                 onClicked: {
                     root.adapter.discovering = false;
                     root.adapter.discovering = true;
+                    root.scanning = true;
+                    scanTimer.restart();
                 }
             }
 

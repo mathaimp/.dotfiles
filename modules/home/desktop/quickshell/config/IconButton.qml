@@ -8,6 +8,8 @@ Rectangle {
     required property int glyph
     property string variant: "default"
     property int glyphSize: Theme.iconSize
+    // Spins the glyph, for refresh buttons while a scan runs.
+    property bool spinning: false
     signal clicked
 
     readonly property bool hovered: mouse.containsMouse
@@ -29,10 +31,21 @@ Rectangle {
     }
 
     Icon {
+        id: icon
         anchors.centerIn: parent
         glyph: root.glyph
         size: root.glyphSize
         color: root.variant === "tabActive" || root.variant === "destructive" ? Theme.bg : Theme.fg
+
+        RotationAnimator on rotation {
+            running: root.spinning
+            from: 0
+            to: 360
+            duration: 900
+            loops: Animation.Infinite
+            onRunningChanged: if (!running)
+                icon.rotation = 0
+        }
     }
 
     MouseArea {

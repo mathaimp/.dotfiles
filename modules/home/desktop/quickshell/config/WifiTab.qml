@@ -55,9 +55,22 @@ ColumnLayout {
 
     spacing: 12
 
+    // The scan has no progress signal, so the refresh icon just spins for one turn.
+    property bool scanning: false
+
+    Timer {
+        id: scanTimer
+        interval: 900 // one full turn of the icon
+        onTriggered: root.scanning = false
+    }
+
     // Only scan while the tab is open.
-    Component.onCompleted: if (device)
-        device.scannerEnabled = true
+    Component.onCompleted: {
+        if (device)
+            device.scannerEnabled = true;
+        scanning = true;
+        scanTimer.restart();
+    }
     Component.onDestruction: if (device)
         device.scannerEnabled = false
 
@@ -116,9 +129,12 @@ ColumnLayout {
                 implicitWidth: 28
                 implicitHeight: 28
                 variant: "tab"
+                spinning: root.scanning
                 onClicked: {
                     root.device.scannerEnabled = false;
                     root.device.scannerEnabled = true;
+                    root.scanning = true;
+                    scanTimer.restart();
                 }
             }
 
@@ -280,6 +296,13 @@ ColumnLayout {
                                 font.pixelSize: 12
                                 color: row.failed ? Theme.critical : Qt.alpha(Theme.fg, 0.7)
                             }
+                        }
+
+                        Text {
+                            text: Math.round(row.signal * 100) + "%"
+                            font.family: Theme.font
+                            font.pixelSize: 12
+                            color: Qt.alpha(Theme.fg, 0.7)
                         }
 
                         Icon {

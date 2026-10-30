@@ -55,6 +55,12 @@ Singleton {
     readonly property int mug: 0xE096 // coffee
     readonly property int search: 0xE151 // search
     readonly property int lock: 0xE10B // lock
+    readonly property int moon: 0xE11E // moon
+    readonly property int logout: 0xE10E // log-out
+    readonly property int reboot: 0xE149 // rotate-cw
+    readonly property int power: 0xE140 // power
+    readonly property int chevronDown: 0xE06D // chevron-down
+    readonly property int chevronRight: 0xE06F // chevron-right
     readonly property int eye: 0xE0BA // eye
     readonly property int eyeOff: 0xE0BB // eye-off
     readonly property int arrowLeft: 0xE048 // arrow-left

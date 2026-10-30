@@ -22,6 +22,57 @@ ColumnLayout {
         return Math.floor(s / 86400) + "d ago";
     }
 
+    // History grouped by app (ordered by each app's newest entry), flattened into rows for the
+    // list: a header for apps with several entries, then their entries unless collapsed.
+    property var collapsed: ({})
+
+    function toggleCollapsed(appName) {
+        const next = Object.assign({}, collapsed);
+        next[appName] = !next[appName];
+        collapsed = next;
+    }
+
+    readonly property var rows: {
+        const groups = new Map();
+        for (const e of NotificationCenter.history) {
+            if (!groups.has(e.appName))
+                groups.set(e.appName, []);
+            groups.get(e.appName).push(e);
+        }
+        const out = [];
+        for (const [appName, items] of groups) {
+            const grouped = items.length > 1;
+            if (grouped) {
+                out.push({
+                    kind: "header",
+                    appName,
+                    icon: items[0].icon,
+                    count: items.length,
+                    collapsed: !!collapsed[appName]
+                });
+                if (collapsed[appName])
+                    continue;
+            }
+            for (const e of items)
+                out.push(Object.assign({
+                    kind: "item",
+                    grouped
+                }, e));
+        }
+        return out;
+    }
+
+    // Everything here is being looked at, so nothing counts as unread while the tab is open.
+    Component.onCompleted: NotificationCenter.unread = 0
+
+    Connections {
+        target: NotificationCenter
+
+        function onHistoryChanged() {
+            NotificationCenter.unread = 0;
+        }
+    }
+
     spacing: 12
 
     Timer {
@@ -122,7 +173,7 @@ ColumnLayout {
                 Layout.fillHeight: true
                 clip: true
                 spacing: 4
-                model: NotificationCenter.history
+                model: root.rows
                 boundsBehavior: Flickable.StopAtBounds
 
                 delegate: Rectangle {
@@ -131,7 +182,7 @@ ColumnLayout {
                     required property var modelData
 
                     width: ListView.view.width
-                    implicitHeight: rowContent.implicitHeight + 16
+                    implicitHeight: modelData.kind === "header" ? 36 : rowContent.implicitHeight + 16
                     height: implicitHeight
                     radius: 8
                     color: rowHover.hovered ? Theme.surface : "transparent"
@@ -144,6 +195,8 @@ ColumnLayout {
                         id: rowContent
                         anchors.fill: parent
                         anchors.margins: 8
+                        anchors.leftMargin: row.modelData.grouped ? 20 : 8
+                        visible: row.modelData.kind === "item"
                         spacing: 10
 
                         Item {
@@ -222,6 +275,58 @@ ColumnLayout {
                             implicitHeight: 22
                             variant: "tab"
                             onClicked: NotificationCenter.remove(row.modelData.id)
+                        }
+                    }
+
+                    // App header for a group of several notifications: click to collapse or expand.
+                    MouseArea {
+                        anchors.fill: parent
+                        visible: row.modelData.kind === "header"
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: root.toggleCollapsed(row.modelData.appName)
+                    }
+
+                    RowLayout {
+                        anchors.fill: parent
+                        anchors.leftMargin: 8
+                        anchors.rightMargin: 8
+                        spacing: 8
+                        visible: row.modelData.kind === "header"
+
+                        Icon {
+                            glyph: row.modelData.collapsed ? Glyphs.chevronRight : Glyphs.chevronDown
+                            size: 14
+                            color: Qt.alpha(Theme.fg, 0.7)
+                        }
+                        IconImage {
+                            visible: row.modelData.icon !== ""
+                            implicitSize: 18
+                            source: row.modelData.icon ?? ""
+                            asynchronous: true
+                        }
+                        Text {
+                            Layout.fillWidth: true
+                            text: row.modelData.appName || "Unknown"
+                            elide: Text.ElideRight
+                            font.family: Theme.font
+                            font.pixelSize: 13
+                            font.bold: true
+                            color: Theme.fg
+                        }
+                        Text {
+                            text: row.modelData.count
+                            font.family: Theme.font
+                            font.pixelSize: 12
+                            color: Qt.alpha(Theme.fg, 0.7)
+                        }
+                        IconButton {
+                            visible: rowHover.hovered
+                            glyph: Glyphs.x
+                            glyphSize: 12
+                            implicitWidth: 22
+                            implicitHeight: 22
+                            variant: "tab"
+                            onClicked: NotificationCenter.removeApp(row.modelData.appName)
                         }
                     }
                 }

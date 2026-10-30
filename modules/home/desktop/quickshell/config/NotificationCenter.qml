@@ -16,15 +16,26 @@ Singleton {
     property var history: []
     readonly property int maxHistory: 100
 
+    // Notifications that arrived since the Notifications tab was last open (the bar bell's badge).
+    property int unread: 0
+
     // Notifications currently on screen (an ObjectModel of Notification).
     readonly property var popups: server.trackedNotifications
 
     function remove(id) {
         history = history.filter(e => e.id !== id);
+        unread = Math.min(unread, history.length);
+    }
+
+    // Drop every history entry from one app.
+    function removeApp(appName) {
+        history = history.filter(e => e.appName !== appName);
+        unread = Math.min(unread, history.length);
     }
 
     function clear() {
         history = [];
+        unread = 0;
         for (const n of server.trackedNotifications.values)
             n.dismiss();
     }
@@ -50,7 +61,8 @@ Singleton {
         persistenceSupported: true
 
         onNotification: n => {
-            if (!n.transient)
+            if (!n.transient) {
+                root.unread++;
                 root.history = [
                     {
                         id: n.id,
@@ -62,6 +74,7 @@ Singleton {
                         time: Date.now()
                     }
                 ].concat(root.history).slice(0, root.maxHistory);
+            }
             // Untracked notifications are closed right away, which is how do-not-disturb hides them.
             if (!root.dnd || n.urgency === NotificationUrgency.Critical)
                 n.tracked = true;
