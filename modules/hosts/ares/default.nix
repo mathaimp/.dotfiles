@@ -48,6 +48,7 @@
             "networkmanager"
             "wheel"
             "dialout"
+            "i2c" # ddcutil: external monitor brightness
           ];
         };
         secure-boot.wait-for-network = false;

@@ -113,6 +113,7 @@
         enableRedistributableFirmware = true;
         cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
         bluetooth.enable = lib.mkDefault true;
+        i2c.enable = true; # i2c-dev + i2c group, for DDC/CI monitor control
       };
     };
 }

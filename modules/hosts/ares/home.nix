@@ -9,6 +9,7 @@
       self.homeModules.shell-bundle
 
       self.homeModules.hyprland
+      self.homeModules.quickshell
       self.homeModules.hyprlock
       self.homeModules.hypridle
       self.homeModules.wlogout

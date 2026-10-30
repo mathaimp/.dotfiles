@@ -61,6 +61,7 @@ in
     (bind "${mod} + SHIFT + Q" (exec "wlogout -b 6") [ ])
     (bind "${mod} + SPACE" (exec "noctalia msg panel-toggle launcher") [ ])
     (bind "${mod} + V" (exec "noctalia msg panel-toggle clipboard") [ ])
+    (bind "${mod} + C" (exec "qs -c default ipc call quicksettings toggle") [ ])
 
     # Focus
     (bind "${mod} + H" ''hl.dsp.focus({ direction = "left" })'' [ ])

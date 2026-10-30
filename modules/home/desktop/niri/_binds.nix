@@ -63,6 +63,15 @@ in
 
     "Mod+Space" = noctalia "panel-toggle launcher";
     "Mod+V" = noctalia "panel-toggle clipboard";
+    "Mod+C".spawn = [
+      "qs"
+      "-c"
+      "default"
+      "ipc"
+      "call"
+      "quicksettings"
+      "toggle"
+    ];
 
     "Mod+E".maximize-column = { };
 
