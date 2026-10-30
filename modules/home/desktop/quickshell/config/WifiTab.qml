@@ -2,21 +2,56 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell.Networking
 
-// Wi-Fi: on/off switch and the list of networks in range (connected first, then saved, then by signal).
+// Wi-Fi: on/off switch and the list of networks in range (connected first, then saved, then the rest).
 // Click a network to connect or disconnect; secured networks that aren't saved ask for a password.
 ColumnLayout {
     id: root
 
     readonly property var device: Networking.devices.values.find(d => d.type === DeviceType.Wifi) ?? null
+
+    // Names in the order they first appeared. Rows keep their place while you use the list: re-sorting
+    // by live signal strength moved rows under the cursor and rebuilt them on every scan update.
+    // A plain object mutated in place (not a notifying property), so recording new names while
+    // `networks` is evaluated doesn't feed back into it.
+    readonly property var firstSeen: ({
+            names: []
+        })
+
+    // Connected first, then saved, then the rest; within each group, first-seen order (a network seen
+    // for the first time is placed by signal strength, strongest first).
     readonly property var networks: {
+        const names = firstSeen.names;
         const seen = new Set();
-        return (device?.networks.values ?? []).filter(n => {
+        const list = (device?.networks.values ?? []).filter(n => {
             if (!n.name || seen.has(n.name))
                 return false;
             seen.add(n.name);
             return true;
-        }).sort((a, b) => (b.connected - a.connected) || (b.known - a.known) || (b.signalStrength - a.signalStrength));
+        });
+        const placed = list.filter(n => names.includes(n.name)).sort((a, b) => names.indexOf(a.name) - names.indexOf(b.name));
+        const fresh = list.filter(n => !names.includes(n.name)).sort((a, b) => b.signalStrength - a.signalStrength);
+        for (const n of fresh)
+            names.push(n.name);
+        const all = placed.concat(fresh);
+        return all.filter(n => n.connected).concat(all.filter(n => !n.connected && n.known), all.filter(n => !n.connected && !n.known));
     }
+
+    // Set to { ssid, locked, security, hidden } to show the connect form instead of the list.
+    property var form: null
+
+    // Name of the network whose password prompt is open; only one at a time.
+    property string asking: ""
+    // What's typed in that prompt. Kept here, not in the row: the rows are rebuilt when networks
+    // appear or disappear, and the text and reveal state must survive that.
+    property string askingPassword: ""
+    property bool askingReveal: false
+
+    onAskingChanged: {
+        askingPassword = "";
+        askingReveal = false;
+    }
+
+    readonly property var enterpriseTypes: [WifiSecurityType.Wpa2Eap, WifiSecurityType.WpaEap, WifiSecurityType.Wpa3SuiteB192]
 
     spacing: 12
 
@@ -73,6 +108,16 @@ ColumnLayout {
                 }
             }
 
+            IconButton {
+                visible: !!root.device && Networking.wifiEnabled
+                glyph: 0xEB0B // plus
+                glyphSize: 14
+                implicitWidth: 28
+                implicitHeight: 28
+                variant: "tab"
+                onClicked: root.form = { ssid: "", locked: false, security: "psk", hidden: true }
+            }
+
             ToggleSwitch {
                 visible: !!root.device
                 checked: Networking.wifiEnabled
@@ -81,10 +126,25 @@ ColumnLayout {
         }
     }
 
+    Loader {
+        Layout.fillWidth: true
+        Layout.fillHeight: true
+        active: !!root.form
+        visible: active
+
+        sourceComponent: WifiForm {
+            seed: root.form
+            device: root.device?.name ?? ""
+            onFinished: root.form = null
+            onCancelled: root.form = null
+        }
+    }
+
     Rectangle {
         Layout.fillWidth: true
         Layout.fillHeight: true
         radius: 12
+        visible: !root.form
         color: Theme.container
         border.width: 1
         border.color: Theme.surface
@@ -105,8 +165,17 @@ ColumnLayout {
                 readonly property bool secured: modelData.security !== WifiSecurityType.Open && modelData.security !== WifiSecurityType.Owe
                 readonly property bool busy: modelData.state === ConnectionState.Connecting || modelData.state === ConnectionState.Disconnecting
                 readonly property real signal: modelData.signalStrength
-                property bool asking: false
+                readonly property bool asking: root.asking === modelData.name
                 property bool failed: false
+
+                // Focus the field on opening, and again when a rebuilt row takes over an open prompt.
+                onAskingChanged: if (asking)
+                    password.forceActiveFocus()
+                Component.onCompleted: if (asking) {
+                    password.text = root.askingPassword;
+                    password.forceActiveFocus();
+                    password.cursorPosition = password.text.length;
+                }
 
                 width: ListView.view.width
                 implicitHeight: rowContent.implicitHeight + 16
@@ -116,22 +185,26 @@ ColumnLayout {
 
                 function activate() {
                     failed = false;
+                    // Selecting a row closes whichever prompt was open (this one toggles).
+                    const wasAsking = asking;
+                    root.asking = "";
                     if (modelData.connected) {
                         modelData.disconnect();
+                    } else if (!modelData.known && root.enterpriseTypes.includes(modelData.security)) {
+                        root.form = { ssid: modelData.name, locked: true, security: "eap", hidden: false };
                     } else if (modelData.known || !secured) {
                         modelData.connect();
-                    } else {
-                        asking = !asking;
-                        if (asking)
-                            password.forceActiveFocus();
+                    } else if (!wasAsking) {
+                        root.asking = modelData.name;
                     }
                 }
 
                 function submit() {
+                    if (!password.text)
+                        return;
                     failed = false;
-                    asking = false;
                     modelData.connectWithPsk(password.text);
-                    password.text = "";
+                    root.asking = ""; // also clears the stored text
                 }
 
                 Connections {
@@ -213,37 +286,61 @@ ColumnLayout {
                     }
 
                     // Password prompt for secured networks that aren't saved yet.
-                    Rectangle {
+                    RowLayout {
                         Layout.fillWidth: true
                         visible: row.asking
-                        implicitHeight: 32
-                        radius: 6
-                        color: Theme.surface
+                        spacing: 6
 
-                        TextInput {
-                            id: password
-                            anchors.fill: parent
-                            anchors.leftMargin: 10
-                            anchors.rightMargin: 10
-                            verticalAlignment: TextInput.AlignVCenter
-                            echoMode: TextInput.Password
-                            font.family: Theme.font
-                            font.pixelSize: 14
-                            color: Theme.fg
-                            clip: true
-                            onAccepted: row.submit()
-                            Keys.onEscapePressed: event => {
-                                row.asking = false;
-                                text = "";
+                        Rectangle {
+                            Layout.fillWidth: true
+                            implicitHeight: 32
+                            radius: 6
+                            color: Theme.surface
+
+                            TextInput {
+                                id: password
+                                anchors.fill: parent
+                                anchors.leftMargin: 10
+                                anchors.rightMargin: 38
+                                verticalAlignment: TextInput.AlignVCenter
+                                echoMode: root.askingReveal ? TextInput.Normal : TextInput.Password
+                                font.family: Theme.font
+                                font.pixelSize: 14
+                                color: Theme.fg
+                                clip: true
+                                selectByMouse: true
+                                onTextChanged: if (row.asking)
+                                    root.askingPassword = text
+                                onAccepted: row.submit()
+                                Keys.onEscapePressed: event => root.asking = ""
+
+                                Text {
+                                    visible: !password.text
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    text: "Password"
+                                    font: password.font
+                                    color: Qt.alpha(Theme.fg, 0.5)
+                                }
                             }
 
-                            Text {
-                                visible: !password.text
+                            IconButton {
+                                anchors.right: parent.right
                                 anchors.verticalCenter: parent.verticalCenter
-                                text: "Password, then Enter"
-                                font: password.font
-                                color: Qt.alpha(Theme.fg, 0.5)
+                                anchors.rightMargin: 4
+                                glyph: root.askingReveal ? 0xECF0 : 0xEA9A // eye-off / eye
+                                glyphSize: 14
+                                implicitWidth: 28
+                                implicitHeight: 26
+                                variant: "tab"
+                                onClicked: root.askingReveal = !root.askingReveal
                             }
+                        }
+
+                        TextButton {
+                            variant: "accent"
+                            text: "Connect"
+                            opacity: password.text ? 1 : 0.5
+                            onClicked: row.submit()
                         }
                     }
                 }
