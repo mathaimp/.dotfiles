@@ -303,6 +303,7 @@ PanelWindow {
                 anchors.verticalCenter: parent.verticalCenter
                 padding: 8 // the neighbouring pills carry their own padding, so these need a bit more
                 tooltipRows: network.tooltipRows
+                onClicked: Panels.toggleTab(bar.modelData, "wifi")
 
                 Network {
                     id: network

@@ -94,6 +94,20 @@ ColumnLayout {
                 }
             }
 
+            // Restart discovery.
+            IconButton {
+                visible: !!root.adapter?.enabled
+                glyph: Glyphs.refresh
+                glyphSize: 14
+                implicitWidth: 28
+                implicitHeight: 28
+                variant: "tab"
+                onClicked: {
+                    root.adapter.discovering = false;
+                    root.adapter.discovering = true;
+                }
+            }
+
             ToggleSwitch {
                 visible: !!root.adapter
                 checked: root.adapter?.enabled ?? false

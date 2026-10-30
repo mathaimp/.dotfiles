@@ -94,8 +94,8 @@ in
     (bind "XF86AudioLowerVolume" (exec "swayosd-client --output-volume lower") lockedRepeat)
 
     # Brightness
-    (bind "XF86MonBrightnessUp" (exec "swayosd-client --brightness raise") lockedRepeat)
-    (bind "XF86MonBrightnessDown" (exec "swayosd-client --brightness lower") lockedRepeat)
+    (bind "XF86MonBrightnessUp" (exec "swayosd-client --brightness raise; qs -c default ipc call brightness stepExternal 0.05") lockedRepeat)
+    (bind "XF86MonBrightnessDown" (exec "swayosd-client --brightness lower; qs -c default ipc call brightness stepExternal -0.05") lockedRepeat)
   ]
   ++ workspaceBinds;
 }

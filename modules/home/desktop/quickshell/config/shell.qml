@@ -46,6 +46,16 @@ ShellRoot {
         }
     }
 
+    // Keybind target: `qs -c default ipc call brightness stepExternal 0.05` (negative to lower). Moves the
+    // external monitors; the keybinds pair it with swayosd-client for the built-in panel and the OSD.
+    IpcHandler {
+        target: "brightness"
+
+        function stepExternal(delta: real): void {
+            Brightness.stepExternal(delta);
+        }
+    }
+
     // Bluetooth pairing prompts (also instantiates the BluetoothAgent singleton at startup).
     Variants {
         model: Quickshell.screens

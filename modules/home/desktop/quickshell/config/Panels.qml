@@ -17,6 +17,17 @@ Singleton {
         quickSettingsScreen = quickSettingsScreen === screen ? null : screen;
     }
 
+    // Open the control center on a given tab; closes it if that tab is already showing.
+    function toggleTab(screen, tabId) {
+        launcherScreen = null;
+        if (quickSettingsScreen === screen && tab === tabId) {
+            quickSettingsScreen = null;
+        } else {
+            tab = tabId;
+            quickSettingsScreen = screen;
+        }
+    }
+
     // Open (or close) the launcher on the focused monitor.
     function toggleLauncher() {
         if (launcherScreen) {

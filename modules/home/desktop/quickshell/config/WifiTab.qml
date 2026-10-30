@@ -108,6 +108,20 @@ ColumnLayout {
                 }
             }
 
+            // Restart the scan.
+            IconButton {
+                visible: !!root.device && Networking.wifiEnabled
+                glyph: Glyphs.refresh
+                glyphSize: 14
+                implicitWidth: 28
+                implicitHeight: 28
+                variant: "tab"
+                onClicked: {
+                    root.device.scannerEnabled = false;
+                    root.device.scannerEnabled = true;
+                }
+            }
+
             IconButton {
                 visible: !!root.device && Networking.wifiEnabled
                 glyph: Glyphs.plus

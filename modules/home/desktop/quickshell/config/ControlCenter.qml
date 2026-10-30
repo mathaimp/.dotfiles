@@ -50,7 +50,7 @@ PanelWindow {
 
         sourceComponent: Rectangle {
             width: 520
-            height: 520
+            height: 660
             radius: 12
             color: Qt.alpha(Theme.bg, 0.97)
             border.width: 1

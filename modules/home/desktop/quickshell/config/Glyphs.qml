@@ -59,7 +59,15 @@ Singleton {
     readonly property int eyeOff: 0xE0BB // eye-off
     readonly property int arrowLeft: 0xE048 // arrow-left
     readonly property int plus: 0xE13D // plus
+    readonly property int refresh: 0xE145 // refresh-cw
     readonly property int bolt: 0xE1B4 // zap
+    readonly property int play: 0xE13C // play
+    readonly property int pause: 0xE12E // pause
+    readonly property int skipBack: 0xE15F // skip-back
+    readonly property int skipForward: 0xE160 // skip-forward
+    readonly property int user: 0xE19F // user
+    readonly property int thermometer: 0xE186 // thermometer
+    readonly property int memory: 0xE445 // memory-stick
 
     // Size correction per icon (1 = the nominal size). Lucide icons have different footprints: the
     // 2- and 1-arc Wi-Fi icons and the dot have far less ink than the full one, while the stat icons in

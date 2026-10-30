@@ -57,6 +57,33 @@ Singleton {
             extDelay.start();
     }
 
+    // For the brightness keys: swayosd-client moves the built-in panel (and shows the OSD), this moves
+    // the external monitors by the same step. Their values are read first if that hasn't happened yet.
+    property real pendingStep: 0
+
+    function stepExternal(delta) {
+        if (detected && externals.length === 0)
+            return;
+        if (!detected || externals.some(d => !d.ready)) {
+            pendingStep += delta;
+            refresh();
+            return;
+        }
+        for (const d of externals) {
+            d.value = Math.max(0, Math.min(1, d.value + delta));
+            d.pending = d.value;
+        }
+        extDelay.start();
+    }
+
+    function applyPendingStep() {
+        if (pendingStep === 0 || !detected || externals.some(d => !d.ready))
+            return;
+        const delta = pendingStep;
+        pendingStep = 0;
+        stepExternal(delta);
+    }
+
     // ddcutil is slow (hundreds of ms per call), so jobs run one at a time.
     property var jobs: []
 
@@ -164,6 +191,7 @@ Singleton {
                     d.ready = true;
                     if (!root.available)
                         root.value = d.value;
+                    root.applyPendingStep();
                 }
             }
         }

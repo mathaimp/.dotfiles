@@ -145,14 +145,15 @@ in
       "mute-toggle"
     ];
 
-    "XF86MonBrightnessUp" = swayosd [
-      "--brightness"
-      "+5"
-    ];
-    "XF86MonBrightnessDown" = swayosd [
-      "--brightness"
-      "-5"
-    ];
+    # swayosd-client moves the built-in panel; the shell moves external monitors by the same step.
+    "XF86MonBrightnessUp" = {
+      _props.allow-when-locked = true;
+      spawn-sh = "swayosd-client --brightness +5; qs -c default ipc call brightness stepExternal 0.05";
+    };
+    "XF86MonBrightnessDown" = {
+      _props.allow-when-locked = true;
+      spawn-sh = "swayosd-client --brightness -5; qs -c default ipc call brightness stepExternal -0.05";
+    };
 
     "Ctrl+Alt+Delete".quit = { };
     "Mod+Shift+P".power-off-monitors = { };

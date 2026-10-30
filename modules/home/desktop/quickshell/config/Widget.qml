@@ -9,6 +9,7 @@ Item {
     // Stat widgets set this so SystemStats samples the extra tooltip metrics while open.
     property bool wantsStatDetails: false
     property alias spacing: holder.spacing
+    signal clicked
     readonly property bool hovered: mouse.containsMouse
     readonly property bool tooltipOpen: tip.visible
 
@@ -42,6 +43,7 @@ Item {
         id: mouse
         anchors.fill: parent
         hoverEnabled: true
+        onClicked: root.clicked()
     }
 
     Tooltip {
