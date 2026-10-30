@@ -16,7 +16,6 @@
         nvitop
         gh
 
-        codex
         inputs.claude-code.packages.${pkgs.stdenv.hostPlatform.system}.default
         opencode
 

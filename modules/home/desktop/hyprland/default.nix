@@ -12,6 +12,7 @@
     {
       imports = [
         ./_keybinds.nix
+        ./_monitors.nix
       ];
       home.packages = with pkgs; [
         wl-clipboard

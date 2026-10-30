@@ -12,7 +12,6 @@
         evince
         libreoffice
         obsidian
-        signal-desktop
       ];
     };
 }
