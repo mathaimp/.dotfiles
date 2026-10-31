@@ -15,9 +15,7 @@ Rectangle {
         : mouse.containsMouse ? Theme.muted : Theme.surface
 
     Behavior on color {
-        ColorAnimation {
-            duration: 150
-        }
+        EffectsColorAnimation {}
     }
 
     Text {

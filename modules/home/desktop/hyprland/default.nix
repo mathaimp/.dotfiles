@@ -92,42 +92,151 @@
             };
           };
 
+          # Material 3 motion. Springs are critically damped (damping = 2 * sqrt(stiffness)).
+          # Spatial springs move and resize things; effects springs handle colour and opacity.
+          curve =
+            let
+              # Multiplies every spring's speed: stiffness by scale^2 and damping by scale keeps them
+              # critically damped. 1 = the M3 reference values.
+              springScale = 1.5;
+              spring = name: stiffness: dampening: {
+                _args = [
+                  name
+                  {
+                    type = "spring";
+                    mass = 1;
+                    stiffness = stiffness * springScale * springScale;
+                    dampening = dampening * springScale;
+                  }
+                ];
+              };
+              bezier = name: p1: p2: {
+                _args = [
+                  name
+                  {
+                    type = "bezier";
+                    points = [
+                      p1
+                      p2
+                    ];
+                  }
+                ];
+              };
+            in
+            [
+              (spring "md3_spatial_fast" 600 49)
+              (spring "md3_spatial_default" 300 35)
+              (spring "md3_spatial_slow" 160 25)
+
+              (spring "md3_effects_fast" 3800 123)
+              (spring "md3_effects_default" 1600 80)
+              (spring "md3_effects_slow" 800 57)
+
+              (bezier "md3_standard" [ 0.2 0.0 ] [ 0.0 1.0 ])
+              (bezier "md3_emphasized_accel" [ 0.3 0.0 ] [ 0.8 0.15 ])
+            ];
+
+          # Multiplies every animation speed below; lower is faster (1 = the values from the M3 reference).
           animation =
-            map
-              (
-                { leaf, speed }:
-                {
-                  inherit leaf speed;
-                  enabled = true;
-                  bezier = "default";
-                }
-              )
-              [
-                {
-                  leaf = "windows";
-                  speed = 4;
-                }
-                {
-                  leaf = "windowsOut";
-                  speed = 4;
-                }
-                {
-                  leaf = "border";
-                  speed = 2;
-                }
-                {
-                  leaf = "fade";
-                  speed = 2;
-                }
-                {
-                  leaf = "fadeDim";
-                  speed = 2;
-                }
-                {
-                  leaf = "workspaces";
-                  speed = 3;
-                }
-              ];
+            let
+              speedScale = 0.3;
+              spatial = "md3_spatial_default";
+              effects = "md3_effects_default";
+            in
+            map (a: if a ? speed then a // { speed = a.speed * speedScale; } else a) [
+              {
+                leaf = "windows";
+                enabled = true;
+                speed = 5;
+                spring = spatial;
+              }
+              {
+                leaf = "windowsIn";
+                enabled = true;
+                speed = 5;
+                spring = spatial;
+                style = "popin 92%";
+              }
+              {
+                leaf = "windowsOut";
+                enabled = true;
+                speed = 2;
+                spring = spatial;
+                style = "popin 92%";
+              }
+              {
+                leaf = "windowsMove";
+                enabled = true;
+                speed = 5;
+                spring = spatial;
+              }
+
+              {
+                leaf = "layers";
+                enabled = true;
+                speed = 3;
+                bezier = "md3_standard";
+                style = "slide";
+              }
+              {
+                leaf = "layersIn";
+                enabled = true;
+                speed = 3;
+                bezier = "md3_standard";
+                style = "slide";
+              }
+              {
+                leaf = "layersOut";
+                enabled = true;
+                speed = 2.5;
+                bezier = "md3_emphasized_accel";
+                style = "slide";
+              }
+
+              {
+                leaf = "fade";
+                enabled = true;
+                speed = 2;
+                spring = effects;
+              }
+              {
+                leaf = "fadeOut";
+                enabled = true;
+                speed = 2;
+                spring = spatial;
+              }
+              {
+                leaf = "fadeDim";
+                enabled = true;
+                speed = 2;
+                spring = effects;
+              }
+              {
+                leaf = "border";
+                enabled = true;
+                speed = 2;
+                spring = effects;
+              }
+              {
+                leaf = "borderangle";
+                enabled = false;
+              }
+
+              {
+                leaf = "workspaces";
+                enabled = true;
+                speed = 5;
+                spring = spatial;
+                style = "slide";
+              }
+              {
+                leaf = "specialWorkspace";
+                enabled = true;
+                speed = 3.5;
+                spring = "md3_spatial_fast";
+                style = "slidevert";
+              }
+            ];
         };
       };
     };

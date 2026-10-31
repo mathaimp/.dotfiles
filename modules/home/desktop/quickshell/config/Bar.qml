@@ -178,10 +178,7 @@ PanelWindow {
                     height: bar.implicitHeight
 
                     Behavior on width {
-                        NumberAnimation {
-                            duration: 250
-                            easing.type: Easing.OutBack
-                        }
+                        SpatialAnimation {}
                     }
 
                     Rectangle {
@@ -192,9 +189,7 @@ PanelWindow {
                         color: mouse.containsMouse && mouse.enabled ? Qt.lighter(ws.pillColor, 1.2) : ws.pillColor
 
                         Behavior on color {
-                            ColorAnimation {
-                                duration: 150
-                            }
+                            EffectsColorAnimation {}
                         }
 
                         Label {
@@ -214,9 +209,7 @@ PanelWindow {
                             opacity: ws.showIcons ? 0 : 1
 
                             Behavior on opacity {
-                                NumberAnimation {
-                                    duration: 150
-                                }
+                                EffectsAnimation {}
                             }
 
                             FontMetrics {
@@ -244,9 +237,7 @@ PanelWindow {
                         visible: opacity > 0
 
                         Behavior on opacity {
-                            NumberAnimation {
-                                duration: 150
-                            }
+                            EffectsAnimation {}
                         }
 
                         Repeater {
@@ -335,9 +326,7 @@ PanelWindow {
                     color: parent.active ? Theme.accent : settingsMouse.containsMouse ? Theme.surface : "transparent"
 
                     Behavior on color {
-                        ColorAnimation {
-                            duration: 150
-                        }
+                        EffectsColorAnimation {}
                     }
                 }
 

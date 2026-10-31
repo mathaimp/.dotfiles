@@ -74,10 +74,7 @@ Item {
 
     property real animatedPercentage: percentage
     Behavior on animatedPercentage {
-        NumberAnimation {
-            duration: 300
-            easing.type: Easing.OutCubic
-        }
+        SpatialAnimation {}
     }
 
     Timer {
@@ -127,10 +124,7 @@ Item {
         color: root.textColor
 
         Behavior on opacity {
-            NumberAnimation {
-                duration: 150
-                easing.type: Easing.InOutQuad
-            }
+            EffectsAnimation {}
         }
     }
 
@@ -143,10 +137,7 @@ Item {
         color: root.textColor
 
         Behavior on opacity {
-            NumberAnimation {
-                duration: 150
-                easing.type: Easing.InOutQuad
-            }
+            EffectsAnimation {}
         }
     }
 }

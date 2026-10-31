@@ -21,9 +21,7 @@ Rectangle {
     color: selected ? Theme.accent : "transparent"
 
     Behavior on color {
-        ColorAnimation {
-            duration: 100
-        }
+        EffectsColorAnimation {}
     }
 
     // Hover selects, but only when the mouse actually moves (the list scrolling under a still

@@ -28,9 +28,7 @@ Item {
         color: root.hovered ? Theme.surface : "transparent"
 
         Behavior on color {
-            ColorAnimation {
-                duration: 150
-            }
+            EffectsColorAnimation {}
         }
     }
 

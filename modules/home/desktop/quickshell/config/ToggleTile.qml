@@ -17,9 +17,7 @@ Rectangle {
     border.color: checked ? Theme.accent : Theme.surface
 
     Behavior on color {
-        ColorAnimation {
-            duration: 150
-        }
+        EffectsColorAnimation {}
     }
 
     ColumnLayout {

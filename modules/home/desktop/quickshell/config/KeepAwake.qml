@@ -14,10 +14,7 @@ Item {
     implicitHeight: pillHeight
 
     Behavior on implicitWidth {
-        NumberAnimation {
-            duration: 300
-            easing.type: Easing.OutCubic
-        }
+        SpatialAnimation {}
     }
 
     Rectangle {
@@ -26,9 +23,7 @@ Item {
         color: root.hovered ? Theme.accent : root.revealed ? Theme.surface : "transparent"
 
         Behavior on color {
-            ColorAnimation {
-                duration: 150
-            }
+            EffectsColorAnimation {}
         }
     }
 
@@ -46,9 +41,7 @@ Item {
         color: root.fgColor
 
         Behavior on opacity {
-            NumberAnimation {
-                duration: 150
-            }
+            EffectsAnimation {}
         }
     }
 

@@ -46,18 +46,15 @@ PanelWindow {
         delegate: NotificationCard {}
 
         add: Transition {
-            NumberAnimation {
+            EffectsAnimation {
                 property: "opacity"
                 from: 0
                 to: 1
-                duration: 150
             }
         }
         displaced: Transition {
-            NumberAnimation {
+            SpatialAnimation {
                 property: "y"
-                duration: 150
-                easing.type: Easing.OutCubic
             }
         }
     }

@@ -25,9 +25,7 @@ Rectangle {
     color: fill
 
     Behavior on color {
-        ColorAnimation {
-            duration: 150
-        }
+        EffectsColorAnimation {}
     }
 
     Icon {

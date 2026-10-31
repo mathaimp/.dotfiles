@@ -26,8 +26,9 @@
           }
           {
             label = "logout";
-            # Fall back to the user's graphical session when the compositor didn't pass XDG_SESSION_ID on.
-            action = "loginctl terminate-session \"\${XDG_SESSION_ID:-$(loginctl show-user \"$(id -u)\" -p Display --value)}\"";
+            # No double quotes in actions: wlogout doesn't unescape the layout's JSON, so they reach the shell as
+            # literal quotes and loginctl is handed the session id as "7". The id is numeric, so unquoted is safe.
+            action = "loginctl terminate-session \${XDG_SESSION_ID:-$(loginctl show-user $(id -u) -p Display --value)}";
             text = "Logout";
             keybind = "e";
           }

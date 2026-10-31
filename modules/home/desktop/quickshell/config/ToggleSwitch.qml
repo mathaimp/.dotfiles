@@ -13,9 +13,7 @@ Rectangle {
     color: checked ? Theme.accent : Theme.surface
 
     Behavior on color {
-        ColorAnimation {
-            duration: 150
-        }
+        EffectsColorAnimation {}
     }
 
     Rectangle {
@@ -27,9 +25,8 @@ Rectangle {
         color: root.checked ? Theme.bg : Theme.fg
 
         Behavior on x {
-            NumberAnimation {
-                duration: 150
-                easing.type: Easing.OutCubic
+            SpatialAnimation {
+                duration: Motion.spatialFast
             }
         }
     }
