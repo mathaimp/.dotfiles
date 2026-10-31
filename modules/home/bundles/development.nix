@@ -17,6 +17,7 @@
         gh
 
         inputs.claude-code.packages.${pkgs.stdenv.hostPlatform.system}.default
+        t3code
         opencode
 
         # python
