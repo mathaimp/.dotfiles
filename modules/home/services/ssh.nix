@@ -37,6 +37,16 @@
             Port = 443;
           };
 
+          "jhu" = {
+            HostName = "login.arch.jhu.edu";
+            User = "mkarim9";
+            IdentityFile = "${config.home.homeDirectory}/.ssh/id_jhufaizal";
+            ControlMaster = "auto";
+            ControlPersist = "24h";
+            ControlPath = "~/.ssh/cm/%C";
+            ServerAliveInterval = 60;
+          };
+
           "blazer" = {
             User = "mathai.mathew";
             HostName = "10.2.36.177";
