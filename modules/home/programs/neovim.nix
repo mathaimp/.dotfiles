@@ -48,6 +48,7 @@
           rust-analyzer
           nixd
           nixfmt
+          imagemagick
         ];
         # make mason and stuff work
         extraWrapperArgs = [

@@ -21,9 +21,9 @@
           window-padding-balance = true;
           window-padding-color = "extend";
           copy-on-select = "clipboard";
-          # soft ping when tmux-state rings the bell (agent done / waiting)
           bell-features = "audio";
           bell-audio-volume = 0.4;
+          clipboard-read = "deny";
           bell-audio-path = "${pkgs.sound-theme-freedesktop}/share/sounds/freedesktop/stereo/message.oga";
         };
       };

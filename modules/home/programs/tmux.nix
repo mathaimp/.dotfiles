@@ -7,8 +7,6 @@
     }:
     let
       tmux = "${pkgs.tmux}/bin/tmux";
-      # tmux-state <running|done|error|waiting|""> sets the window's @state.
-      # done/error are dropped when you're already looking at the window.
       tmuxState = pkgs.writeShellScriptBin "tmux-state" ''
         [ -n "$TMUX_PANE" ] || exit 0
         state="$1"
@@ -23,14 +21,11 @@
         else
           ${tmux} set-option -wuq -t "$TMUX_PANE" @state
         fi
-        # "ping": ring the terminal bell (Ghostty plays a soft sound, works over ssh)
         if [ "$2" = ping ]; then
           tty=$(${tmux} display -p -t "$TMUX_PANE" '#{pane_tty}')
           printf '\a' > "$tty"
         fi
       '';
-      # tmux-git <dir>: git status in the same format as the powerlevel10k prompt
-      # (branch ⇣behind⇡ahead *stash ~conflicts +staged !unstaged ?untracked); empty outside a repo.
       tmuxGit = pkgs.writeShellScriptBin "tmux-git" ''
         out=$(${pkgs.git}/bin/git -C "$1" status --porcelain=v2 --branch --show-stash 2>/dev/null) || exit 0
         printf '%s\n' "$out" | awk '
@@ -101,6 +96,7 @@
           bind -n M-L next-window
 
           set-option -g allow-passthrough on
+          set -g set-clipboard on
 
           # --- Status Bar General ---
           set -g status "on"
@@ -113,7 +109,7 @@
           setw -g window-status-current-style "fg=blue,bold,bg=default"
           setw -g window-status-separator "#[fg=blue]  "
 
-          # --- Activity state (@state set by tmux-state: running/done/error/waiting) ---
+          # --- Activity state ---
           set -g focus-events on
           set -g bell-action any
           set -g visual-bell off
